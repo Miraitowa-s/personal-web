@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>周云飞 · 星空山野</title>
+  <link rel="stylesheet" href="style.css?v=20250325"/>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav>
+  <a class="nav-logo" href="#home">
+    <img src="image/logo.png" alt="Logo"/>
+  </a>
+  <div class="nav-links">
+    <a href="#about">关于</a>
+    <a href="#works">创作与收藏</a>
+    <a href="knowledge.html">知识库</a>
+    <a href="#journey">大事记</a>
+  </div>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="切换明暗模式">🌙</button>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <span class="hero-eyebrow">Personal Homepage</span>
+    <h1>星空山野</h1>
+    <div class="hero-line"></div>
+    <h2>这里是周云飞的个人主页 · 记录创作与收藏</h2>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#works">查看作品</a>
+      <a class="btn-ghost" href="tools.html">进入工具库</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>向下滚动</span>
+  </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section id="about">
+  <div class="container">
+    <div class="about-inner">
+      <p class="sec-eyebrow">About Me</p>
+      <h2 class="sec-title">关于我</h2>
+      <div class="sec-bar"></div>
+      <div class="about-tags">
+        <span class="tag">95后</span>
+        <span class="tag">新闻学科班</span>
+        <span class="tag">吉他爱好者</span>
+        <span class="tag">摄影爱好者</span>
+        <span class="tag">DIY手工</span>
+        <span class="tag">探索者</span>
+      </div>
+      <div class="about-body">
+        <p>探索未知，记录此刻。</p>
+        <p>新闻科班出身，</p>
+        <p>却有一颗不安分的心。</p>
+        <p>弹过吉他，按过快门，</p>
+        <p>也曾在画布前发呆。</p>
+        <p>无一精通，</p>
+        <p>却都乐在其中。</p>
+        <p>热爱 DIY，痴迷手工，</p>
+        <p>享受从零到一的创造。</p>
+        <p>这里，</p>
+        <p>是好奇心栖息的角落。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WORKS ========== -->
+<section id="works">
+  <div class="container">
+    <div class="works-header">
+      <p class="sec-eyebrow">Works & Collections</p>
+      <h2 class="sec-title">创作与收藏</h2>
+      <div class="sec-bar"></div>
+      <p class="sec-desc">两个维度：亲手做的内容创作，以及精心筛选的好站工具收藏。</p>
+    </div>
+
+    <div class="works-divider">我的作品</div>
+    <div class="my-works-grid">
+      <a href="works.html#web" class="wcard">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#d1fae5,#6ee7b7)">🌐</div>
+        <div class="wcard-body">
+          <div class="wcard-title">软件项目</div>
+          <div class="wcard-desc">个人主页、小程序等软件项目实践，追寻简洁优雅的产品质感。</div>
+          <div class="wcard-foot">
+            <span class="badge b-web">软件</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="works.html#photo" class="wcard">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fef3c7,#fcd34d)">📷</div>
+        <div class="wcard-body">
+          <div class="wcard-title">摄影与图像</div>
+          <div class="wcard-desc">用镜头记录日常，光影、构图、瞬间，凝固那些值得被记住的时刻。</div>
+          <div class="wcard-foot">
+            <span class="badge b-photo">摄影</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="works.html#diy" class="wcard">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#ede9fe,#c4b5fd)">🛠️</div>
+        <div class="wcard-body">
+          <div class="wcard-title">DIY & 手工</div>
+          <div class="wcard-desc">从零动手，改装、拼接、制作，享受创造一件实物的过程。</div>
+          <div class="wcard-foot">
+            <span class="badge b-write">手工</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="works.html#music" class="wcard">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#dbeafe,#818cf8)">🎸</div>
+        <div class="wcard-body">
+          <div class="wcard-title">音乐</div>
+          <div class="wcard-desc">自学吉他中，偶尔录几段不算成熟的练习，算是留个成长脚印。</div>
+          <div class="wcard-foot">
+            <span class="badge b-music">音乐</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="works-divider" style="margin-top:3.5rem">收集的工具</div>
+    <div class="tool-grid">
+      <a href="tools.html#video" class="tcard">
+        <div class="tcard-icon">🎬</div>
+        <div>
+          <div class="tcard-name">视频平台</div>
+          <div class="tcard-sub">B站 · YouTube · TED</div>
+        </div>
+      </a>
+      <a href="tools.html#books" class="tcard">
+        <div class="tcard-icon">📚</div>
+        <div>
+          <div class="tcard-name">书籍资源</div>
+          <div class="tcard-sub">微信读书 · 豆瓣 · Z-Lib</div>
+        </div>
+      </a>
+      <a href="tools.html#learn" class="tcard">
+        <div class="tcard-icon">🎓</div>
+        <div>
+          <div class="tcard-name">学习平台</div>
+          <div class="tcard-sub">Coursera · Khan · B站</div>
+        </div>
+      </a>
+      <a href="tools.html#tools" class="tcard">
+        <div class="tcard-icon">🔧</div>
+        <div>
+          <div class="tcard-name">效率工具</div>
+          <div class="tcard-sub">Notion · Obsidian · Figma</div>
+        </div>
+      </a>
+      <a href="tools.html#ai" class="tcard">
+        <div class="tcard-icon">🤖</div>
+        <div>
+          <div class="tcard-name">AI & 大模型</div>
+          <div class="tcard-sub">ChatGPT · Claude · Gemini</div>
+        </div>
+      </a>
+      <a href="tools.html#design" class="tcard">
+        <div class="tcard-icon">🎨</div>
+        <div>
+          <div class="tcard-name">设计资源</div>
+          <div class="tcard-sub">Canva · Unsplash · Dribbble</div>
+        </div>
+      </a>
+      <a href="tools.html#photo" class="tcard">
+        <div class="tcard-icon">📷</div>
+        <div>
+          <div class="tcard-name">摄影资源</div>
+          <div class="tcard-sub">500px · Lightroom · VSCO</div>
+        </div>
+      </a>
+      <a href="tools.html#music" class="tcard">
+        <div class="tcard-icon">🎸</div>
+        <div>
+          <div class="tcard-name">乐器 & 音乐</div>
+          <div class="tcard-sub">Ultimate Guitar · 汇音堂</div>
+        </div>
+      </a>
+      <a href="tools.html#diy" class="tcard">
+        <div class="tcard-icon">🪚</div>
+        <div>
+          <div class="tcard-name">DIY & 手工</div>
+          <div class="tcard-sub">立创商城 · 哔哩哔哩</div>
+        </div>
+      </a>
+      <a href="tools.html#inspire" class="tcard">
+        <div class="tcard-icon">💡</div>
+        <div>
+          <div class="tcard-name">灵感发现</div>
+          <div class="tcard-sub">少数派 · Pinterest · ARE.NA</div>
+        </div>
+      </a>
+    </div>
+
+    <a href="tools.html" class="tool-more">进入完整工具库 →</a>
+  </div>
+</section>
+
+<!-- ========== JOURNEY ========== -->
+<section id="journey">
+  <div class="container">
+    <div class="journey-header">
+      <p class="sec-eyebrow">Milestone</p>
+      <h2 class="sec-title">小站大事记</h2>
+      <div class="sec-bar"></div>
+    </div>
+    <p class="journey-hint">← 左右滑动查看更多 →</p>
+    <div class="journey-track">
+      <div class="jcard">
+        <div class="jcard-date">2025.01</div>
+        <div class="jcard-event">网页设计编码，个人主页正式上线</div>
+      </div>
+      <div class="jcard">
+        <div class="jcard-date">2025</div>
+        <div class="jcard-event">开始系统整理工具收藏库</div>
+      </div>
+      <div class="jcard">
+        <div class="jcard-date">2025</div>
+        <div class="jcard-event">视频创作持续更新中</div>
+      </div>
+      <div class="jcard">
+        <div class="jcard-date">2026.03</div>
+        <div class="jcard-event">主页全新改版，更简洁美观</div>
+      </div>
+      <div class="jcard">
+        <div class="jcard-date">未来</div>
+        <div class="jcard-event">更多故事正在发生…</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">周云飞 · 星空山野</div>
+      <div class="footer-sub">简洁 · 真实 · 持续生长</div>
+    </div>
+    <div class="footer-col">
+      <h4>导航</h4>
+      <a href="#about">关于我</a>
+      <a href="#works">我的作品</a>
+      <a href="tools.html">工具库</a>
+      <a href="#journey">大事记</a>
+    </div>
+    <div class="footer-col">
+      <h4>联系</h4>
+      <a href="https://www.bilibili.com/" target="_blank">哔哩哔哩</a>
+      <a href="https://github.com/" target="_blank">GitHub</a>
+      <a href="https://weibo.com/newlogin?tabtype=weibo&gid=102803&openLoginLayer=0&url=https://weibo.com/" target="_blank">微博</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 周云飞 All Rights Reserved.</span>
+    <span>用心记录，认真生活</span>
+  </div>
+</footer>
+
+<script>
+  // 主题切换
+  let dark = false;
+  function toggleTheme() {
+    dark = !dark;
+    document.body.classList.toggle('dark', dark);
+    document.getElementById('themeBtn').textContent = dark ? '☀️' : '🌙';
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  }
+
+  // 恢复主题偏好
+  if (localStorage.getItem('theme') === 'dark') {
+    toggleTheme();
+  }
+
+  // 平滑滚动
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) {
+        e.preventDefault();
+        window.scrollTo({ top: t.offsetTop - 60, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // 滚动切换导航背景
+  const nav = document.querySelector('nav');
+  const aboutSection = document.getElementById('about');
+
+  function updateNav() {
+    const scrollY = window.scrollY;
+    const aboutTop = aboutSection.offsetTop;
+
+    // 滚动超过关于我区域后添加背景
+    if (scrollY > aboutTop - 72) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "categories": [
+    {
+      "id": "photography",
+      "name": "📷 摄影",
+      "docs": [
+        { "file": "exposure-triangle.md", "title": "曝光三角" },
+        { "file": "composition.md", "title": "构图原则" }
+      ]
+    },
+    {
+      "id": "diy",
+      "name": "🛠️ DIY",
+      "docs": [
+        { "file": "woodworking-basics.md", "title": "木工基础" }
+      ]
+    },
+    {
+      "id": "guitar",
+      "name": "🎸 吉他弹唱",
+      "docs": [
+        { "file": "basic-chords.md", "title": "基础和弦" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>知识库 · 周云飞</title>
+  <!-- Markdown 解析库 -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --bg:      #f5f5f3;
+      --surface: #ffffff;
+      --border:  #e6e6e2;
+      --text:    #18181b;
+      --text2:   #52525b;
+      --text3:   #a1a1aa;
+      --accent:  #4f6ef7;
+      --r:       12px;
+      --sh:      0 6px 28px rgba(0,0,0,0.09);
+      --t:       0.22s ease;
+    }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+      color:var(--text); line-height:1.7; overflow-x:hidden;
+      background:var(--bg);
+    }
+    a { text-decoration:none; color:inherit; }
+
+    /* ===== NAV ===== */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:300;
+      height:64px; display:flex; align-items:center; justify-content:space-between;
+      padding:0 5%;
+      background:rgba(245,245,243,.9); backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-logo { display:flex; align-items:center; gap:.8rem; }
+    .nav-logo img { width:120px; height:auto; }
+    .nav-links { display:flex; gap:2rem; }
+    .nav-links a { font-size:.85rem; color:var(--text2); transition:color var(--t); }
+    .nav-links a:hover, .nav-links a.active { color:var(--text); }
+    .theme-toggle {
+      width:36px; height:36px; border-radius:50%;
+      border:1.5px solid var(--border); background:var(--surface);
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; font-size:1rem; transition:all var(--t);
+    }
+    .theme-toggle:hover { background:var(--text); border-color:var(--text); filter:invert(1); }
+
+    /* ===== LAYOUT ===== */
+    .doc-layout {
+      display:flex;
+      min-height:100vh;
+      padding-top:64px;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width:260px;
+      background:var(--surface);
+      border-right:1px solid var(--border);
+      padding:1.5rem 0;
+      position:fixed;
+      top:64px; bottom:0; left:0;
+      overflow-y:auto;
+    }
+    .sidebar-cat {
+      margin-bottom:1.5rem;
+    }
+    .sidebar-cat-title {
+      font-size:.8rem; font-weight:700; color:var(--text3);
+      text-transform:uppercase; letter-spacing:.05em;
+      padding:0 1.5rem .5rem;
+    }
+    .sidebar-link {
+      display:block;
+      padding:.6rem 1.5rem .6rem 2rem;
+      font-size:.88rem; color:var(--text2);
+      border-left:3px solid transparent;
+      transition:all var(--t);
+      cursor:pointer;
+    }
+    .sidebar-link:hover {
+      color:var(--text);
+      background:rgba(79,110,247,.05);
+    }
+    .sidebar-link.active {
+      color:var(--accent);
+      border-left-color:var(--accent);
+      background:rgba(79,110,247,.08);
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .doc-main {
+      flex:1;
+      margin-left:260px;
+      padding:2.5rem 5% 4rem;
+      max-width:800px;
+    }
+
+    /* ===== MARKDOWN STYLES ===== */
+    .markdown-body h1 {
+      font-size:1.8rem; font-weight:800;
+      margin-bottom:1rem; padding-bottom:.8rem;
+      border-bottom:2px solid var(--border);
+    }
+    .markdown-body h2 {
+      font-size:1.3rem; font-weight:700;
+      margin:2rem 0 1rem;
+      padding-bottom:.4rem;
+      border-bottom:1px solid var(--border);
+    }
+    .markdown-body h3 {
+      font-size:1.1rem; font-weight:700;
+      margin:1.5rem 0 .8rem;
+    }
+    .markdown-body p {
+      margin-bottom:1rem;
+      line-height:1.8;
+    }
+    .markdown-body ul, .markdown-body ol {
+      margin:1rem 0 1rem 1.5rem;
+    }
+    .markdown-body li {
+      margin-bottom:.4rem;
+    }
+    .markdown-body code {
+      background:#f0f0f0;
+      padding:.15rem .4rem;
+      border-radius:4px;
+      font-family:"SF Mono", Monaco, monospace;
+      font-size:.9em;
+    }
+    .markdown-body pre {
+      background:#1e1e2e;
+      color:#f8f8f2;
+      padding:1rem;
+      border-radius:var(--r);
+      overflow-x:auto;
+      margin:1rem 0;
+    }
+    .markdown-body pre code {
+      background:transparent;
+      padding:0;
+    }
+    .markdown-body blockquote {
+      border-left:4px solid var(--accent);
+      padding-left:1rem;
+      margin:1rem 0;
+      color:var(--text2);
+    }
+    .markdown-body table {
+      width:100%;
+      border-collapse:collapse;
+      margin:1rem 0;
+      font-size:.9rem;
+    }
+    .markdown-body th, .markdown-body td {
+      padding:.6rem .8rem;
+      border:1px solid var(--border);
+      text-align:left;
+    }
+    .markdown-body th {
+      background:var(--bg);
+      font-weight:600;
+    }
+    .markdown-body tr:nth-child(even) {
+      background:rgba(0,0,0,.02);
+    }
+    .markdown-body input[type="checkbox"] {
+      margin-right:.5rem;
+    }
+    .markdown-body hr {
+      border:none;
+      border-top:1px solid var(--border);
+      margin:2rem 0;
+    }
+    .markdown-body img {
+      max-width:100%;
+      border-radius:var(--r);
+    }
+
+    /* ===== LOADING ===== */
+    .loading {
+      text-align:center;
+      padding:4rem;
+      color:var(--text3);
+    }
+    .loading::after {
+      content:'';
+      display:inline-block;
+      width:20px; height:20px;
+      border:2px solid var(--border);
+      border-top-color:var(--accent);
+      border-radius:50%;
+      animation:spin 1s linear infinite;
+      margin-left:.5rem;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    /* ===== ERROR ===== */
+    .error {
+      text-align:center;
+      padding:4rem;
+      color:#dc2626;
+    }
+
+    /* ===== DARK MODE ===== */
+    body.dark {
+      --bg:#0f0f11; --surface:#1c1c1f; --border:#2e2e34;
+      --text:#f5f5f0; --text2:#a0a0a8; --text3:#606068;
+    }
+    body.dark nav { background:rgba(15,15,17,.9); }
+    body.dark .sidebar { background:#1c1c1f; border-color:#2e2e34; }
+    body.dark .markdown-body code { background:#2e2e34; }
+    body.dark .markdown-body pre { background:#0f0f11; }
+    body.dark .markdown-body th { background:#0f0f11; }
+    body.dark .markdown-body tr:nth-child(even) { background:rgba(255,255,255,.02); }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:900px){
+      .sidebar { display:none; }
+      .doc-main { margin-left:0; padding:1.5rem 5%; }
+      .nav-links { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="image/logo.png" alt="Logo"/>
+  </a>
+  <div class="nav-links">
+    <a href="works.html">创作与收藏</a>
+    <a href="knowledge.html" class="active">知识库</a>
+    <a href="tools.html">工具库</a>
+    <a href="index.html">← 返回主页</a>
+  </div>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+</nav>
+
+<!-- ===== LAYOUT ===== -->
+<div class="doc-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <!-- 动态生成 -->
+  </aside>
+
+  <!-- Main Content -->
+  <main class="doc-main">
+    <div class="markdown-body" id="content">
+      <div class="loading">加载中</div>
+    </div>
+  </main>
+</div>
+
+<script>
+  // ===== 配置（内嵌，支持本地预览） =====
+  const DOCS_BASE = 'docs/';
+  const SIDEBAR_DATA = {
+    "categories": [
+      {
+        "id": "photography",
+        "name": "📷 摄影",
+        "docs": [
+          { "file": "exposure-triangle.md", "title": "曝光三角" },
+          { "file": "composition.md", "title": "构图原则" }
+        ]
+      },
+      {
+        "id": "diy",
+        "name": "🛠️ DIY",
+        "docs": [
+          { "file": "woodworking-basics.md", "title": "木工基础" }
+        ]
+      },
+      {
+        "id": "guitar",
+        "name": "🎸 吉他弹唱",
+        "docs": [
+          { "file": "basic-chords.md", "title": "基础和弦" }
+        ]
+      }
+    ]
+  };
+  let sidebarData = SIDEBAR_DATA;
+  let currentDoc = null;
+
+  // ===== 主题切换 =====
+  function toggleTheme() {
+    const dark = !document.body.classList.contains('dark');
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+    applyTheme(dark);
+  }
+  function applyTheme(dark) {
+    document.body.classList.toggle('dark', dark);
+    document.getElementById('themeBtn').textContent = dark ? '☀️' : '🌙';
+  }
+  applyTheme(localStorage.getItem('theme') === 'dark');
+
+  // ===== 加载侧边栏配置 =====
+  async function loadSidebar() {
+    // 使用内嵌配置，无需 fetch
+    renderSidebar();
+  }
+
+  // ===== 渲染侧边栏 =====
+  function renderSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.innerHTML = sidebarData.categories.map(cat => `
+      <div class="sidebar-cat">
+        <div class="sidebar-cat-title">${cat.name}</div>
+        ${cat.docs.map(doc => `
+          <a class="sidebar-link" 
+             data-cat="${cat.id}" 
+             data-file="${doc.file}"
+             onclick="loadDoc('${cat.id}', '${doc.file}', this)">
+            ${doc.title}
+          </a>
+        `).join('')}
+      </div>
+    `).join('');
+  }
+
+  // ===== 文档内容（内嵌，支持本地预览） =====
+  const DOC_CONTENTS = {
+    'photography/exposure-triangle.md': `# 曝光三角
+
+曝光三角是摄影最基础的概念，由**光圈、快门速度、ISO** 三个要素组成，它们共同决定照片的曝光量。
+
+## 1. 光圈 (Aperture)
+
+用 **f 值**表示，如 f/1.8、f/2.8、f/8、f/16
+
+| f 值 | 效果 |
+|------|------|
+| f/1.4 - f/2.8 | 大光圈，景深浅，背景虚化强，适合人像 |
+| f/5.6 - f/8 | 中等光圈，画质最佳，适合日常拍摄 |
+| f/11 - f/16 | 小光圈，景深深，适合风光摄影 |
+
+> 💡 **记忆口诀**：f 值越小，光圈越大，进光越多，虚化越强
+
+## 2. 快门速度 (Shutter Speed)
+
+控制感光元件曝光的时间长短。
+
+- **高速快门** (1/500s 以上)：冻结运动，适合体育、飞鸟
+- **安全快门**：通常不低于 1/焦距，如 50mm 镜头至少 1/50s
+- **慢速快门**：需要三脚架，适合流水、车轨、星空
+
+## 3. ISO 感光度
+
+ISO 越高，感光元件对光线越敏感。
+
+| ISO 范围 | 适用场景 | 画质表现 |
+|---------|---------|---------|
+| ISO 100-400 | 光线充足 | 最纯净，噪点最少 |
+| ISO 800-1600 | 阴天/室内 | 轻微噪点，可接受 |
+| ISO 3200+ | 夜景/暗光 | 明显噪点，谨慎使用 |
+
+## 三者关系
+
+\`\`\`
+曝光量 = 光圈 × 快门速度 × ISO
+\`\`\`
+
+改变其中一个，需要相应调整其他两个来保持曝光平衡。`,
+
+    'photography/composition.md': `# 构图原则
+
+好的构图能让照片更具视觉冲击力和艺术感。
+
+## 1. 三分法 (Rule of Thirds)
+
+将画面用两条横线和两条竖线分成九宫格，**主体放在交叉点或线上**。
+
+- 人物眼睛放在上 1/3 线
+- 地平线放在上或下 1/3 线，避免居中
+- 打开相机的网格线辅助练习
+
+## 2. 引导线 (Leading Lines)
+
+利用画面中的线条引导观众视线到主体。
+
+**常见引导线**：
+- 道路、铁轨、河流
+- 栏杆、走廊、桥梁
+- 树枝、光线、阴影
+
+## 3. 框架构图 (Framing)
+
+用前景元素框住主体，增加层次感和聚焦效果。
+
+## 4. 留白 (Negative Space)
+
+给主体周围留出空白，营造简约、孤独、宁静的氛围。
+
+## 练习清单
+
+- [ ] 拍 10 张三分法构图
+- [ ] 拍 5 张引导线构图
+- [ ] 拍 5 张框架构图`,
+
+    'diy/woodworking-basics.md': `# 木工基础
+
+木工 DIY 是创造实用家具和装饰品的有趣方式。
+
+## 常用木材
+
+| 木材类型 | 特点 | 适合项目 |
+|---------|------|---------|
+| 松木 | 便宜、易加工、较软 | 初学者练习、简单家具 |
+| 橡木 | 坚硬、纹理美、耐用 | 高档家具、地板 |
+| 多层板 | 稳定、不易变形、便宜 | 柜体、层板 |
+
+## 基础工具
+
+### 手动工具
+- **锯子**：手板锯（粗切）、背锯（精细）
+- **刨子**：修平木材表面
+- **凿子**：制作榫卯、开槽
+
+### 电动工具
+- **电圆锯/曲线锯**：直线/曲线切割
+- **电钻/冲击钻**：打孔、拧螺丝
+- **砂光机**：打磨表面
+
+## 基本工序
+
+### 1. 测量与标线
+\`\`\`
+口诀：量两次，切一次
+\`\`\`
+
+### 2. 打磨
+| 目数 | 用途 |
+|-----|------|
+| 80-120 目 | 粗磨，去除毛刺 |
+| 180-240 目 | 中磨，平整表面 |
+| 320-400 目 | 细磨，光滑手感 |
+
+## 安全须知
+
+⚠️ **必戴护目镜** - 木屑飞溅伤眼  
+⚠️ **使用夹具** - 不要用手固定木材`,
+
+    'guitar/basic-chords.md': `# 基础和弦
+
+掌握这几个和弦，你就能弹唱 80% 的流行歌曲。
+
+## 必学和弦（C调）
+
+### 1. C 和弦
+
+\`\`\`
+e|--0--|
+B|--1--|  ← 食指
+G|--0--|
+D|--2--|  ← 中指
+A|--3--|  ← 无名指
+E|--x--|  (不弹)
+\`\`\`
+
+### 2. G 和弦
+
+\`\`\`
+e|--3--|  ← 小指
+B|--0--|
+G|--0--|
+D|--0--|
+A|--2--|  ← 中指
+E|--3--|  ← 无名指
+\`\`\`
+
+### 3. Am 和弦
+
+\`\`\`
+e|--0--|
+B|--1--|  ← 食指
+G|--2--|  ← 中指
+D|--2--|  ← 无名指
+A|--0--|
+E|--x--|
+\`\`\`
+
+### 4. Em 和弦
+
+最简单的和弦：
+
+\`\`\`
+e|--0--|
+B|--0--|
+G|--0--|
+D|--2--|  ← 中指
+A|--2--|  ← 无名指
+E|--0--|
+\`\`\`
+
+## 万能和弦进行
+
+### C - G - Am - F
+最经典的进行，无数流行歌用这个：
+- 《平凡之路》
+- 《成都》
+- 《小幸运》
+
+## 按弦技巧
+
+1. **指尖按弦**：用指尖而不是指肚
+2. **靠近品丝**：在品格靠近音孔一侧按
+3. **拇指位置**：放在琴颈背面中间
+4. **手腕放松**：不要翻手腕去够弦`
+  };
+
+  // ===== 加载文档 =====
+  async function loadDoc(cat, file, linkEl) {
+    // 更新激活状态
+    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+    if(linkEl) linkEl.classList.add('active');
+
+    currentDoc = { cat, file };
+    localStorage.setItem('lastDoc', JSON.stringify(currentDoc));
+    history.replaceState(null, null, `?cat=${cat}&doc=${file}`);
+
+    const content = document.getElementById('content');
+    content.innerHTML = '<div class="loading">加载中</div>';
+
+    // 先尝试从内嵌数据加载（支持本地预览）
+    const key = `${cat}/${file}`;
+    if (DOC_CONTENTS[key]) {
+      content.innerHTML = marked.parse(DOC_CONTENTS[key]);
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    // 否则尝试 fetch（部署后从文件加载）
+    try {
+      const res = await fetch(`${DOCS_BASE}${cat}/${file}`);
+      if(!res.ok) throw new Error('加载失败');
+      const markdown = await res.text();
+      content.innerHTML = marked.parse(markdown);
+      window.scrollTo(0, 0);
+    } catch(e) {
+      content.innerHTML = `
+        <div class="error">
+          <h2>😅 文档加载失败</h2>
+          <p>请检查文件是否存在，或稍后重试</p>
+          <p style="font-size:.8rem;color:var(--text3)">${e.message}</p>
+        </div>
+      `;
+    }
+  }
+
+  // ===== 初始化 =====
+  async function init() {
+    await loadSidebar();
+
+    // 从 URL 参数或本地存储恢复
+    const params = new URLSearchParams(location.search);
+    const cat = params.get('cat');
+    const doc = params.get('doc');
+    const saved = localStorage.getItem('lastDoc');
+
+    let target = null;
+    if(cat && doc) {
+      target = { cat, file: doc };
+    } else if(saved) {
+      try { target = JSON.parse(saved); } catch(e) {}
+    }
+
+    if(target) {
+      // 找到对应的链接元素
+      const link = document.querySelector(`[data-cat="${target.cat}"][data-file="${target.file}"]`);
+      loadDoc(target.cat, target.file, link);
+    } else {
+      // 默认加载第一个文档
+      const firstCat = sidebarData.categories[0];
+      const firstDoc = firstCat.docs[0];
+      const link = document.querySelector(`[data-cat="${firstCat.id}"][data-file="${firstDoc.file}"]`);
+      loadDoc(firstCat.id, firstDoc.file, link);
+    }
+  }
+
+  init();
+</script>
+
+</body>
+</html>

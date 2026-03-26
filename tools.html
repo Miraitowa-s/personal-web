@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>工具库 · 周云飞</title>
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --bg:      #f5f5f3;
+      --surface: #ffffff;
+      --border:  #e6e6e2;
+      --text:    #18181b;
+      --text2:   #52525b;
+      --text3:   #a1a1aa;
+      --accent:  #4f6ef7;
+      --r:       12px;
+      --sh:      0 6px 28px rgba(0,0,0,0.09);
+      --sh-sm:   0 2px 10px rgba(0,0,0,0.06);
+      --t:       0.22s ease;
+    }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+      color:var(--text); line-height:1.7; overflow-x:hidden;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(79,110,247,.12) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 85% 85%, rgba(138,53,214,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 5% 80%, rgba(26,158,90,.07) 0%, transparent 60%),
+        #f5f5f3;
+      background-attachment:fixed;
+    }
+    a { text-decoration:none; color:inherit; }
+
+    /* NAV */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:300;
+      height:72px; display:flex; align-items:center; justify-content:space-between;
+      padding:0 8%;
+      background:rgba(245,245,243,.82); backdrop-filter:blur(20px);
+      -webkit-backdrop-filter:blur(20px);
+      border-bottom:1px solid rgba(0,0,0,.06);
+    }
+    .nav-logo {
+      display:flex; align-items:center; gap:.8rem;
+      text-decoration:none;
+      padding:8px 0;
+    }
+    .nav-logo img {
+      width:140px; height:auto;
+      flex-shrink:0; object-fit:contain;
+      display:block;
+    }
+    .nav-links { display:flex; gap:2rem; }
+    .nav-links a { font-size:.85rem; color:var(--text2); transition:color var(--t); }
+    .nav-links a:hover { color:var(--text); }
+    .theme-toggle {
+      width:36px; height:36px; border-radius:50%;
+      border:1.5px solid var(--border); background:var(--surface);
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; font-size:1rem; transition:all var(--t);
+    }
+    .theme-toggle:hover { background:var(--text); border-color:var(--text); filter:invert(1); }
+
+    /* HERO */
+    .hero {
+      padding:120px 8% 60px;
+      text-align:center;
+      background:transparent;
+      position:relative;
+    }
+    .hero::before {
+      content:''; position:absolute; top:-120px; right:-80px;
+      width:480px; height:480px; border-radius:50%;
+      background:radial-gradient(circle, rgba(79,110,247,.1) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .hero-eyebrow { font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--text3); display:block; margin-bottom:1rem; }
+    .hero h1 { font-size:clamp(2rem,5vw,3rem); font-weight:900; letter-spacing:-.03em; margin-bottom:.8rem; }
+    .hero-line { width:28px; height:3px; background:var(--text); border-radius:2px; margin:.8rem auto 1.2rem; }
+    .hero-desc { font-size:.93rem; color:var(--text2); max-width:500px; margin:0 auto 2rem; }
+
+    /* 搜索框 */
+    .search-wrap {
+      max-width:480px; margin:0 auto 1.5rem;
+      position:relative;
+    }
+    .search-input {
+      width:100%; padding:.7rem 1.2rem .7rem 3rem;
+      border:1.5px solid var(--border); border-radius:30px;
+      background:rgba(255,255,255,.85); backdrop-filter:blur(6px);
+      font-size:.88rem; color:var(--text); outline:none;
+      transition:border-color var(--t), box-shadow var(--t);
+    }
+    .search-input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(79,110,247,.12); }
+    .search-icon { position:absolute; left:1rem; top:50%; transform:translateY(-50%); color:var(--text3); font-size:.95rem; }
+    .search-kbd {
+      position:absolute; right:1rem; top:50%; transform:translateY(-50%);
+      font-size:.65rem; color:var(--text3);
+      background:var(--bg); border:1px solid var(--border);
+      padding:.1rem .4rem; border-radius:4px;
+    }
+
+    /* TABS */
+    .tabs-wrap { display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:3rem; }
+    .tab-btn {
+      padding:.38rem .95rem; border-radius:20px; font-size:.78rem;
+      border:1.5px solid var(--border); background:rgba(255,255,255,.7);
+      color:var(--text2); cursor:pointer; transition:all var(--t);
+    }
+    .tab-btn:hover, .tab-btn.active {
+      background:var(--text); color:#fff; border-color:var(--text);
+    }
+
+    /* MAIN CONTENT */
+    main { max-width:960px; margin:0 auto; padding:0 8% 80px; }
+
+    /* 分类区块 */
+    .cat-section { margin-bottom:4rem; }
+    .cat-title {
+      display:flex; align-items:center; gap:.75rem;
+      font-size:.72rem; letter-spacing:.15em; text-transform:uppercase;
+      color:var(--text3); font-weight:700; margin-bottom:1.2rem;
+    }
+    .cat-title::after { content:''; flex:1; height:1px; background:var(--border); }
+
+    .cards-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
+      gap:.85rem;
+    }
+    .card {
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(230,230,226,.85);
+      border-radius:var(--r);
+      padding:1rem 1.15rem;
+      display:flex; align-items:flex-start; gap:.85rem;
+      transition:box-shadow var(--t), transform var(--t);
+      backdrop-filter:blur(4px);
+    }
+    .card:hover { box-shadow:var(--sh); transform:translateY(-3px); }
+    .card-icon {
+      width:38px; height:38px; border-radius:9px;
+      background:var(--bg); display:flex; align-items:center;
+      justify-content:center; font-size:1.1rem; flex-shrink:0;
+    }
+    .card-info { min-width:0; }
+    .card-name { font-size:.84rem; font-weight:700; color:var(--text); margin-bottom:.18rem; }
+    .card-desc { font-size:.72rem; color:var(--text3); line-height:1.5; }
+
+    /* MODAL 搜索 */
+    .modal-overlay {
+      display:none; position:fixed; inset:0; z-index:900;
+      background:rgba(0,0,0,.4); backdrop-filter:blur(6px);
+      align-items:flex-start; justify-content:center;
+      padding-top:12vh;
+    }
+    .modal-overlay.open { display:flex; }
+    .modal-box {
+      background:var(--surface); border-radius:16px;
+      width:min(580px,90vw); box-shadow:0 24px 64px rgba(0,0,0,.18);
+      overflow:hidden;
+    }
+    .modal-search {
+      display:flex; align-items:center; gap:.8rem;
+      padding:1rem 1.3rem; border-bottom:1px solid var(--border);
+    }
+    .modal-search input {
+      flex:1; border:none; outline:none; font-size:1rem;
+      color:var(--text); background:transparent;
+    }
+    .modal-results { max-height:340px; overflow-y:auto; }
+    .mresult {
+      display:flex; align-items:center; gap:.85rem;
+      padding:.8rem 1.3rem; cursor:pointer; transition:background var(--t);
+    }
+    .mresult:hover { background:var(--bg); }
+    .mresult-icon { font-size:1.2rem; }
+    .mresult-name { font-size:.88rem; font-weight:600; }
+    .mresult-cat  { font-size:.72rem; color:var(--text3); }
+    .modal-empty { text-align:center; padding:2.5rem; color:var(--text3); font-size:.85rem; }
+    .modal-hint {
+      padding:.7rem 1.3rem; font-size:.7rem; color:var(--text3);
+      border-top:1px solid var(--border);
+    }
+
+    /* HIDDEN */
+    .hidden { display:none !important; }
+
+    /* DARK */
+    body.dark {
+      --bg:#111113; --surface:#1c1c1f; --border:#2e2e34;
+      --text:#f0f0f2; --text2:#b0b0bb; --text3:#666670;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(79,110,247,.16) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 85% 85%, rgba(138,53,214,.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 5% 80%, rgba(26,158,90,.09) 0%, transparent 60%),
+        #111113;
+    }
+    body.dark nav { background:rgba(17,17,19,.9); }
+    /* Logo 在暗色模式下不需要 filter，因为 logo.png 本身有白色文字 */
+    body.dark .nav-links a { color:var(--text2); }
+    body.dark .nav-links a:hover { color:var(--text); }
+    body.dark .search-input {
+      background:rgba(28,28,31,0.8);
+      border-color:var(--border);
+      color:var(--text);
+    }
+    body.dark .tab-btn {
+      background:rgba(28,28,31,0.6);
+      border-color:var(--border);
+      color:var(--text2);
+    }
+    body.dark .tab-btn:hover, body.dark .tab-btn.active {
+      background:var(--text);
+      color:var(--bg);
+      border-color:var(--text);
+    }
+    body.dark .card {
+      background:rgba(28,28,31,0.7);
+      border-color:rgba(46,46,52,0.8);
+    }
+    body.dark .card:hover {
+      background:rgba(38,38,42,0.9);
+    }
+    body.dark .card-name { color:var(--text); }
+    body.dark .card-desc { color:var(--text2); }
+    body.dark .cat-title { color:var(--text3); }
+    body.dark .cat-title::after { background:var(--border); }
+    body.dark .modal-box {
+      background:var(--surface);
+      border:1px solid var(--border);
+    }
+    body.dark .mresult:hover { background:var(--bg); }
+
+    @media(max-width:680px){
+      .nav-links { display:none; }
+      .cards-grid { grid-template-columns:1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="image/logo.png" alt="Logo" style="width:140px;height:auto;"/>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#about">关于</a>
+    <a href="index.html#works">作品</a>
+    <a href="index.html#journey">大事记</a>
+    <a href="tools.html" style="color:var(--text);font-weight:600">工具库</a>
+  </div>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="切换明暗模式">🌙</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-eyebrow">Tool Collections</span>
+  <h1>工具收藏库</h1>
+  <div class="hero-line"></div>
+  <p class="hero-desc">精选好站，按兴趣分门别类，随时取用。</p>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="inlineSearch" type="text" placeholder="搜索工具…" oninput="filterCards(this.value)" autocomplete="off"/>
+    <span class="search-kbd">Ctrl K</span>
+  </div>
+  <div class="tabs-wrap" id="tabsWrap">
+    <button class="tab-btn active" data-cat="all">全部</button>
+    <button class="tab-btn" data-cat="ai">AI &amp; 大模型</button>
+    <button class="tab-btn" data-cat="video">视频平台</button>
+    <button class="tab-btn" data-cat="books">书籍资源</button>
+    <button class="tab-btn" data-cat="learn">学习平台</button>
+    <button class="tab-btn" data-cat="tools">效率工具</button>
+    <button class="tab-btn" data-cat="design">设计资源</button>
+    <button class="tab-btn" data-cat="photo">摄影资源</button>
+    <button class="tab-btn" data-cat="music">乐器 &amp; 音乐</button>
+    <button class="tab-btn" data-cat="diy">DIY &amp; 手工</button>
+    <button class="tab-btn" data-cat="inspire">灵感发现</button>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main id="mainContent">
+
+  <!-- AI & 大模型 -->
+  <div class="cat-section" id="cat-ai" data-cat="ai">
+    <div class="cat-title">🤖&nbsp; AI &amp; 大模型</div>
+    <div class="cards-grid">
+      <a href="https://chat.openai.com" target="_blank" class="card" data-name="ChatGPT" data-cat="ai">
+        <div class="card-icon">🤖</div>
+        <div class="card-info"><div class="card-name">ChatGPT</div><div class="card-desc">OpenAI 出品，最广泛使用的 AI 对话助手</div></div>
+      </a>
+      <a href="https://claude.ai" target="_blank" class="card" data-name="Claude" data-cat="ai">
+        <div class="card-icon">🧠</div>
+        <div class="card-info"><div class="card-name">Claude</div><div class="card-desc">Anthropic 出品，擅长长文分析与推理</div></div>
+      </a>
+      <a href="https://gemini.google.com" target="_blank" class="card" data-name="Gemini" data-cat="ai">
+        <div class="card-icon">✨</div>
+        <div class="card-info"><div class="card-name">Gemini</div><div class="card-desc">Google 多模态大模型，支持图文理解</div></div>
+      </a>
+      <a href="https://www.deepseek.com" target="_blank" class="card" data-name="DeepSeek" data-cat="ai">
+        <div class="card-icon">🔬</div>
+        <div class="card-info"><div class="card-name">DeepSeek</div><div class="card-desc">国产顶级推理模型，开源免费</div></div>
+      </a>
+      <a href="https://kimi.moonshot.cn" target="_blank" class="card" data-name="Kimi" data-cat="ai">
+        <div class="card-icon">🌙</div>
+        <div class="card-info"><div class="card-name">Kimi</div><div class="card-desc">月之暗面，超长上下文中文 AI</div></div>
+      </a>
+      <a href="https://tongyi.aliyun.com" target="_blank" class="card" data-name="通义千问" data-cat="ai">
+        <div class="card-icon">💬</div>
+        <div class="card-info"><div class="card-name">通义千问</div><div class="card-desc">阿里云大模型，功能全面</div></div>
+      </a>
+      <a href="https://www.perplexity.ai" target="_blank" class="card" data-name="Perplexity" data-cat="ai">
+        <div class="card-icon">🔍</div>
+        <div class="card-info"><div class="card-name">Perplexity</div><div class="card-desc">AI 搜索引擎，实时联网检索</div></div>
+      </a>
+      <a href="https://midjourney.com" target="_blank" class="card" data-name="Midjourney" data-cat="ai">
+        <div class="card-icon">🎨</div>
+        <div class="card-info"><div class="card-name">Midjourney</div><div class="card-desc">顶级 AI 图像生成，美学一流</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 视频平台 -->
+  <div class="cat-section" id="cat-video" data-cat="video">
+    <div class="cat-title">🎬&nbsp; 视频平台</div>
+    <div class="cards-grid">
+      <a href="https://www.bilibili.com" target="_blank" class="card" data-name="哔哩哔哩" data-cat="video">
+        <div class="card-icon">📺</div>
+        <div class="card-info"><div class="card-name">哔哩哔哩</div><div class="card-desc">国内最好的学习+娱乐视频平台</div></div>
+      </a>
+      <a href="https://www.youtube.com" target="_blank" class="card" data-name="YouTube" data-cat="video">
+        <div class="card-icon">▶️</div>
+        <div class="card-info"><div class="card-name">YouTube</div><div class="card-desc">全球最大视频平台，海量内容</div></div>
+      </a>
+      <a href="https://www.ted.com" target="_blank" class="card" data-name="TED Talks" data-cat="video">
+        <div class="card-icon">🎤</div>
+        <div class="card-info"><div class="card-name">TED Talks</div><div class="card-desc">全球顶尖演讲，开阔思维边界</div></div>
+      </a>
+      <a href="https://www.ixigua.com" target="_blank" class="card" data-name="西瓜视频" data-cat="video">
+        <div class="card-icon">🍉</div>
+        <div class="card-info"><div class="card-name">西瓜视频</div><div class="card-desc">中长视频，纪录片资源丰富</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 书籍资源 -->
+  <div class="cat-section" id="cat-books" data-cat="books">
+    <div class="cat-title">📚&nbsp; 书籍资源</div>
+    <div class="cards-grid">
+      <a href="https://weread.qq.com" target="_blank" class="card" data-name="微信读书" data-cat="books">
+        <div class="card-icon">📖</div>
+        <div class="card-info"><div class="card-name">微信读书</div><div class="card-desc">海量正版书，无限卡免费畅读</div></div>
+      </a>
+      <a href="https://www.douban.com/books" target="_blank" class="card" data-name="豆瓣读书" data-cat="books">
+        <div class="card-icon">🫘</div>
+        <div class="card-info"><div class="card-name">豆瓣读书</div><div class="card-desc">书评+书单，发现好书最佳入口</div></div>
+      </a>
+      <a href="https://z-lib.id" target="_blank" class="card" data-name="Z-Library" data-cat="books">
+        <div class="card-icon">🌐</div>
+        <div class="card-info"><div class="card-name">Z-Library</div><div class="card-desc">世界最大免费电子书库</div></div>
+      </a>
+      <a href="https://www.gutenberg.org" target="_blank" class="card" data-name="古腾堡计划" data-cat="books">
+        <div class="card-icon">📜</div>
+        <div class="card-info"><div class="card-name">古腾堡计划</div><div class="card-desc">7 万+ 经典文学免费下载</div></div>
+      </a>
+      <a href="https://book.sohu.com" target="_blank" class="card" data-name="读书笔记" data-cat="books">
+        <div class="card-icon">✏️</div>
+        <div class="card-info"><div class="card-name">简悦</div><div class="card-desc">网页稍后读 + 阅读笔记工具</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 学习平台 -->
+  <div class="cat-section" id="cat-learn" data-cat="learn">
+    <div class="cat-title">🎓&nbsp; 学习平台</div>
+    <div class="cards-grid">
+      <a href="https://www.coursera.org" target="_blank" class="card" data-name="Coursera" data-cat="learn">
+        <div class="card-icon">🎓</div>
+        <div class="card-info"><div class="card-name">Coursera</div><div class="card-desc">顶尖大学课程，可获认证</div></div>
+      </a>
+      <a href="https://www.khanacademy.org" target="_blank" class="card" data-name="可汗学院" data-cat="learn">
+        <div class="card-icon">📐</div>
+        <div class="card-info"><div class="card-name">可汗学院</div><div class="card-desc">免费系统化学习，K12 到大学</div></div>
+      </a>
+      <a href="https://developer.mozilla.org" target="_blank" class="card" data-name="MDN" data-cat="learn">
+        <div class="card-icon">🦊</div>
+        <div class="card-info"><div class="card-name">MDN</div><div class="card-desc">Web 开发权威参考文档</div></div>
+      </a>
+      <a href="https://www.yuque.com" target="_blank" class="card" data-name="语雀" data-cat="learn">
+        <div class="card-icon">📝</div>
+        <div class="card-info"><div class="card-name">语雀</div><div class="card-desc">阿里出品，知识库与文档协作</div></div>
+      </a>
+      <a href="https://sspai.com" target="_blank" class="card" data-name="少数派" data-cat="learn">
+        <div class="card-icon">🔢</div>
+        <div class="card-info"><div class="card-name">少数派</div><div class="card-desc">高质量数字生活方式媒体</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 效率工具 -->
+  <div class="cat-section" id="cat-tools" data-cat="tools">
+    <div class="cat-title">🔧&nbsp; 效率工具</div>
+    <div class="cards-grid">
+      <a href="https://www.notion.so" target="_blank" class="card" data-name="Notion" data-cat="tools">
+        <div class="card-icon">📋</div>
+        <div class="card-info"><div class="card-name">Notion</div><div class="card-desc">全能笔记+数据库+项目管理</div></div>
+      </a>
+      <a href="https://obsidian.md" target="_blank" class="card" data-name="Obsidian" data-cat="tools">
+        <div class="card-icon">💎</div>
+        <div class="card-info"><div class="card-name">Obsidian</div><div class="card-desc">本地优先笔记，双链知识图谱</div></div>
+      </a>
+      <a href="https://www.figma.com" target="_blank" class="card" data-name="Figma" data-cat="tools">
+        <div class="card-icon">🖼️</div>
+        <div class="card-info"><div class="card-name">Figma</div><div class="card-desc">协作设计工具，原型必备</div></div>
+      </a>
+      <a href="https://github.com" target="_blank" class="card" data-name="GitHub" data-cat="tools">
+        <div class="card-icon">🐙</div>
+        <div class="card-info"><div class="card-name">GitHub</div><div class="card-desc">代码托管+开源社区</div></div>
+      </a>
+      <a href="https://excalidraw.com" target="_blank" class="card" data-name="Excalidraw" data-cat="tools">
+        <div class="card-icon">✏️</div>
+        <div class="card-info"><div class="card-name">Excalidraw</div><div class="card-desc">手绘风格在线白板，头脑风暴</div></div>
+      </a>
+      <a href="https://www.xmind.net" target="_blank" class="card" data-name="XMind" data-cat="tools">
+        <div class="card-icon">🧩</div>
+        <div class="card-info"><div class="card-name">XMind</div><div class="card-desc">思维导图，整理思路利器</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 设计资源 -->
+  <div class="cat-section" id="cat-design" data-cat="design">
+    <div class="cat-title">🎨&nbsp; 设计资源</div>
+    <div class="cards-grid">
+      <a href="https://www.canva.com" target="_blank" class="card" data-name="Canva" data-cat="design">
+        <div class="card-icon">🖌️</div>
+        <div class="card-info"><div class="card-name">Canva</div><div class="card-desc">在线图文设计，模板超多</div></div>
+      </a>
+      <a href="https://unsplash.com" target="_blank" class="card" data-name="Unsplash" data-cat="design">
+        <div class="card-icon">🖼️</div>
+        <div class="card-info"><div class="card-name">Unsplash</div><div class="card-desc">高质量免费商用摄影图库</div></div>
+      </a>
+      <a href="https://dribbble.com" target="_blank" class="card" data-name="Dribbble" data-cat="design">
+        <div class="card-icon">🏀</div>
+        <div class="card-info"><div class="card-name">Dribbble</div><div class="card-desc">顶尖设计师作品展示社区</div></div>
+      </a>
+      <a href="https://www.iconfont.cn" target="_blank" class="card" data-name="Iconfont" data-cat="design">
+        <div class="card-icon">🔣</div>
+        <div class="card-info"><div class="card-name">Iconfont</div><div class="card-desc">阿里图标库，海量免费图标</div></div>
+      </a>
+      <a href="https://coolors.co" target="_blank" class="card" data-name="Coolors" data-cat="design">
+        <div class="card-icon">🎨</div>
+        <div class="card-info"><div class="card-name">Coolors</div><div class="card-desc">配色方案生成工具，一键出图</div></div>
+      </a>
+      <a href="https://fonts.google.com" target="_blank" class="card" data-name="Google Fonts" data-cat="design">
+        <div class="card-icon">🔤</div>
+        <div class="card-info"><div class="card-name">Google Fonts</div><div class="card-desc">免费开源字体库，设计必备</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 摄影资源 -->
+  <div class="cat-section" id="cat-photo" data-cat="photo">
+    <div class="cat-title">📷&nbsp; 摄影资源</div>
+    <div class="cards-grid">
+      <a href="https://500px.com" target="_blank" class="card" data-name="500px" data-cat="photo">
+        <div class="card-icon">📸</div>
+        <div class="card-info"><div class="card-name">500px</div><div class="card-desc">全球摄影师社区，高质量作品集</div></div>
+      </a>
+      <a href="https://www.adobe.com/products/photoshop-lightroom.html" target="_blank" class="card" data-name="Lightroom" data-cat="photo">
+        <div class="card-icon">🌅</div>
+        <div class="card-info"><div class="card-name">Lightroom</div><div class="card-desc">Adobe 专业调色软件</div></div>
+      </a>
+      <a href="https://vsco.co" target="_blank" class="card" data-name="VSCO" data-cat="photo">
+        <div class="card-icon">🌿</div>
+        <div class="card-info"><div class="card-name">VSCO</div><div class="card-desc">胶片风格滤镜，移动端修图</div></div>
+      </a>
+      <a href="https://www.snapseed.online" target="_blank" class="card" data-name="Snapseed" data-cat="photo">
+        <div class="card-icon">✂️</div>
+        <div class="card-info"><div class="card-name">Snapseed</div><div class="card-desc">Google 出品免费修图，功能专业</div></div>
+      </a>
+      <a href="https://www.pixiv.net" target="_blank" class="card" data-name="Pixiv" data-cat="photo">
+        <div class="card-icon">🖼️</div>
+        <div class="card-info"><div class="card-name">Pixiv</div><div class="card-desc">日系插画+摄影创意社区</div></div>
+      </a>
+      <a href="https://www.darktable.org" target="_blank" class="card" data-name="Darktable" data-cat="photo">
+        <div class="card-icon">🌑</div>
+        <div class="card-info"><div class="card-name">Darktable</div><div class="card-desc">免费开源 RAW 暗室处理软件</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 乐器 & 音乐 -->
+  <div class="cat-section" id="cat-music" data-cat="music">
+    <div class="cat-title">🎸&nbsp; 乐器 &amp; 音乐</div>
+    <div class="cards-grid">
+      <a href="https://www.ultimate-guitar.com" target="_blank" class="card" data-name="Ultimate Guitar" data-cat="music">
+        <div class="card-icon">🎸</div>
+        <div class="card-info"><div class="card-name">Ultimate Guitar</div><div class="card-desc">全球最大吉他谱库，Tab 海量</div></div>
+      </a>
+      <a href="https://www.chordify.net" target="_blank" class="card" data-name="Chordify" data-cat="music">
+        <div class="card-icon">🎵</div>
+        <div class="card-info"><div class="card-name">Chordify</div><div class="card-desc">自动分析歌曲和弦，跟弹神器</div></div>
+      </a>
+      <a href="https://musescore.com" target="_blank" class="card" data-name="MuseScore" data-cat="music">
+        <div class="card-icon">🎼</div>
+        <div class="card-info"><div class="card-name">MuseScore</div><div class="card-desc">免费乐谱编辑与分享平台</div></div>
+      </a>
+      <a href="https://www.yousician.com" target="_blank" class="card" data-name="Yousician" data-cat="music">
+        <div class="card-icon">🏆</div>
+        <div class="card-info"><div class="card-name">Yousician</div><div class="card-desc">吉他/钢琴游戏化教学 App</div></div>
+      </a>
+      <a href="https://splice.com" target="_blank" class="card" data-name="Splice" data-cat="music">
+        <div class="card-icon">🎛️</div>
+        <div class="card-info"><div class="card-name">Splice</div><div class="card-desc">海量音效采样素材库</div></div>
+      </a>
+      <a href="https://www.soundtrap.com" target="_blank" class="card" data-name="Soundtrap" data-cat="music">
+        <div class="card-icon">🎙️</div>
+        <div class="card-info"><div class="card-name">Soundtrap</div><div class="card-desc">在线 DAW，随时随地录音编曲</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- DIY & 手工 -->
+  <div class="cat-section" id="cat-diy" data-cat="diy">
+    <div class="cat-title">🪚&nbsp; DIY &amp; 手工</div>
+    <div class="cards-grid">
+      <a href="https://www.lceda.cn" target="_blank" class="card" data-name="立创EDA" data-cat="diy">
+        <div class="card-icon">⚡</div>
+        <div class="card-info"><div class="card-name">立创EDA</div><div class="card-desc">在线 PCB 设计，电子制作入门</div></div>
+      </a>
+      <a href="https://www.szlcsc.com" target="_blank" class="card" data-name="立创商城" data-cat="diy">
+        <div class="card-icon">🛒</div>
+        <div class="card-info"><div class="card-name">立创商城</div><div class="card-desc">电子元器件采购，价格实惠</div></div>
+      </a>
+      <a href="https://www.instructables.com" target="_blank" class="card" data-name="Instructables" data-cat="diy">
+        <div class="card-icon">🔨</div>
+        <div class="card-info"><div class="card-name">Instructables</div><div class="card-desc">全球最大 DIY 教程社区</div></div>
+      </a>
+      <a href="https://makezine.com" target="_blank" class="card" data-name="Make" data-cat="diy">
+        <div class="card-icon">⚙️</div>
+        <div class="card-info"><div class="card-name">Make Magazine</div><div class="card-desc">创客文化杂志，DIY 项目灵感</div></div>
+      </a>
+      <a href="https://www.thingiverse.com" target="_blank" class="card" data-name="Thingiverse" data-cat="diy">
+        <div class="card-icon">🖨️</div>
+        <div class="card-info"><div class="card-name">Thingiverse</div><div class="card-desc">3D 打印模型免费下载</div></div>
+      </a>
+      <a href="https://item.taobao.com" target="_blank" class="card" data-name="淘宝DIY" data-cat="diy">
+        <div class="card-icon">🛍️</div>
+        <div class="card-info"><div class="card-name">淘宝手工区</div><div class="card-desc">木工/皮革/编织材料一站购</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 灵感发现 -->
+  <div class="cat-section" id="cat-inspire" data-cat="inspire">
+    <div class="cat-title">💡&nbsp; 灵感发现</div>
+    <div class="cards-grid">
+      <a href="https://sspai.com" target="_blank" class="card" data-name="少数派" data-cat="inspire">
+        <div class="card-icon">🔢</div>
+        <div class="card-info"><div class="card-name">少数派</div><div class="card-desc">数字生活方式，发现好工具好内容</div></div>
+      </a>
+      <a href="https://www.pinterest.com" target="_blank" class="card" data-name="Pinterest" data-cat="inspire">
+        <div class="card-icon">📌</div>
+        <div class="card-info"><div class="card-name">Pinterest</div><div class="card-desc">视觉灵感图钉板，无尽创意来源</div></div>
+      </a>
+      <a href="https://are.na" target="_blank" class="card" data-name="ARE.NA" data-cat="inspire">
+        <div class="card-icon">🔲</div>
+        <div class="card-info"><div class="card-name">ARE.NA</div><div class="card-desc">小众创意灵感收集平台</div></div>
+      </a>
+      <a href="https://www.producthunt.com" target="_blank" class="card" data-name="Product Hunt" data-cat="inspire">
+        <div class="card-icon">🐱</div>
+        <div class="card-info"><div class="card-name">Product Hunt</div><div class="card-desc">每日最新产品，发现新鲜工具</div></div>
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<!-- 搜索 MODAL -->
+<div class="modal-overlay" id="searchModal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <div class="modal-search">
+      <span>🔍</span>
+      <input type="text" id="modalInput" placeholder="搜索工具…" oninput="modalSearch(this.value)" autocomplete="off"/>
+      <span style="font-size:.72rem;color:var(--text3);cursor:pointer" onclick="closeModalDirect()">ESC</span>
+    </div>
+    <div class="modal-results" id="modalResults"></div>
+    <div class="modal-hint">输入关键词搜索 · ESC 关闭</div>
+  </div>
+</div>
+
+<script>
+/* ---------- 深色模式 ---------- */
+let dark = false;
+function toggleTheme(){
+  dark=!dark;
+  document.body.classList.toggle('dark',dark);
+  document.getElementById('themeBtn').textContent=dark?'☀️':'🌙';
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+}
+
+// 恢复主题偏好
+if (localStorage.getItem('theme') === 'dark') {
+  toggleTheme();
+}
+
+/* ---------- Tab 筛选 ---------- */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat=btn.dataset.cat;
+    document.querySelectorAll('.cat-section').forEach(sec=>{
+      sec.style.display=(cat==='all'||sec.dataset.cat===cat)?'':'none';
+    });
+    document.getElementById('inlineSearch').value='';
+  });
+});
+
+/* ---------- 内联搜索 ---------- */
+function filterCards(q){
+  q=q.trim().toLowerCase();
+  document.querySelectorAll('.cat-section').forEach(sec=>{
+    let anyVisible=false;
+    sec.querySelectorAll('.card').forEach(c=>{
+      const match=c.dataset.name.toLowerCase().includes(q)||
+                  c.querySelector('.card-desc').textContent.toLowerCase().includes(q);
+      c.style.display=match?'':'none';
+      if(match) anyVisible=true;
+    });
+    sec.style.display=anyVisible?'':'none';
+  });
+  // 重置 tab
+  if(q===''){
+    document.querySelectorAll('.cat-section').forEach(s=>s.style.display='');
+    const activeTab=document.querySelector('.tab-btn.active');
+    if(activeTab) activeTab.click();
+  }
+}
+
+/* ---------- Modal 搜索 ---------- */
+const allCards=[...document.querySelectorAll('.card')];
+function openModal(){
+  document.getElementById('searchModal').classList.add('open');
+  setTimeout(()=>document.getElementById('modalInput').focus(),50);
+  modalSearch('');
+}
+function closeModalDirect(){
+  document.getElementById('searchModal').classList.remove('open');
+}
+function closeModal(e){
+  if(e.target===document.getElementById('searchModal')) closeModalDirect();
+}
+function modalSearch(q){
+  q=q.trim().toLowerCase();
+  const res=document.getElementById('modalResults');
+  const filtered=q?allCards.filter(c=>
+    c.dataset.name.toLowerCase().includes(q)||
+    c.querySelector('.card-desc').textContent.toLowerCase().includes(q)
+  ):allCards.slice(0,12);
+  if(filtered.length===0){
+    res.innerHTML='<div class="modal-empty">没有找到相关工具</div>';
+    return;
+  }
+  res.innerHTML=filtered.map(c=>`
+    <a href="${c.href}" target="_blank" class="mresult" onclick="closeModalDirect()">
+      <span class="mresult-icon">${c.querySelector('.card-icon').textContent}</span>
+      <div>
+        <div class="mresult-name">${c.dataset.name}</div>
+        <div class="mresult-cat">${c.querySelector('.card-desc').textContent}</div>
+      </div>
+    </a>
+  `).join('');
+}
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openModal();}
+  if(e.key==='Escape') closeModalDirect();
+});
+
+/* ---------- hash 跳转定位 ---------- */
+window.addEventListener('DOMContentLoaded',()=>{
+  const h=location.hash.replace('#','');
+  if(h){
+    const catBtn=document.querySelector(`.tab-btn[data-cat="${h}"]`);
+    if(catBtn) catBtn.click();
+    const sec=document.getElementById('cat-'+h);
+    if(sec) setTimeout(()=>sec.scrollIntoView({behavior:'smooth',block:'start'}),200);
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>我的作品 · 周云飞</title>
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --bg:#f8f7f5; --surface:#fff; --border:#e8e8e4;
+      --text:#1a1a1a; --text2:#666; --text3:#aaa;
+      --accent:#4f6ef7; --r:14px;
+      --sh:0 6px 28px rgba(0,0,0,0.09);
+      --t:0.22s ease;
+    }
+    html { scroll-behavior:smooth; }
+    body {
+      background:var(--bg); color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB",sans-serif;
+      line-height:1.7; overflow-x:hidden;
+    }
+    a { text-decoration:none; color:inherit; }
+
+    /* ===== NAV ===== */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:300;
+      height:72px; display:flex; align-items:center; justify-content:space-between;
+      padding:0 8%;
+      background:rgba(248,247,245,.92); backdrop-filter:blur(20px);
+      -webkit-backdrop-filter:blur(20px);
+      border-bottom:1px solid rgba(0,0,0,.06);
+      transition:background 0.22s ease;
+    }
+    .nav-logo { display:flex; align-items:center; gap:.8rem; text-decoration:none; padding:8px 0; }
+    .nav-logo img { width:140px; height:auto; flex-shrink:0; object-fit:contain; display:block; }
+    .nav-links { display:flex; gap:2.5rem; margin-left:auto; margin-right:2.5rem; }
+    .nav-links a { font-size:0.95rem; color:var(--text2); transition:color var(--t); font-family:"Microsoft YaHei","微软雅黑",sans-serif; }
+    .nav-links a:hover { color:var(--text); }
+    .nav-back {
+      padding:.32rem .9rem; border-radius:20px;
+      border:1.5px solid var(--border); font-size:.78rem; color:var(--text2);
+      background:var(--surface); transition:all var(--t);
+    }
+    .nav-back:hover { background:var(--text); color:#fff; border-color:var(--text); }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      padding:120px 8% 70px; text-align:center;
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(79,110,247,.10) 0%, transparent 65%), var(--bg);
+    }
+    .page-hero .eyebrow { font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--text3); margin-bottom:.8rem; }
+    .page-hero h1 { font-size:clamp(2rem,5vw,3rem); font-weight:900; letter-spacing:-.03em; margin-bottom:.6rem; }
+    .page-hero-line { width:28px; height:3px; background:var(--text); border-radius:2px; margin:.8rem auto 1.2rem; }
+    .page-hero p { font-size:.93rem; color:var(--text2); max-width:480px; margin:0 auto; }
+
+    /* ===== TAB NAV ===== */
+    .tab-bar {
+      position:sticky; top:72px; z-index:100;
+      background:rgba(248,247,245,.92); backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+      display:flex; justify-content:center; gap:.4rem;
+      padding:.65rem 8%;
+    }
+    .tab-btn {
+      padding:.35rem 1.1rem; border-radius:20px;
+      border:1.5px solid transparent; font-size:.8rem; color:var(--text2);
+      background:transparent; cursor:pointer; transition:all var(--t);
+    }
+    .tab-btn:hover    { background:var(--surface); border-color:var(--border); }
+    .tab-btn.active   { background:var(--text); color:#fff; border-color:var(--text); }
+
+    /* ===== MAIN CONTENT ===== */
+    .works-main { max-width:960px; margin:0 auto; padding:60px 8% 80px; }
+    .cat-block { margin-bottom:3.5rem; }
+    .cat-head { display:flex; align-items:center; gap:1rem; margin-bottom:1.4rem; }
+    .cat-icon { font-size:1.4rem; }
+    .cat-title { font-size:1.1rem; font-weight:800; }
+    .cat-line { flex:1; height:1px; background:var(--border); }
+
+    /* ===== 作品卡片 ===== */
+    .wgrid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:1.2rem; }
+    .wcard {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--r); overflow:hidden;
+      display:flex; flex-direction:column;
+      transition:box-shadow var(--t), transform var(--t);
+      cursor:pointer;
+    }
+    .wcard:hover { box-shadow:var(--sh); transform:translateY(-4px); }
+    .wcard-thumb { width:100%; height:152px; display:flex; align-items:center; justify-content:center; font-size:2.6rem; flex-shrink:0; }
+    .wcard-body { padding:1.1rem 1.3rem 1.3rem; flex:1; display:flex; flex-direction:column; }
+    .wcard-title { font-size:.95rem; font-weight:700; margin-bottom:.35rem; }
+    .wcard-desc  { font-size:.78rem; color:var(--text2); line-height:1.65; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .wcard-foot  { display:flex; align-items:center; justify-content:space-between; margin-top:.9rem; }
+    .badge { font-size:.66rem; padding:.18rem .6rem; border-radius:4px; font-weight:600; }
+    .b-web   { background:#e8fff2; color:#1a9e5a; }
+    .b-photo { background:#fff8e1; color:#d97706; }
+    .b-write { background:#f4e8ff; color:#8a35d6; }
+    .b-music { background:#e0f2fe; color:#0284c7; }
+    .b-private { background:#fce7f3; color:#db2777; }
+    .wcard-arrow { font-size:.75rem; color:var(--text3); transition:color var(--t), transform var(--t); display:inline-block; }
+    .wcard:hover .wcard-arrow { color:var(--accent); transform:translateX(3px); }
+
+    /* ===== 相册弹窗 ===== */
+    .gallery-overlay {
+      position:fixed; inset:0; z-index:500;
+      background:rgba(0,0,0,0.7); backdrop-filter:blur(8px);
+      display:flex; align-items:flex-start; justify-content:center;
+      opacity:0; pointer-events:none;
+      transition:opacity 0.3s ease;
+      overflow-y:auto; padding:20px;
+    }
+    .gallery-overlay.open { opacity:1; pointer-events:all; }
+    .gallery-box {
+      background:var(--surface); border-radius:20px;
+      width:100%; max-width:900px;
+      margin:auto;
+      overflow:hidden;
+      transform:translateY(30px);
+      transition:transform 0.3s ease;
+      box-shadow:0 24px 80px rgba(0,0,0,0.25);
+    }
+    .gallery-overlay.open .gallery-box { transform:translateY(0); }
+
+    .gallery-header {
+      padding:1.4rem 1.8rem 1rem;
+      display:flex; align-items:center; justify-content:space-between;
+      border-bottom:1px solid var(--border);
+    }
+    .gallery-title { font-size:1.1rem; font-weight:800; display:flex; align-items:center; gap:.6rem; }
+    .gallery-title span { font-size:1.4rem; }
+    .gallery-close {
+      width:36px; height:36px; border-radius:50%;
+      border:1.5px solid var(--border); background:transparent;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; font-size:1.1rem; color:var(--text2);
+      transition:all var(--t);
+    }
+    .gallery-close:hover { background:var(--text); color:#fff; border-color:var(--text); }
+
+    /* 私人相册密码锁 */
+    .gallery-lock {
+      padding:3rem 2rem; text-align:center;
+    }
+    .gallery-lock .lock-icon { font-size:3rem; margin-bottom:1rem; }
+    .gallery-lock h3 { font-size:1.1rem; font-weight:700; margin-bottom:.4rem; }
+    .gallery-lock p { font-size:.85rem; color:var(--text2); margin-bottom:1.5rem; }
+    .lock-input-row { display:flex; gap:.6rem; justify-content:center; max-width:280px; margin:0 auto; }
+    .lock-input {
+      flex:1; padding:.55rem .8rem; border-radius:10px;
+      border:1.5px solid var(--border); background:var(--bg);
+      font-size:.9rem; color:var(--text); outline:none;
+      transition:border-color var(--t);
+    }
+    .lock-input:focus { border-color:var(--accent); }
+    .lock-btn {
+      padding:.55rem 1.2rem; border-radius:10px;
+      background:var(--text); color:#fff; border:none;
+      font-size:.85rem; cursor:pointer; font-weight:600;
+      transition:opacity var(--t);
+    }
+    .lock-btn:hover { opacity:.85; }
+    .lock-error { font-size:.78rem; color:#e05252; margin-top:.6rem; min-height:1em; }
+
+    /* 瀑布流相册 */
+    .gallery-body { padding:1.2rem 1.4rem 1.6rem; }
+    .gallery-desc { font-size:.82rem; color:var(--text2); margin-bottom:1.2rem; }
+    .photo-grid {
+      columns:3; column-gap:10px;
+    }
+    .photo-item {
+      break-inside:avoid;
+      margin-bottom:10px;
+      border-radius:10px; overflow:hidden;
+      cursor:pointer; position:relative;
+      background:var(--border);
+    }
+    .photo-item img {
+      width:100%; display:block;
+      transition:transform 0.3s ease;
+    }
+    .photo-item:hover img { transform:scale(1.03); }
+    .photo-item .photo-overlay {
+      position:absolute; inset:0;
+      background:rgba(0,0,0,0);
+      transition:background 0.3s ease;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .photo-item:hover .photo-overlay { background:rgba(0,0,0,0.25); }
+    .photo-overlay span { color:#fff; font-size:1.5rem; opacity:0; transition:opacity 0.3s; }
+    .photo-item:hover .photo-overlay span { opacity:1; }
+
+    /* 占位卡片（暂无照片） */
+    .photo-placeholder {
+      padding:3rem; text-align:center;
+      color:var(--text3); font-size:.9rem;
+    }
+    .photo-placeholder .ph-icon { font-size:3rem; margin-bottom:.8rem; }
+
+    /* 全屏预览 */
+    .lightbox {
+      position:fixed; inset:0; z-index:600;
+      background:rgba(0,0,0,0.92);
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; pointer-events:none;
+      transition:opacity 0.25s ease;
+    }
+    .lightbox.open { opacity:1; pointer-events:all; }
+    .lightbox img {
+      max-width:90vw; max-height:88vh;
+      border-radius:8px;
+      box-shadow:0 0 80px rgba(0,0,0,0.6);
+      object-fit:contain;
+    }
+    .lightbox-close {
+      position:absolute; top:20px; right:24px;
+      color:#fff; font-size:2rem; cursor:pointer; opacity:.7;
+      transition:opacity var(--t); background:none; border:none;
+    }
+    .lightbox-close:hover { opacity:1; }
+    .lightbox-prev, .lightbox-next {
+      position:absolute; top:50%; transform:translateY(-50%);
+      color:#fff; font-size:2rem; cursor:pointer;
+      background:rgba(255,255,255,.12); border:none;
+      width:48px; height:48px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transition:background var(--t); opacity:.8;
+    }
+    .lightbox-prev { left:20px; }
+    .lightbox-next { right:20px; }
+    .lightbox-prev:hover, .lightbox-next:hover { background:rgba(255,255,255,.25); opacity:1; }
+    .lightbox-caption {
+      position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+      color:rgba(255,255,255,.6); font-size:.8rem; white-space:nowrap;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background:var(--text); color:rgba(255,255,255,.55);
+      padding:2rem 8%;
+      display:flex; justify-content:space-between; flex-wrap:wrap; gap:.5rem;
+      font-size:.75rem;
+    }
+    footer a { color:rgba(255,255,255,.5); transition:color var(--t); }
+    footer a:hover { color:#fff; }
+
+    @media(max-width:680px){
+      .nav-links { display:none; }
+      .wgrid { grid-template-columns:1fr; }
+      .photo-grid { columns:2; }
+    }
+
+    /* ===== DARK MODE ===== */
+    body.dark {
+      --bg:#111113; --surface:#1c1c1f; --border:#2e2e34;
+      --text:#f0f0f2; --text2:#b0b0bb; --text3:#666670;
+    }
+    body.dark nav { background:rgba(17,17,19,.92); border-bottom-color:rgba(255,255,255,.06); }
+    body.dark .tab-bar { background:rgba(17,17,19,.92); border-bottom-color:var(--border); }
+    body.dark .tab-btn.active { background:#fff; color:#111; border-color:#fff; }
+    body.dark .wcard { background:rgba(28,28,31,0.8); border-color:rgba(46,46,52,0.8); }
+    body.dark .badge.b-web   { background:rgba(26,158,90,.15); color:#4ade80; }
+    body.dark .badge.b-photo { background:rgba(217,119,6,.15); color:#fbbf24; }
+    body.dark .badge.b-write { background:rgba(138,53,214,.15); color:#c084fc; }
+    body.dark .badge.b-music { background:rgba(2,132,199,.15); color:#38bdf8; }
+    body.dark .badge.b-private { background:rgba(219,39,119,.15); color:#f472b6; }
+    body.dark .nav-links a { color:var(--text2); }
+    body.dark .nav-links a:hover { color:var(--text); }
+    body.dark .nav-back { background:rgba(28,28,31,0.8); border-color:var(--border); color:var(--text2); }
+    body.dark .nav-back:hover { background:#fff; color:#111; border-color:#fff; }
+    body.dark footer { background:#0f0f11; }
+    body.dark .gallery-box { background:var(--surface); }
+    body.dark .lock-input { background:rgba(28,28,31,0.8); border-color:var(--border); color:var(--text); }
+    body.dark .lock-btn { background:#fff; color:#111; }
+    body.dark .page-hero { background:
+      radial-gradient(ellipse 70% 60% at 50% 0%, rgba(79,110,247,.15) 0%, transparent 65%), var(--bg);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="image/logo.png" alt="Logo"/>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#about">关于</a>
+    <a href="index.html#works">创作与收藏</a>
+    <a href="index.html#journey">大事记</a>
+    <a href="tools.html">工具库</a>
+  </div>
+  <a href="index.html" class="nav-back">← 返回主页</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <p class="eyebrow">My Works</p>
+  <h1>我的作品</h1>
+  <div class="page-hero-line"></div>
+  <p>这里收录了我在软件、摄影、手工、音乐四个方向上的创作，持续更新中。</p>
+</div>
+
+<!-- TAB -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('all',this)">全部</button>
+  <button class="tab-btn" onclick="switchTab('web',this)">🌐 软件</button>
+  <button class="tab-btn" onclick="switchTab('photo',this)">📷 摄影</button>
+  <button class="tab-btn" onclick="switchTab('diy',this)">🛠️ DIY</button>
+  <button class="tab-btn" onclick="switchTab('music',this)">🎸 音乐</button>
+</div>
+
+<!-- MAIN -->
+<div class="works-main">
+
+  <!-- 软件项目 -->
+  <div class="cat-block" id="web" data-cat="web">
+    <div class="cat-head">
+      <span class="cat-icon">🌐</span>
+      <span class="cat-title">软件项目</span>
+      <div class="cat-line"></div>
+    </div>
+    <div class="wgrid">
+      <a href="index.html" class="wcard">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#d1fae5,#6ee7b7)">🌐</div>
+        <div class="wcard-body">
+          <div class="wcard-title">个人主页</div>
+          <div class="wcard-desc">个人主页，纯手写 HTML/CSS，追寻简洁优雅的产品质感。</div>
+          <div class="wcard-foot">
+            <span class="badge b-web">软件</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </a>
+      <a href="tools.html" class="wcard">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#e0f2fe,#7dd3fc)">🔧</div>
+        <div class="wcard-body">
+          <div class="wcard-title">工具库导航</div>
+          <div class="wcard-desc">收藏好站的导航工具库，支持分类筛选与快速搜索。</div>
+          <div class="wcard-foot">
+            <span class="badge b-web">软件</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 摄影与图像 -->
+  <div class="cat-block" id="photo" data-cat="photo">
+    <div class="cat-head">
+      <span class="cat-icon">📷</span>
+      <span class="cat-title">摄影与图像</span>
+      <div class="cat-line"></div>
+    </div>
+    <div class="wgrid">
+      <!-- 街拍摄影 -->
+      <div class="wcard" onclick="openGallery('street')">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fef3c7,#fcd34d)">🏙️</div>
+        <div class="wcard-body">
+          <div class="wcard-title">街拍摄影</div>
+          <div class="wcard-desc">城市街头的光影与人文，记录那些稍纵即逝的生动瞬间。</div>
+          <div class="wcard-foot">
+            <span class="badge b-photo">摄影</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </div>
+      <!-- 人物摄影 -->
+      <div class="wcard" onclick="openGallery('portrait')">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fce7f3,#f9a8d4)">🧑‍🎨</div>
+        <div class="wcard-body">
+          <div class="wcard-title">人物摄影</div>
+          <div class="wcard-desc">用镜头捕捉人物神态与情绪，每一张都是故事的凝固。</div>
+          <div class="wcard-foot">
+            <span class="badge b-photo">摄影</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </div>
+      <!-- 风光摄影 -->
+      <div class="wcard" onclick="openGallery('landscape')">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#d1fae5,#6ee7b7)">🌅</div>
+        <div class="wcard-body">
+          <div class="wcard-title">风光摄影</div>
+          <div class="wcard-desc">山野间的星空、日落与晨雾，自然给予的最好馈赠。</div>
+          <div class="wcard-foot">
+            <span class="badge b-photo">摄影</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </div>
+      <!-- 个人保存 -->
+      <div class="wcard" onclick="openGallery('private')">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fce7f3,#ddd6fe)">🔒</div>
+        <div class="wcard-body">
+          <div class="wcard-title">个人保存</div>
+          <div class="wcard-desc">私人相册，记录与朋友的日常、珍贵的时光片段。</div>
+          <div class="wcard-foot">
+            <span class="badge b-private">私密</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIY & 手工 -->
+  <div class="cat-block" id="diy" data-cat="diy">
+    <div class="cat-head">
+      <span class="cat-icon">🛠️</span>
+      <span class="cat-title">DIY & 手工</span>
+      <div class="cat-line"></div>
+    </div>
+    <div class="wgrid">
+      <div class="wcard" onclick="openGallery('diy1')">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#ede9fe,#c4b5fd)">🛠️</div>
+        <div class="wcard-body">
+          <div class="wcard-title">手工制作</div>
+          <div class="wcard-desc">从零动手，改装、拼接、制作，享受创造一件实物的过程。</div>
+          <div class="wcard-foot">
+            <span class="badge b-write">手工</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </div>
+      <div class="wcard" onclick="openGallery('diy2')">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#d1fae5,#a7f3d0)">🪚</div>
+        <div class="wcard-body">
+          <div class="wcard-title">改装项目</div>
+          <div class="wcard-desc">拆解、改造、重新组装，赋予旧物新的生命与功能。</div>
+          <div class="wcard-foot">
+            <span class="badge b-write">手工</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 音乐 -->
+  <div class="cat-block" id="music" data-cat="music">
+    <div class="cat-head">
+      <span class="cat-icon">🎸</span>
+      <span class="cat-title">音乐</span>
+      <div class="cat-line"></div>
+    </div>
+    <div class="wgrid">
+      <div class="wcard" onclick="openGallery('guitar')">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#dbeafe,#818cf8)">🎸</div>
+        <div class="wcard-body">
+          <div class="wcard-title">吉他练习</div>
+          <div class="wcard-desc">自学吉他中，偶尔录几段不算成熟的练习，算是留个成长脚印。</div>
+          <div class="wcard-foot">
+            <span class="badge b-music">音乐</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </div>
+      <div class="wcard" onclick="openGallery('cover')">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#e0f2fe,#7dd3fc)">🎵</div>
+        <div class="wcard-body">
+          <div class="wcard-title">翻唱 & 原创</div>
+          <div class="wcard-desc">尝试翻唱喜欢的曲子，偶尔也写写简单的旋律片段。</div>
+          <div class="wcard-foot">
+            <span class="badge b-music">音乐</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /works-main -->
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 周云飞 · 星空山野</span>
+  <span><a href="index.html">← 返回主页</a> &nbsp;|&nbsp; <a href="tools.html">工具库 →</a></span>
+</footer>
+
+<!-- ===== 相册弹窗 ===== -->
+<div class="gallery-overlay" id="galleryOverlay" onclick="handleOverlayClick(event)">
+  <div class="gallery-box" id="galleryBox">
+    <div class="gallery-header">
+      <div class="gallery-title" id="galleryTitleEl">
+        <span id="galleryEmoji">📷</span>
+        <span id="galleryTitleText">相册</span>
+      </div>
+      <button class="gallery-close" onclick="closeGallery()">✕</button>
+    </div>
+    <!-- 内容区：lock / photos -->
+    <div id="galleryContent"></div>
+  </div>
+</div>
+
+<!-- ===== 全屏预览 ===== -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-prev" onclick="event.stopPropagation();lightboxNav(-1)">‹</button>
+  <img id="lightboxImg" src="" alt=""/>
+  <button class="lightbox-next" onclick="event.stopPropagation();lightboxNav(1)">›</button>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<script>
+  // ===== 主题 =====
+  let dark = false;
+  function toggleTheme() {
+    dark = !dark;
+    document.body.classList.toggle('dark', dark);
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  }
+  if (localStorage.getItem('theme') === 'dark') toggleTheme();
+
+  // ===== Tab 切换 =====
+  function switchTab(cat, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.cat-block').forEach(block => {
+      block.style.display = (cat === 'all' || block.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+
+  // 锚点跳转
+  const hash = location.hash.replace('#','');
+  if (hash) {
+    const target = [...document.querySelectorAll('.tab-btn')].find(b => b.getAttribute('onclick')?.includes(`'${hash}'`));
+    if (target) { target.classList.add('active'); switchTab(hash, target); }
+  }
+
+  // ===== 相册数据配置 =====
+  // 将来添加真实照片时，替换 src 为实际路径，如 "photos/street/001.jpg"
+  const galleries = {
+    street: {
+      emoji: '🏙️', title: '街拍摄影',
+      desc: '城市街头的光与影，那些一闪而过的生动瞬间。',
+      private: false,
+      photos: [
+        // 示例占位，替换为实际照片路径
+        // { src: 'photos/street/001.jpg', caption: '2025 上海' },
+      ]
+    },
+    portrait: {
+      emoji: '🧑‍🎨', title: '人物摄影',
+      desc: '用镜头捕捉真实的神态与情绪。',
+      private: false,
+      photos: []
+    },
+    landscape: {
+      emoji: '🌅', title: '风光摄影',
+      desc: '山野间的星空、日落与晨雾。',
+      private: false,
+      photos: []
+    },
+    private: {
+      emoji: '🔒', title: '个人保存',
+      desc: '与朋友的日常，珍贵的私人时光。',
+      private: true,
+      password: '171442', // 修改此处设置密码
+      photos: []
+    },
+    diy1: {
+      emoji: '🛠️', title: '手工制作',
+      desc: '从零动手，享受创造一件实物的过程。',
+      private: false, type: 'video', videos: []
+    },
+    diy2: {
+      emoji: '🪚', title: '改装项目',
+      desc: '拆解、改造，赋予旧物新的生命。',
+      private: false, type: 'video', videos: []
+    },
+    guitar: {
+      emoji: '🎸', title: '吉他练习',
+      desc: '自学吉他，留个成长脚印。',
+      private: false, type: 'video', videos: []
+    },
+    cover: {
+      emoji: '🎵', title: '翻唱 & 原创',
+      desc: '翻唱喜欢的曲子，或写写简单旋律。',
+      private: false, type: 'video', videos: []
+    }
+  };
+
+  let currentGallery = null;
+
+  // ===== 打开相册 =====
+  function openGallery(key) {
+    currentGallery = key;
+    const g = galleries[key];
+    document.getElementById('galleryEmoji').textContent = g.emoji;
+    document.getElementById('galleryTitleText').textContent = g.title;
+
+    if (g.private) {
+      renderLock(key);
+    } else {
+      renderPhotos(key);
+    }
+
+    document.getElementById('galleryOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGallery() {
+    document.getElementById('galleryOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('galleryOverlay')) closeGallery();
+  }
+
+  // ===== 渲染密码锁 =====
+  function renderLock(key) {
+    const g = galleries[key];
+    document.getElementById('galleryContent').innerHTML = `
+      <div class="gallery-lock">
+        <div class="lock-icon">🔐</div>
+        <h3>私人相册</h3>
+        <p>这里存放着珍贵的私人时光，请输入密码查看。</p>
+        <div class="lock-input-row">
+          <input class="lock-input" type="password" id="lockInput" placeholder="请输入密码" onkeydown="if(event.key==='Enter')checkPassword('${key}')"/>
+          <button class="lock-btn" onclick="checkPassword('${key}')">进入</button>
+        </div>
+        <div class="lock-error" id="lockError"></div>
+      </div>
+    `;
+    setTimeout(() => document.getElementById('lockInput')?.focus(), 100);
+  }
+
+  function checkPassword(key) {
+    const input = document.getElementById('lockInput').value;
+    const g = galleries[key];
+    if (input === g.password) {
+      renderPhotos(key);
+    } else {
+      document.getElementById('lockError').textContent = '密码错误，请重试';
+      document.getElementById('lockInput').value = '';
+      document.getElementById('lockInput').focus();
+    }
+  }
+
+  // ===== 渲染照片网格 =====
+  function renderPhotos(key) {
+    const g = galleries[key];
+    let html = `<div class="gallery-body">`;
+    if (g.desc) html += `<div class="gallery-desc">${g.desc}</div>`;
+
+    if (!g.photos || g.photos.length === 0) {
+      html += `
+        <div class="photo-placeholder">
+          <div class="ph-icon">${g.emoji}</div>
+          <div>照片整理中，敬请期待…</div>
+        </div>
+      `;
+    } else {
+      html += `<div class="photo-grid" id="photoGrid">`;
+      g.photos.forEach((p, i) => {
+        html += `
+          <div class="photo-item" onclick="openLightbox('${key}', ${i})">
+            <img src="${p.src}" alt="${p.caption || ''}" loading="lazy"/>
+            <div class="photo-overlay"><span>🔍</span></div>
+          </div>
+        `;
+      });
+      html += `</div>`;
+    }
+    html += `</div>`;
+    document.getElementById('galleryContent').innerHTML = html;
+  }
+
+  // ===== 全屏预览 =====
+  let lbKey = '', lbIndex = 0;
+
+  function openLightbox(key, index) {
+    lbKey = key;
+    lbIndex = index;
+    showLightboxPhoto();
+    document.getElementById('lightbox').classList.add('open');
+  }
+
+  function showLightboxPhoto() {
+    const photos = galleries[lbKey].photos;
+    const p = photos[lbIndex];
+    document.getElementById('lightboxImg').src = p.src;
+    document.getElementById('lightboxCaption').textContent = `${p.caption || ''} (${lbIndex + 1} / ${photos.length})`;
+  }
+
+  function lightboxNav(dir) {
+    const photos = galleries[lbKey].photos;
+    lbIndex = (lbIndex + dir + photos.length) % photos.length;
+    showLightboxPhoto();
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+
+  // 键盘支持
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeLightbox(); closeGallery(); }
+    if (document.getElementById('lightbox').classList.contains('open')) {
+      if (e.key === 'ArrowLeft') lightboxNav(-1);
+      if (e.key === 'ArrowRight') lightboxNav(1);
+    }
+  });
+</script>
+</body>
+</html>
