@@ -3,6 +3,30 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- 缓存控制：防止CDN缓存导致更新不及时 -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <!-- 隐藏EdgeOne演示提示条 -->
+  <style>
+    /* 隐藏腾讯云 EdgeOne 演示提示条 */
+    body > div:last-child,
+    [class*="demo"],
+    [class*="Demo"],
+    [id*="demo"],
+    [id*="Demo"],
+    .eo-banner,
+    .eo-notice,
+    .edgeone-banner,
+    [class*="edgeone"],
+    [class*="EdgeOne"] {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+    }
+  </style>
   <title>知识库 · 周云飞</title>
   <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
   <script src="embedded_content.js"></script>
