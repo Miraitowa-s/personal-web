@@ -1,6 +1,17 @@
 {
   "categories": [
     {
+      "id": "guide",
+      "name": "指南",
+      "docs": [
+        {
+          "file": "README.md",
+          "title": "📚 知识库使用指南",
+          "mtime": 0
+        }
+      ]
+    },
+    {
       "id": "ai-agent",
       "name": "ai-agent",
       "docs": [

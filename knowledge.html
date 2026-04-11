@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>知识库 · 周云飞</title>
   <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+  <script src="embedded_content.js"></script>
   <script>
     // 备用：若 CDN 加载失败则从 unpkg 加载
     window.addEventListener('load', function() {
@@ -688,84 +689,88 @@
   // ═══════════════════════════════════════
   const DOCS_BASE = 'docs/';           // 静态文件基路径
 
-  // 内嵌目录数据（file:// 直接打开时 fetch 无法使用，作为最终 fallback）
-  // 新增分类/文章时，同步更新此处和 docs/_sidebar.json
-  const FALLBACK_TREE = [
+  // 内嵌目录数据 - 现在是主数据源，不再依赖服务器
+  // 新增分类/文章时，同步更新此处
+  const EMBEDDED_TREE = [
     { id:'ai-llm', name:'ai-llm', docs:[
-      { file:'ai-learning-roadmap.md',      title:'🌟 AI 与大模型学习路径指南' },
-      { file:'llm-guide.md',                title:'📚 大语言模型完全指南' },
-      { file:'deep-learning-basics.md',     title:'🤖 深度学习基础' },
-      { file:'transformer-architecture.md', title:'⚡ Transformer 架构详解' },
-      { file:'fine-tuning-practical-guide.md', title:'🔧 AI 微调实战指南' },
-      { file:'prompt-engineering.md',       title:'💬 Prompt Engineering 指南' },
-      { file:'rag-guide.md',                title:'🔍 RAG 检索增强生成' },
-      { file:'ollama-guide.md',             title:'🏠 Ollama 本地大模型部署' },
+      { file:'ai-learning-roadmap.md',      title:'AI 与大模型学习路径指南' },
+      { file:'llm-guide.md',                title:'大语言模型完全指南' },
+      { file:'deep-learning-basics.md',     title:'深度学习基础' },
+      { file:'transformer-architecture.md', title:'Transformer 架构详解' },
+      { file:'fine-tuning-practical-guide.md', title:'AI 微调实战指南' },
+      { file:'prompt-engineering.md',       title:'Prompt Engineering 指南' },
+      { file:'rag-guide.md',                title:'RAG 检索增强生成' },
+      { file:'ollama-guide.md',             title:'Ollama 本地大模型部署' },
     ]},
     { id:'ai-agent', name:'ai-agent', docs:[
-      { file:'ai-agent-basics.md',       title:'🌟 AI Agent 基础概念指南' },
-      { file:'ai-agent-practice.md',     title:'🛠️ AI Agent 实战' },
-      { file:'langchain-guide.md',       title:'⛓️ LangChain 开发指南' },
-      { file:'nlp-guide.md',             title:'🗣️ 自然语言处理基础' },
-      { file:'nlp-foundation-models.md', title:'🏗️ 预训练模型体系' },
-      { file:'mcp-protocol.md',          title:'🔌 MCP 协议：AI 工具调用标准' },
+      { file:'ai-agent-basics.md',       title:'AI Agent 基础概念指南' },
+      { file:'ai-agent-practice.md',     title:'AI Agent 实战' },
+      { file:'langchain-guide.md',       title:'LangChain 开发指南' },
+      { file:'nlp-guide.md',             title:'自然语言处理基础' },
+      { file:'nlp-foundation-models.md', title:'预训练模型体系' },
+      { file:'mcp-protocol.md',          title:'MCP 协议：AI 工具调用标准' },
     ]},
     { id:'data-science', name:'data-science', docs:[
-      { file:'data-science-guide.md',  title:'🌟 数据科学学习指南' },
-      { file:'machine-learning.md',    title:'🤖 机器学习基础' },
-      { file:'sklearn-guide.md',       title:'🔧 Scikit-learn 实战' },
-      { file:'pandas-guide.md',        title:'📊 Pandas 数据处理指南' },
-      { file:'numpy-guide.md',         title:'🔢 NumPy 数值计算指南' },
-      { file:'data-visualization.md',  title:'📈 数据可视化' },
+      { file:'data-science-guide.md',  title:'数据科学学习指南' },
+      { file:'machine-learning.md',    title:'机器学习基础' },
+      { file:'sklearn-guide.md',       title:'Scikit-learn 实战' },
+      { file:'pandas-guide.md',        title:'Pandas 数据处理指南' },
+      { file:'numpy-guide.md',         title:'NumPy 数值计算指南' },
+      { file:'data-visualization.md',  title:'数据可视化' },
     ]},
     { id:'frontend', name:'frontend', docs:[
-      { file:'frontend-overview.md',           title:'🌟 前端技术栈全览指南' },
-      { file:'js-tutorial.md',                 title:'🟨 JavaScript 核心教程' },
-      { file:'css3-tutorial.md',               title:'🎨 CSS3 样式指南' },
-      { file:'html5-features.md',              title:'📄 HTML5 新特性' },
-      { file:'css-layout-guide.md',            title:'📐 CSS 布局：Flexbox & Grid' },
-      { file:'typescript-guide.md',            title:'🟦 TypeScript 类型指南' },
-      { file:'react-basics.md',                title:'⚛️ React 基础入门' },
-      { file:'vue3-composition-api.md',        title:'🟢 Vue3 Composition API' },
-      { file:'nextjs-guide.md',                title:'🚀 Next.js SSR 指南' },
-      { file:'testing-frameworks-guide.md',    title:'🧪 前端测试框架完全指南' },
-      { file:'web-performance-optimization.md',title:'⚡ 前端性能优化实战' },
+      { file:'frontend-overview.md',           title:'前端技术栈全览指南' },
+      { file:'js-tutorial.md',                 title:'JavaScript 核心教程' },
+      { file:'css3-tutorial.md',               title:'CSS3 样式指南' },
+      { file:'html5-features.md',              title:'HTML5 新特性' },
+      { file:'css-layout-guide.md',            title:'CSS 布局：Flexbox & Grid' },
+      { file:'typescript-guide.md',            title:'TypeScript 类型指南' },
+      { file:'react-basics.md',                title:'React 基础入门' },
+      { file:'vue3-composition-api.md',        title:'Vue3 Composition API' },
+      { file:'nextjs-guide.md',                title:'Next.js SSR 指南' },
+      { file:'testing-frameworks-guide.md',    title:'前端测试框架完全指南' },
+      { file:'web-performance-optimization.md',title:'前端性能优化实战' },
     ]},
     { id:'backend-eng', name:'backend-eng', docs:[
-      { file:'backend-overview.md',          title:'🌟 后端 & 工程技术指南' },
-      { file:'python3-basics.md',            title:'🐍 Python3 基础' },
-      { file:'python3-advanced.md',          title:'🐍 Python3 进阶' },
-      { file:'api-design-best-practices.md', title:'🔌 API 设计最佳实践' },
-      { file:'mysql-guide.md',               title:'🗄️ MySQL 数据库指南' },
-      { file:'mongodb-guide.md',             title:'📂 MongoDB NoSQL 指南' },
-      { file:'sql-basics.md',                title:'📝 SQL 基础语法' },
-      { file:'git-guide.md',                 title:'📊 Git 版本控制指南' },
-      { file:'http-guide.md',                title:'🌐 HTTP 协议详解' },
-      { file:'tcpip-guide.md',               title:'🔗 TCP/IP 协议栈' },
-      { file:'network-basics.md',            title:'📡 网络基础' },
+      { file:'backend-overview.md',          title:'后端 & 工程技术指南' },
+      { file:'python3-basics.md',            title:'Python3 基础' },
+      { file:'python3-advanced.md',          title:'Python3 进阶' },
+      { file:'api-design-best-practices.md', title:'API 设计最佳实践' },
+      { file:'mysql-guide.md',               title:'MySQL 数据库指南' },
+      { file:'mongodb-guide.md',             title:'MongoDB NoSQL 指南' },
+      { file:'sql-basics.md',                title:'SQL 基础语法' },
+      { file:'git-guide.md',                 title:'Git 版本控制指南' },
+      { file:'http-guide.md',                title:'HTTP 协议详解' },
+      { file:'tcpip-guide.md',               title:'TCP/IP 协议栈' },
+      { file:'network-basics.md',            title:'网络基础' },
     ]},
     { id:'guitar', name:'guitar', docs:[
-      { file:'practice-guide.md',      title:'🌟 吉他练习方法与时间管理指南' },
-      { file:'basic-chords.md',        title:'🎵 基础和弦入门' },
-      { file:'music-theory-basics.md', title:'🎼 吉他乐理入门' },
-      { file:'fingerstyle-guide.md',   title:'🎸 指弹吉他入门' },
+      { file:'practice-guide.md',      title:'吉他练习方法与时间管理指南' },
+      { file:'basic-chords.md',        title:'基础和弦入门' },
+      { file:'music-theory-basics.md', title:'吉他乐理入门' },
+      { file:'fingerstyle-guide.md',   title:'指弹吉他入门' },
     ]},
     { id:'photography', name:'photography', docs:[
-      { file:'camera-gear-guide.md',        title:'🌟 相机装备选购指南' },
-      { file:'exposure-triangle.md',        title:'📷 曝光三角' },
-      { file:'composition.md',              title:'🎨 构图原则' },
-      { file:'lightroom-editing.md',        title:'🎛️ Lightroom 后期调色' },
-      { file:'post-processing-workflow.md', title:'🔧 后期实战工作流' },
-      { file:'street-photography.md',       title:'🏙️ 街头摄影指南' },
+      { file:'camera-gear-guide.md',        title:'相机装备选购指南' },
+      { file:'exposure-triangle.md',        title:'曝光三角' },
+      { file:'composition.md',              title:'构图原则' },
+      { file:'lightroom-editing.md',        title:'Lightroom 后期调色' },
+      { file:'post-processing-workflow.md', title:'后期实战工作流' },
+      { file:'street-photography.md',       title:'街头摄影指南' },
     ]},
     { id:'diy', name:'diy', docs:[
-      { file:'tools-guide.md',        title:'🌟 DIY 工具入门指南' },
-      { file:'woodworking-basics.md', title:'🪵 木工基础' },
+      { file:'tools-guide.md',        title:'DIY 工具入门指南' },
+      { file:'woodworking-basics.md', title:'木工基础' },
     ]},
   ];
 
 
+  // 内嵌文章内容 - 所有文章都在这里，无需服务器
+  // EMBEDDED_CONTENT 对象已经在 embedded_content.js 中定义
+
   // 分类名映射：把英文文件夹名转为美观的中文展示名
   const CAT_ICONS = {
+    'guide':            '📚',
     'ai-llm':           '🤖',
     'ai-agent':         '🦾',
     'data-science':     '📊',
@@ -779,6 +784,7 @@
 
   // 分类名映射：把英文文件夹名转为美观的中文展示名
   const CAT_LABELS = {
+    'guide':            '📚 指南',
     'ai-llm':           '🤖 AI 与大模型',
     'ai-agent':         '🦾 AI Agent 开发',
     'data-science':     '📊 数据科学',
@@ -834,35 +840,33 @@
   const SESSION_KEY = 'kb_tree_cache';
 
   async function loadTree() {
-    // ── 静态模式：直接读取 _sidebar.json，不依赖本地服务器 ──
-    // 优先使用 sessionStorage 缓存快速渲染，避免白屏
+    // ── 新方案：直接使用内嵌数据，无需服务器依赖 ──
+    // 1. 优先使用 sessionStorage 缓存（如果存在且有效）
     const cached = sessionStorage.getItem(SESSION_KEY);
+    let useCached = false;
+    
     if (cached) {
       try {
         const parsed = JSON.parse(cached);
-        tree = parsed.categories || [];
-        renderTree();
+        // 检查缓存是否包含完整的分类数据
+        if (parsed && parsed.length && parsed[0].id) {
+          tree = parsed;
+          renderTree();
+          useCached = true;
+        }
       } catch { /* 缓存损坏则忽略 */ }
     }
-
-    // 后台拉取最新 _sidebar.json
-    try {
-      const res = await fetch(DOCS_BASE + '_sidebar.json');
-      if (!res.ok) throw new Error('sidebar not found');
-      const data = await res.json();
-      const newStr = JSON.stringify(data);
-      if (newStr !== cached) {
-        sessionStorage.setItem(SESSION_KEY, newStr);
-        tree = data.categories || [];
-        renderTree();
-      }
-    } catch {
-      // 连 _sidebar.json 都读不到（file:// 协议限制），尝试内嵌数据
-      if (!cached) {
-        tree = FALLBACK_TREE;
-        renderTree();
-      }
+    
+    // 2. 主数据源：内嵌的 EMBEDDED_TREE
+    if (!useCached) {
+      tree = EMBEDDED_TREE;
+      renderTree();
+      // 缓存内嵌数据
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(EMBEDDED_TREE));
     }
+    
+    // 3. 初始化搜索索引
+    initSearchIndex();
   }
 
   // ═══════════════════════════════════════
@@ -925,27 +929,138 @@
   }
 
   // ═══════════════════════════════════════
-  //  搜索过滤
+  //  搜索索引和过滤
   // ═══════════════════════════════════════
+  
+  // 搜索索引，用于快速搜索
+  let searchIndex = [];
+  
+  // 初始化搜索索引
+  function initSearchIndex() {
+    searchIndex = [];
+    EMBEDDED_TREE.forEach(category => {
+      category.docs.forEach(doc => {
+        searchIndex.push({
+          id: category.id,
+          name: category.name,
+          file: doc.file,
+          title: doc.title,
+        // 转换为搜索关键词（移除emoji和特殊符号）
+        searchText: (doc.title + ' ' + category.name).replace(/[🌟📚🤖🛠️🦾⛓️🗣️🏗️🔌📊🔢📈🎨📐🟦⚛️🟢🚀🧪🐍🗄️📂📝🌐🔗📡🎵🎼🎸📷🎛️🏙️🪵⚡🔧💬🔍🏠]/g, '').toLowerCase()
+        });
+      });
+    });
+  }
+  
+  // 增强的搜索过滤
   function filterTree(q) {
     q = q.trim().toLowerCase();
-    let any = false;
-    document.querySelectorAll('.sb-cat').forEach(cat => {
-      let catVisible = false;
-      cat.querySelectorAll('.sb-doc-item').forEach(item => {
-        const match = !q || item.dataset.title.toLowerCase().includes(q);
-        item.classList.toggle('hidden', !match);
-        if (match) catVisible = true;
+    
+    // 如果没有搜索词，显示全部
+    if (!q) {
+      document.querySelectorAll('.sb-cat, .sb-doc-item').forEach(el => {
+        el.style.display = '';
+        el.classList.remove('hidden');
       });
-      cat.style.display = catVisible ? '' : 'none';
-      if (catVisible) {
+      const nr = document.getElementById('sbNoResult');
+      if (nr) nr.style.display = 'none';
+      return;
+    }
+    
+    let any = false;
+    
+    // 使用搜索索引快速匹配
+    const matchedDocs = searchIndex.filter(item => 
+      item.searchText.includes(q) || 
+      item.title.toLowerCase().includes(q) ||
+      item.name.toLowerCase().includes(q)
+    );
+    
+    // 获取匹配的分类ID
+    const matchedCatIds = new Set(matchedDocs.map(doc => doc.id));
+    
+    // 处理每个分类
+    document.querySelectorAll('.sb-cat').forEach(cat => {
+      const catId = cat.dataset.catId;
+      const shouldShow = matchedCatIds.has(catId);
+      cat.style.display = shouldShow ? '' : 'none';
+      
+      if (shouldShow) {
         any = true;
         // 搜索时自动展开
         if (q) openCat(cat.querySelector('.sb-cat-header'));
+        
+        // 处理该分类下的文档项
+        cat.querySelectorAll('.sb-doc-item').forEach(item => {
+          const file = item.dataset.file;
+          const isMatched = matchedDocs.some(doc => 
+            doc.id === catId && doc.file === file
+          );
+          item.classList.toggle('hidden', !isMatched);
+          item.style.display = isMatched ? '' : 'none';
+        });
       }
     });
+    
+    // 显示/隐藏"无结果"消息
     const nr = document.getElementById('sbNoResult');
     if (nr) nr.style.display = any ? 'none' : 'block';
+    
+    // 如果没有匹配结果，显示提示
+    if (!any) {
+      console.log('搜索词:', q, '匹配结果:', matchedDocs.length);
+    }
+  }
+  
+  // 添加键盘快捷键支持
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      // Ctrl+F 聚焦搜索框
+      document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+          e.preventDefault();
+          searchInput.focus();
+        }
+        // Esc 清空搜索
+        if (e.key === 'Escape' && document.activeElement === searchInput) {
+          searchInput.value = '';
+          filterTree('');
+        }
+      });
+      
+      // 输入防抖
+      let debounceTimer;
+      searchInput.addEventListener('input', function() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          filterTree(this.value);
+        }, 150);
+      });
+    }
+  });
+
+  // ═══════════════════════════════════════
+  //  读取本地文件的辅助函数（支持 file:// 协议）
+  // ═══════════════════════════════════════
+  async function readLocalFile(relativePath) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', relativePath, true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 0 || xhr.status === 200) {
+            resolve(xhr.responseText);
+          } else {
+            reject(new Error(`无法读取文件: ${relativePath}`));
+          }
+        }
+      };
+      xhr.onerror = function() {
+        reject(new Error(`网络错误: ${relativePath}`));
+      };
+      xhr.send();
+    });
   }
 
   // ═══════════════════════════════════════
@@ -974,18 +1089,40 @@
     closeMobSidebar();
 
     try {
-      const url = `${DOCS_BASE}${cat}/${file}`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const md = await res.text();
-      renderDoc(md, cat, file);
+      let md;
+      
+      // 优先从内嵌内容中获取
+      if (EMBEDDED_CONTENT && EMBEDDED_CONTENT[cat] && EMBEDDED_CONTENT[cat][file]) {
+        md = EMBEDDED_CONTENT[cat][file];
+        renderDoc(md, cat, file);
+      } else {
+        // 如果内嵌内容中没有，尝试从服务器获取（兼容旧版本）
+        const url = `${DOCS_BASE}${cat}/${file}`;
+        
+        // 检查是否在文件协议下（本地直接打开）
+        if (window.location.protocol === 'file:') {
+          // 在文件协议下，使用 XMLHttpRequest 读取本地文件
+          md = await readLocalFile(url);
+        } else {
+          // 在 HTTP/HTTPS 协议下，使用 fetch
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          md = await res.text();
+        }
+        
+        renderDoc(md, cat, file);
+      }
     } catch (e) {
       content.innerHTML = `
         <div class="state-box">
           <span class="err-icon">😅</span>
           <p>文档加载失败：<code>${escHtml(cat)}/${escHtml(file)}</code></p>
           <p style="font-size:.78rem;color:var(--text3)">${e.message}</p>
-          <p style="font-size:.78rem;margin-top:.5rem">提示：直接打开 HTML 文件时无法读取本地文档，<br>请运行 <strong>start.bat</strong> 启动本地服务后访问。</p>
+          <p style="font-size:.78rem;margin-top:.5rem">
+            如果直接在本地打开文件，请确保：
+            <br>1. docs 目录存在且包含文章文件
+            <br>2. 或者启动本地服务器：<strong>start.bat</strong>
+          </p>
         </div>`;
     }
   }
