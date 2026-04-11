@@ -1,0 +1,20 @@
+[
+  {
+    "id": "msg-1775653010851-bj5y4c",
+    "from": "backend-langs",
+    "to": "team-lead",
+    "type": "message",
+    "content": "已获取所有12篇文章的原始内容，现在开始编写Markdown文件。已完成内容抓取：\n\n1. Python3基础 - 已抓取\n2. Python3高级特性 - 已抓取\n3. Go语言基础 - 已抓取\n4. Java基础 - 已抓取\n5. C语言基础 - 已抓取\n6. C++基础 - 已抓取\n7. Rust语言 - 已抓取\n8. PHP基础 - 已抓取\n9. Ruby基础 - 已抓取\n10. Docker容器 - 已抓取\n11. Linux基础 - 已抓取\n12. 数据结构与算法 - 已抓取\n\n现在开始写入文件，预计需要一些时间完成12篇高质量文章的编写。",
+    "timestamp": "2026-04-08T12:56:50.851Z",
+    "read": true
+  },
+  {
+    "id": "msg-1775653244270-sz2i2u",
+    "from": "devtools",
+    "to": "team-lead",
+    "type": "message",
+    "content": "当前进度汇报：\n\n已完成 **1/10** 篇文章：\n1. ✅ Git 版本控制完全指南 (git-guide.md) - 约 8000 字\n\n正在继续编写剩余的 9 篇文章，预计全部完成后统一汇报。",
+    "timestamp": "2026-04-08T13:00:44.270Z",
+    "read": true
+  }
+]

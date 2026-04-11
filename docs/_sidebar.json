@@ -1,25 +1,321 @@
 {
   "categories": [
     {
-      "id": "photography",
-      "name": "📷 摄影",
+      "id": "ai-agent",
+      "name": "ai-agent",
       "docs": [
-        { "file": "exposure-triangle.md", "title": "曝光三角" },
-        { "file": "composition.md", "title": "构图原则" }
+        {
+          "file": "ai-agent-basics.md",
+          "title": "AI Agent 基础概念",
+          "mtime": 1775816873961.2937
+        },
+        {
+          "file": "ai-agent-practice.md",
+          "title": "AI Agent 实战：从零构建智能助手",
+          "mtime": 1775654927374.5957
+        },
+        {
+          "file": "langchain-guide.md",
+          "title": "LangChain 开发指南",
+          "mtime": 1775654927361.5823
+        },
+        {
+          "file": "mcp-protocol.md",
+          "title": "MCP 协议：AI Agent 工具调用标准",
+          "mtime": 1775742171625.8862
+        },
+        {
+          "file": "nlp-foundation-models.md",
+          "title": "NLP 预训练模型体系",
+          "mtime": 1775656290131.6968
+        },
+        {
+          "file": "nlp-guide.md",
+          "title": "自然语言处理（NLP）基础",
+          "mtime": 1775656259453.9556
+        }
+      ]
+    },
+    {
+      "id": "ai-llm",
+      "name": "ai-llm",
+      "docs": [
+        {
+          "file": "ai-learning-roadmap.md",
+          "title": "AI 与大模型学习路径",
+          "mtime": 1775816855615.1606
+        },
+        {
+          "file": "deep-learning-basics.md",
+          "title": "深度学习基础",
+          "mtime": 1775654386682.525
+        },
+        {
+          "file": "fine-tuning-practical-guide.md",
+          "title": "AI 微调实战指南：LoRA 与 QLoRA",
+          "mtime": 1775744338258.9475
+        },
+        {
+          "file": "llm-guide.md",
+          "title": "大语言模型（LLM）完全指南",
+          "mtime": 1775654491481.303
+        },
+        {
+          "file": "ollama-guide.md",
+          "title": "Ollama 本地大模型部署指南",
+          "mtime": 1775656196057.0903
+        },
+        {
+          "file": "prompt-engineering.md",
+          "title": "Prompt Engineering 提示工程指南",
+          "mtime": 1775654566421.157
+        },
+        {
+          "file": "rag-guide.md",
+          "title": "RAG 检索增强生成完全指南",
+          "mtime": 1775654635391.2024
+        },
+        {
+          "file": "transformer-architecture.md",
+          "title": "Transformer 架构详解",
+          "mtime": 1775743945650.5718
+        }
+      ]
+    },
+    {
+      "id": "backend-eng",
+      "name": "backend-eng",
+      "docs": [
+        {
+          "file": "api-design-best-practices.md",
+          "title": "API 设计与最佳实践指南",
+          "mtime": 1775744143447.3286
+        },
+        {
+          "file": "backend-overview.md",
+          "title": "后端 & 工程技术指南",
+          "mtime": 1775816972579.3628
+        },
+        {
+          "file": "git-guide.md",
+          "title": "Git 版本控制完全指南",
+          "mtime": 1775653083523.5906
+        },
+        {
+          "file": "http-guide.md",
+          "title": "HTTP 协议完全指南",
+          "mtime": 1775653102284.1926
+        },
+        {
+          "file": "mongodb-guide.md",
+          "title": "MongoDB 文档数据库指南",
+          "mtime": 1775653412809.6455
+        },
+        {
+          "file": "mysql-guide.md",
+          "title": "MySQL 完全指南",
+          "mtime": 1775653122770.7437
+        },
+        {
+          "file": "network-basics.md",
+          "title": "计算机网络基础",
+          "mtime": 1775653485657.8818
+        },
+        {
+          "file": "python3-advanced.md",
+          "title": "Python3 高级特性",
+          "mtime": 1775653412815.0793
+        },
+        {
+          "file": "python3-basics.md",
+          "title": "Python3 基础教程",
+          "mtime": 1775653182206.8591
+        },
+        {
+          "file": "sql-basics.md",
+          "title": "SQL 基础教程",
+          "mtime": 1775653122769.4744
+        },
+        {
+          "file": "tcpip-guide.md",
+          "title": "TCP/IP 协议栈详解",
+          "mtime": 1775653252672.905
+        }
+      ]
+    },
+    {
+      "id": "data-science",
+      "name": "data-science",
+      "docs": [
+        {
+          "file": "data-science-guide.md",
+          "title": "数据科学学习指南",
+          "mtime": 1775816935741.185
+        },
+        {
+          "file": "data-visualization.md",
+          "title": "数据可视化指南",
+          "mtime": 1775656363242.738
+        },
+        {
+          "file": "machine-learning.md",
+          "title": "机器学习基础",
+          "mtime": 1775653477968.8672
+        },
+        {
+          "file": "numpy-guide.md",
+          "title": "NumPy 数值计算库",
+          "mtime": 1775653057083.362
+        },
+        {
+          "file": "pandas-guide.md",
+          "title": "Pandas 数据分析库",
+          "mtime": 1775653188307.339
+        },
+        {
+          "file": "sklearn-guide.md",
+          "title": "Scikit-Learn 机器学习实战",
+          "mtime": 1775656390244.7034
+        }
       ]
     },
     {
       "id": "diy",
-      "name": "🛠️ DIY",
+      "name": "diy",
       "docs": [
-        { "file": "woodworking-basics.md", "title": "木工基础" }
+        {
+          "file": "tools-guide.md",
+          "title": "DIY 工具入门指南",
+          "mtime": 1775817088642.684
+        },
+        {
+          "file": "woodworking-basics.md",
+          "title": "木工基础",
+          "mtime": 1774532874788.41
+        }
+      ]
+    },
+    {
+      "id": "frontend",
+      "name": "frontend",
+      "docs": [
+        {
+          "file": "css-layout-guide.md",
+          "title": "CSS 布局完全指南：Flexbox & Grid",
+          "mtime": 1774696191522.3914
+        },
+        {
+          "file": "css3-tutorial.md",
+          "title": "CSS3 完全指南",
+          "mtime": 1775653321486.8235
+        },
+        {
+          "file": "frontend-overview.md",
+          "title": "前端开发技术栈全览",
+          "mtime": 1775816954091.5957
+        },
+        {
+          "file": "html5-features.md",
+          "title": "HTML5 新特性完全指南",
+          "mtime": 1775653133414.6396
+        },
+        {
+          "file": "js-tutorial.md",
+          "title": "JavaScript 教程",
+          "mtime": 1774748084146.6252
+        },
+        {
+          "file": "nextjs-guide.md",
+          "title": "Next.js 全栈框架指南",
+          "mtime": 1775653256685.0334
+        },
+        {
+          "file": "react-basics.md",
+          "title": "React 基础入门",
+          "mtime": 1775653256685.0334
+        },
+        {
+          "file": "testing-frameworks-guide.md",
+          "title": "前端测试框架完全指南：Jest + React Testing Library",
+          "mtime": 1775744594088.3328
+        },
+        {
+          "file": "typescript-guide.md",
+          "title": "TypeScript 完全指南",
+          "mtime": 1775653449728.953
+        },
+        {
+          "file": "vue3-composition-api.md",
+          "title": "Vue3 组合式 API",
+          "mtime": 1775653083556.3484
+        },
+        {
+          "file": "web-performance-optimization.md",
+          "title": "前端性能优化实战指南",
+          "mtime": 1775745253621.9187
+        }
       ]
     },
     {
       "id": "guitar",
-      "name": "🎸 吉他弹唱",
+      "name": "guitar",
       "docs": [
-        { "file": "basic-chords.md", "title": "基础和弦" }
+        {
+          "file": "basic-chords.md",
+          "title": "基础和弦",
+          "mtime": 1775744030661.2178
+        },
+        {
+          "file": "fingerstyle-guide.md",
+          "title": "指弹吉他入门：从零开始的 Fingerstyle",
+          "mtime": 1774696011951.1125
+        },
+        {
+          "file": "music-theory-basics.md",
+          "title": "吉他乐理入门：不枯燥的基础知识",
+          "mtime": 1774696048489.1143
+        },
+        {
+          "file": "practice-guide.md",
+          "title": "吉他练习方法与时间管理",
+          "mtime": 1775817043976.782
+        }
+      ]
+    },
+    {
+      "id": "photography",
+      "name": "photography",
+      "docs": [
+        {
+          "file": "camera-gear-guide.md",
+          "title": "摄影装备选购与参数详解",
+          "mtime": 1775817067356.191
+        },
+        {
+          "file": "composition.md",
+          "title": "构图原则",
+          "mtime": 1775743971589.9778
+        },
+        {
+          "file": "exposure-triangle.md",
+          "title": "曝光三角",
+          "mtime": 1774532843029.8796
+        },
+        {
+          "file": "lightroom-editing.md",
+          "title": "Lightroom 后期调色完全指南",
+          "mtime": 1774695927062.263
+        },
+        {
+          "file": "post-processing-workflow.md",
+          "title": "摄影后期实战：Lightroom/Photoshop 完整工作流",
+          "mtime": 1775744744839.0188
+        },
+        {
+          "file": "street-photography.md",
+          "title": "街头摄影指南：在流动中捕捉瞬间",
+          "mtime": 1774695965944.3606
+        }
       ]
     }
   ]

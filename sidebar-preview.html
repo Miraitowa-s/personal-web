@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>侧边栏层级方案对比</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif; background:#e8eaed; padding:2rem; color:#1f2329; }
+
+  h1 { text-align:center; font-size:1.3rem; margin-bottom:1.5rem; color:#646a73; font-weight:500; }
+
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; max-width:900px; margin:0 auto; }
+
+  .card {
+    background:#fff; border-radius:12px; overflow:hidden;
+    box-shadow:0 1px 4px rgba(0,0,0,.08);
+  }
+  .card-header {
+    padding:.6rem 1rem;
+    background:#f5f6f7;
+    border-bottom:1px solid #e8eaed;
+    font-size:.78rem; font-weight:600; color:#646a73;
+    display:flex; align-items:center; gap:.4rem;
+  }
+  .card-header .badge {
+    display:inline-block; padding:.1rem .4rem;
+    background:#e8632a; color:#fff; border-radius:4px;
+    font-size:.65rem; font-weight:700;
+  }
+
+  .sidebar {
+    width:228px; padding:.5rem 0;
+    font-size:13px; min-height:320px;
+  }
+
+  /* ============ 方案 A：背景色差 ============ */
+  .sidebar-a .cat-hd {
+    padding:.45rem .75rem .45rem .6rem;
+    font-size:.85rem; font-weight:700; color:#1f2329;
+    background:#f5f6f7;
+    margin:.1rem .4rem;
+    border-radius:6px;
+  }
+  .sidebar-a .doc-item {
+    padding:.3rem .6rem .3rem 1.8rem;
+    margin:0 .4rem .03rem;
+    font-size:.78rem; color:#646a73;
+    border-radius:6px;
+    cursor:pointer;
+    transition:background .15s;
+  }
+  .sidebar-a .doc-item:hover { background:rgba(0,0,0,.04); }
+  .sidebar-a .doc-item.active { color:#e8632a; font-weight:600; background:rgba(232,99,42,.08); }
+  .sidebar-a .cat-gap { height:.4rem; }
+
+  /* ============ 方案 B：左侧彩色竖线 ============ */
+  .sidebar-b .cat-hd {
+    padding:.45rem .75rem .45rem .6rem;
+    font-size:.85rem; font-weight:700; color:#1f2329;
+    margin:.1rem .4rem;
+    border-left:3px solid #e8632a;
+    padding-left:calc(.6rem - 3px);
+  }
+  .sidebar-b .doc-list {
+    padding-left:1.2rem;
+    border-left:1.5px solid #e8eaed;
+    margin-left:1rem;
+  }
+  .sidebar-b .doc-item {
+    padding:.3rem .6rem .3rem .8rem;
+    font-size:.78rem; color:#646a73;
+    border-radius:6px;
+    cursor:pointer;
+    transition:background .15s;
+  }
+  .sidebar-b .doc-item:hover { background:rgba(0,0,0,.04); }
+  .sidebar-b .doc-item.active { color:#e8632a; font-weight:600; background:rgba(232,99,42,.08); }
+  .sidebar-b .cat-gap { height:.5rem; }
+
+  /* ============ 方案 C：字号/字重强对比 ============ */
+  .sidebar-c .cat-hd {
+    padding:.55rem .75rem .55rem .6rem;
+    font-size:.9rem; font-weight:800; color:#1f2329;
+    margin:.15rem .4rem;
+    letter-spacing:.03em;
+  }
+  .sidebar-c .doc-item {
+    padding:.3rem .6rem .3rem 1.5rem;
+    margin:0 .4rem .03rem;
+    font-size:.75rem; font-weight:400; color:#8f959e;
+    border-radius:6px;
+    cursor:pointer;
+    transition:all .15s;
+  }
+  .sidebar-c .doc-item:hover { color:#646a73; background:rgba(0,0,0,.03); }
+  .sidebar-c .doc-item.active { color:#e8632a; font-weight:600; background:rgba(232,99,42,.08); }
+  .sidebar-c .cat-gap { height:.6rem; }
+
+  /* ============ 方案 D：分组间距 ============ */
+  .sidebar-d .cat-hd {
+    padding:.4rem .75rem .4rem .6rem;
+    font-size:.85rem; font-weight:700; color:#1f2329;
+    margin:.1rem .4rem;
+  }
+  .sidebar-d .doc-group {
+    padding:.15rem 0;
+    margin:0 .4rem;
+    border-radius:8px;
+    background:rgba(0,0,0,.015);
+  }
+  .sidebar-d .doc-item {
+    padding:.3rem .6rem .3rem 1.5rem;
+    font-size:.78rem; color:#646a73;
+    border-radius:4px;
+    cursor:pointer;
+    transition:all .15s;
+  }
+  .sidebar-d .doc-item:hover { background:rgba(0,0,0,.04); }
+  .sidebar-d .doc-item.active { color:#e8632a; font-weight:600; background:rgba(232,99,42,.08); }
+  .sidebar-d .cat-gap { height:1rem; }
+
+  /* 点击切换 active 的提示 */
+  .tip { text-align:center; margin-top:1.5rem; font-size:.8rem; color:#8f959e; }
+</style>
+</head>
+<body>
+
+<h1>侧边栏层级方案对比 · 点击文章可切换高亮</h1>
+
+<div class="grid">
+
+  <!-- 方案 A -->
+  <div class="card">
+    <div class="card-header">方案 A <span class="badge">背景色差</span></div>
+    <div class="sidebar sidebar-a">
+      <div class="cat-hd">🎸 吉他</div>
+      <div class="doc-item active" onclick="active(this)">基础和弦入门</div>
+      <div class="doc-item" onclick="active(this)">指弹吉他入门</div>
+      <div class="doc-item" onclick="active(this)">乐理基础知识</div>
+      <div class="cat-gap"></div>
+      <div class="cat-hd">📸 摄影</div>
+      <div class="doc-item" onclick="active(this)">Lightroom 调色</div>
+      <div class="doc-item" onclick="active(this)">街拍技巧</div>
+      <div class="cat-gap"></div>
+      <div class="cat-hd">🌐 Web</div>
+      <div class="doc-item" onclick="active(this)">CSS 布局指南</div>
+      <div class="doc-item" onclick="active(this)">HTML 基础</div>
+      <div class="cat-gap"></div>
+      <div class="cat-hd">🛠 DIY</div>
+      <div class="doc-item" onclick="active(this)">手工教程</div>
+    </div>
+  </div>
+
+  <!-- 方案 B -->
+  <div class="card">
+    <div class="card-header">方案 B <span class="badge">左侧彩色竖线</span></div>
+    <div class="sidebar sidebar-b">
+      <div class="cat-hd">🎸 吉他</div>
+      <div class="doc-list">
+        <div class="doc-item active" onclick="active(this)">基础和弦入门</div>
+        <div class="doc-item" onclick="active(this)">指弹吉他入门</div>
+        <div class="doc-item" onclick="active(this)">乐理基础知识</div>
+      </div>
+      <div class="cat-gap"></div>
+      <div class="cat-hd">📸 摄影</div>
+      <div class="doc-list">
+        <div class="doc-item" onclick="active(this)">Lightroom 调色</div>
+        <div class="doc-item" onclick="active(this)">街拍技巧</div>
+      </div>
+      <div class="cat-gap"></div>
+      <div class="cat-hd">🌐 Web</div>
+      <div class="doc-list">
+        <div class="doc-item" onclick="active(this)">CSS 布局指南</div>
+        <div class="doc-item" onclick="active(this)">HTML 基础</div>
+      </div>
+      <div class="cat-gap"></div>
+      <div class="cat-hd">🛠 DIY</div>
+      <div class="doc-list">
+        <div class="doc-item" onclick="active(this)">手工教程</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 方案 C -->
+  <div class="card">
+    <div class="card-header">方案 C <span class="badge">字号/字重强对比</span></div>
+    <div class="sidebar sidebar-c">
+      <div class="cat-hd">🎸 吉他</div>
+      <div class="doc-item active" onclick="active(this)">基础和弦入门</div>
+      <div class="doc-item" onclick="active(this)">指弹吉他入门</div>
+      <div class="doc-item" onclick="active(this)">乐理基础知识</div>
+      <div class="cat-gap"></div>
+      <div class="cat-hd">📸 摄影</div>
+      <div class="doc-item" onclick="active(this)">Lightroom 调色</div>
+      <div class="doc-item" onclick="active(this)">街拍技巧</div>
+      <div class="cat-gap"></div>
+      <div class="cat-hd">🌐 Web</div>
+      <div class="doc-item" onclick="active(this)">CSS 布局指南</div>
+      <div class="doc-item" onclick="active(this)">HTML 基础</div>
+      <div class="cat-gap"></div>
+      <div class="cat-hd">🛠 DIY</div>
+      <div class="doc-item" onclick="active(this)">手工教程</div>
+    </div>
+  </div>
+
+  <!-- 方案 D -->
+  <div class="card">
+    <div class="card-header">方案 D <span class="badge">分组背景块</span></div>
+    <div class="sidebar sidebar-d">
+      <div class="cat-hd">🎸 吉他</div>
+      <div class="doc-group">
+        <div class="doc-item active" onclick="active(this)">基础和弦入门</div>
+        <div class="doc-item" onclick="active(this)">指弹吉他入门</div>
+        <div class="doc-item" onclick="active(this)">乐理基础知识</div>
+      </div>
+      <div class="cat-gap"></div>
+      <div class="cat-hd">📸 摄影</div>
+      <div class="doc-group">
+        <div class="doc-item" onclick="active(this)">Lightroom 调色</div>
+        <div class="doc-item" onclick="active(this)">街拍技巧</div>
+      </div>
+      <div class="cat-gap"></div>
+      <div class="cat-hd">🌐 Web</div>
+      <div class="doc-group">
+        <div class="doc-item" onclick="active(this)">CSS 布局指南</div>
+        <div class="doc-item" onclick="active(this)">HTML 基础</div>
+      </div>
+      <div class="cat-gap"></div>
+      <div class="cat-hd">🛠 DIY</div>
+      <div class="doc-group">
+        <div class="doc-item" onclick="active(this)">手工教程</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p class="tip">点击任意文章可切换高亮状态，方便感受各方案的交互反馈</p>
+
+<script>
+function active(el) {
+  const sidebar = el.closest('.sidebar');
+  sidebar.querySelectorAll('.doc-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>

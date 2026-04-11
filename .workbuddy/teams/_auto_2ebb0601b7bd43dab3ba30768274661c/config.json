@@ -1,0 +1,53 @@
+{
+  "name": "_auto_2ebb0601b7bd43dab3ba30768274661c",
+  "leadAgentId": "2ebb0601b7bd43dab3ba30768274661c",
+  "workspacePath": "d:\\code\\Personal Web",
+  "createdAt": "2026-04-08T12:52:55.365Z",
+  "options": {
+    "workspacePath": "d:\\code\\Personal Web",
+    "isAutoTeam": true
+  },
+  "members": [
+    {
+      "memberId": "team-lead@_auto_2ebb0601b7bd43dab3ba30768274661c",
+      "name": "team-lead",
+      "role": "Team Lead - coordinates the team and interacts with the user"
+    },
+    {
+      "memberId": "frontend-basic@_auto_2ebb0601b7bd43dab3ba30768274661c",
+      "name": "frontend-basic",
+      "role": "抓取前端基础教程"
+    },
+    {
+      "memberId": "frontend-framework@_auto_2ebb0601b7bd43dab3ba30768274661c",
+      "name": "frontend-framework",
+      "role": "抓取前端框架教程"
+    },
+    {
+      "memberId": "backend-langs@_auto_2ebb0601b7bd43dab3ba30768274661c",
+      "name": "backend-langs",
+      "role": "抓取后端编程语言教程"
+    },
+    {
+      "memberId": "database@_auto_2ebb0601b7bd43dab3ba30768274661c",
+      "name": "database",
+      "role": "抓取数据库教程"
+    },
+    {
+      "memberId": "devtools@_auto_2ebb0601b7bd43dab3ba30768274661c",
+      "name": "devtools",
+      "role": "抓取开发工具教程"
+    },
+    {
+      "memberId": "ai-data@_auto_2ebb0601b7bd43dab3ba30768274661c",
+      "name": "ai-data",
+      "role": "抓取AI数据分析教程"
+    },
+    {
+      "memberId": "network@_auto_2ebb0601b7bd43dab3ba30768274661c",
+      "name": "network",
+      "role": "抓取网络基础教程"
+    }
+  ],
+  "isAutoTeam": true
+}

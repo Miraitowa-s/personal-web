@@ -4,6 +4,29 @@
 
 ## 1. 三分法 (Rule of Thirds)
 
+<div style="display: flex; gap: 20px; flex-wrap: wrap; margin: 20px 0;">
+  <div style="flex: 1; min-width: 300px;">
+    <div style="width: 100%; height: 180px; background: #f0f2f5; border: 2px dashed #ff4d4f; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;">
+      <div style="text-align: center;">
+        <div style="font-size: 24px; color: #ff4d4f; margin-bottom: 8px;">❌</div>
+        <div style="color: #666; font-size: 14px;">主体居中示例</div>
+        <div style="color: #999; font-size: 12px; margin-top: 4px;">地平线位于画面中心</div>
+      </div>
+    </div>
+    <p style="font-size: 14px; color: #666; text-align: center;">❌ 主体居中，视觉呆板</p>
+  </div>
+  <div style="flex: 1; min-width: 300px;">
+    <div style="width: 100%; height: 180px; background: #f0f2f5; border: 2px solid #52c41a; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;">
+      <div style="text-align: center;">
+        <div style="font-size: 24px; color: #52c41a; margin-bottom: 8px;">✅</div>
+        <div style="color: #666; font-size: 14px;">三分法正确示例</div>
+        <div style="color: #999; font-size: 12px; margin-top: 4px;">主体位于九宫格交叉点</div>
+      </div>
+    </div>
+    <p style="font-size: 14px; color: #666; text-align: center;">✅ 主体在交叉点，视觉平衡</p>
+  </div>
+</div>
+
 将画面用两条横线和两条竖线分成九宫格，**主体放在交叉点或线上**。
 
 - 人物眼睛放在上 1/3 线

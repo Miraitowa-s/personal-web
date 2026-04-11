@@ -19,7 +19,7 @@
       --sh-sm:   0 2px 10px rgba(0,0,0,0.06);
       --t:       0.22s ease;
     }
-    html { scroll-behavior:smooth; }
+    html { scroll-behavior:smooth; scroll-padding-top:80px; }
     body {
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
       color:var(--text); line-height:1.7; overflow-x:hidden;
@@ -64,7 +64,7 @@
 
     /* HERO */
     .hero {
-      padding:120px 8% 60px;
+      padding:120px 8% 15px;
       text-align:center;
       background:transparent;
       position:relative;
@@ -78,11 +78,13 @@
     .hero-eyebrow { font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--text3); display:block; margin-bottom:1rem; }
     .hero h1 { font-size:clamp(2rem,5vw,3rem); font-weight:900; letter-spacing:-.03em; margin-bottom:.8rem; }
     .hero-line { width:28px; height:3px; background:var(--text); border-radius:2px; margin:.8rem auto 1.2rem; }
-    .hero-desc { font-size:.93rem; color:var(--text2); max-width:500px; margin:0 auto 2rem; }
+    .hero-desc { font-size:.9rem; color:var(--text2); max-width:500px; margin:0 auto 1.5rem; }
+
+
 
     /* 搜索框 */
     .search-wrap {
-      max-width:480px; margin:0 auto 1.5rem;
+      max-width:480px; margin:0 auto 1rem;
       position:relative;
     }
     .search-input {
@@ -101,8 +103,8 @@
       padding:.1rem .4rem; border-radius:4px;
     }
 
-    /* TABS */
-    .tabs-wrap { display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:3rem; }
+    /* TABS - 统一底部间距 */
+    .tabs-wrap { display:flex; gap:.4rem; justify-content:center; flex-wrap:wrap; margin-bottom:0.8rem; }
     .tab-btn {
       padding:.38rem .95rem; border-radius:20px; font-size:.78rem;
       border:1.5px solid var(--border); background:rgba(255,255,255,.7);
@@ -112,80 +114,124 @@
       background:var(--text); color:#fff; border-color:var(--text);
     }
 
-    /* MAIN CONTENT */
-    main { max-width:960px; margin:0 auto; padding:0 8% 80px; }
-
-    /* 分类区块 */
-    .cat-section { margin-bottom:4rem; }
-    .cat-title {
-      display:flex; align-items:center; gap:.75rem;
-      font-size:.72rem; letter-spacing:.15em; text-transform:uppercase;
-      color:var(--text3); font-weight:700; margin-bottom:1.2rem;
+    /* 主内容容器 - 居中且与两侧保持同样的间距 */
+    .main-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 4%;
     }
-    .cat-title::after { content:''; flex:1; height:1px; background:var(--border); }
-
-    .cards-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
-      gap:.85rem;
+    
+    /* 分类标题 - 统一间距 */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin: 0 0 0.8rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
     }
-    .card {
-      background:rgba(255,255,255,.78);
-      border:1px solid rgba(230,230,226,.85);
-      border-radius:var(--r);
-      padding:1rem 1.15rem;
-      display:flex; align-items:flex-start; gap:.85rem;
-      transition:box-shadow var(--t), transform var(--t);
-      backdrop-filter:blur(4px);
+    .section-title .icon {
+      font-size: 1.2rem;
     }
-    .card:hover { box-shadow:var(--sh); transform:translateY(-3px); }
-    .card-icon {
-      width:38px; height:38px; border-radius:9px;
-      background:var(--bg); display:flex; align-items:center;
-      justify-content:center; font-size:1.1rem; flex-shrink:0;
+    
+    /* 工具网格 - 按照index.html的样式 */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.7rem;
+      margin-bottom: 1.5rem;
     }
-    .card-info { min-width:0; }
-    .card-name { font-size:.84rem; font-weight:700; color:var(--text); margin-bottom:.18rem; }
-    .card-desc { font-size:.72rem; color:var(--text3); line-height:1.5; }
-
-    /* MODAL 搜索 */
-    .modal-overlay {
-      display:none; position:fixed; inset:0; z-index:900;
-      background:rgba(0,0,0,.4); backdrop-filter:blur(6px);
-      align-items:flex-start; justify-content:center;
-      padding-top:12vh;
+    
+    /* 工具卡片 - 按照index.html的tcard样式 */
+    .tcard {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(230, 230, 226, 0.8);
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      transition: box-shadow var(--t), transform var(--t);
+      backdrop-filter: blur(4px);
+      text-decoration: none;
+      height: 100%;
     }
-    .modal-overlay.open { display:flex; }
-    .modal-box {
-      background:var(--surface); border-radius:16px;
-      width:min(580px,90vw); box-shadow:0 24px 64px rgba(0,0,0,.18);
-      overflow:hidden;
+    .tcard:hover {
+      box-shadow: var(--sh-sm);
+      transform: translateY(-2px);
     }
-    .modal-search {
-      display:flex; align-items:center; gap:.8rem;
-      padding:1rem 1.3rem; border-bottom:1px solid var(--border);
+    
+    /* 工具图标 */
+    .tcard-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
     }
-    .modal-search input {
-      flex:1; border:none; outline:none; font-size:1rem;
-      color:var(--text); background:transparent;
+    
+    /* 工具信息容器 */
+    .tcard-info {
+      flex-grow: 1;
+      min-width: 0;
     }
-    .modal-results { max-height:340px; overflow-y:auto; }
-    .mresult {
-      display:flex; align-items:center; gap:.85rem;
-      padding:.8rem 1.3rem; cursor:pointer; transition:background var(--t);
+    
+    /* 工具名称 - 上面 */
+    .tcard-name {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.1rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
-    .mresult:hover { background:var(--bg); }
-    .mresult-icon { font-size:1.2rem; }
-    .mresult-name { font-size:.88rem; font-weight:600; }
-    .mresult-cat  { font-size:.72rem; color:var(--text3); }
-    .modal-empty { text-align:center; padding:2.5rem; color:var(--text3); font-size:.85rem; }
-    .modal-hint {
-      padding:.7rem 1.3rem; font-size:.7rem; color:var(--text3);
-      border-top:1px solid var(--border);
+    
+    /* 工具介绍 - 下面，精简准确 */
+    .tcard-desc {
+      font-size: 0.71rem;
+      color: var(--text3);
+      line-height: 1.4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
-
-    /* HIDDEN */
-    .hidden { display:none !important; }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 0 4%;
+      }
+      .tool-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      }
+    }
+    
+    @media (max-width: 680px) {
+      .tool-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .main-container {
+        padding: 0 3%;
+      }
+      .tool-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.7rem;
+      }
+      .tcard {
+        padding: 0.7rem 0.9rem;
+      }
+    }
 
     /* DARK */
     body.dark {
@@ -216,26 +262,11 @@
       color:var(--bg);
       border-color:var(--text);
     }
-    body.dark .card {
-      background:rgba(28,28,31,0.7);
-      border-color:rgba(46,46,52,0.8);
-    }
-    body.dark .card:hover {
-      background:rgba(38,38,42,0.9);
-    }
-    body.dark .card-name { color:var(--text); }
-    body.dark .card-desc { color:var(--text2); }
     body.dark .cat-title { color:var(--text3); }
     body.dark .cat-title::after { background:var(--border); }
-    body.dark .modal-box {
-      background:var(--surface);
-      border:1px solid var(--border);
-    }
-    body.dark .mresult:hover { background:var(--bg); }
 
     @media(max-width:680px){
       .nav-links { display:none; }
-      .cards-grid { grid-template-columns:1fr 1fr; }
     }
   </style>
 </head>
@@ -251,6 +282,7 @@
     <a href="index.html#works">作品</a>
     <a href="index.html#journey">大事记</a>
     <a href="tools.html" style="color:var(--text);font-weight:600">工具库</a>
+    <a href="knowledge.html">知识库</a>
   </div>
   <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="切换明暗模式">🌙</button>
 </nav>
@@ -266,429 +298,874 @@
     <input class="search-input" id="inlineSearch" type="text" placeholder="搜索工具…" oninput="filterCards(this.value)" autocomplete="off"/>
     <span class="search-kbd">Ctrl K</span>
   </div>
+  
+
   <div class="tabs-wrap" id="tabsWrap">
     <button class="tab-btn active" data-cat="all">全部</button>
-    <button class="tab-btn" data-cat="ai">AI &amp; 大模型</button>
-    <button class="tab-btn" data-cat="video">视频平台</button>
-    <button class="tab-btn" data-cat="books">书籍资源</button>
-    <button class="tab-btn" data-cat="learn">学习平台</button>
-    <button class="tab-btn" data-cat="tools">效率工具</button>
-    <button class="tab-btn" data-cat="design">设计资源</button>
-    <button class="tab-btn" data-cat="photo">摄影资源</button>
-    <button class="tab-btn" data-cat="music">乐器 &amp; 音乐</button>
-    <button class="tab-btn" data-cat="diy">DIY &amp; 手工</button>
-    <button class="tab-btn" data-cat="inspire">灵感发现</button>
+    <button class="tab-btn" data-cat="ai" data-target="ai">AI与智能</button>
+    <button class="tab-btn" data-cat="media" data-target="media">媒体与创作</button>
+    <button class="tab-btn" data-cat="learn" data-target="learn">学习与知识</button>
+    <button class="tab-btn" data-cat="design" data-target="design">设计与艺术</button>
+    <button class="tab-btn" data-cat="music" data-target="music">音乐与乐器</button>
+    <button class="tab-btn" data-cat="diy" data-target="diy">DIY与手工</button>
   </div>
 </div>
 
 <!-- CONTENT -->
-<main id="mainContent">
-
-  <!-- AI & 大模型 -->
-  <div class="cat-section" id="cat-ai" data-cat="ai">
-    <div class="cat-title">🤖&nbsp; AI &amp; 大模型</div>
-    <div class="cards-grid">
-      <a href="https://chat.openai.com" target="_blank" class="card" data-name="ChatGPT" data-cat="ai">
-        <div class="card-icon">🤖</div>
-        <div class="card-info"><div class="card-name">ChatGPT</div><div class="card-desc">OpenAI 出品，最广泛使用的 AI 对话助手</div></div>
+<div class="main-container">
+    
+    <!-- 1. AI与智能工具 -->
+    <div class="section-title" id="section-ai">
+      <span class="icon">🤖</span>
+      <span>AI与智能工具</span>
+    </div>
+    
+    <div class="tool-grid">
+      <a href="https://chat.openai.com" target="_blank" class="tcard" data-category="ai">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🤖</div>
+        <div class="tcard-info">
+          <div class="tcard-name">ChatGPT</div>
+          <div class="tcard-desc">OpenAI 对话AI助手，支持联网搜索与代码解释</div>
+        </div>
       </a>
-      <a href="https://claude.ai" target="_blank" class="card" data-name="Claude" data-cat="ai">
-        <div class="card-icon">🧠</div>
-        <div class="card-info"><div class="card-name">Claude</div><div class="card-desc">Anthropic 出品，擅长长文分析与推理</div></div>
+      
+      <a href="https://claude.ai" target="_blank" class="tcard" data-category="ai">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🧠</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Claude</div>
+          <div class="tcard-desc">Anthropic 出品，200K 超长上下文，安全性高</div>
+        </div>
       </a>
-      <a href="https://gemini.google.com" target="_blank" class="card" data-name="Gemini" data-cat="ai">
-        <div class="card-icon">✨</div>
-        <div class="card-info"><div class="card-name">Gemini</div><div class="card-desc">Google 多模态大模型，支持图文理解</div></div>
+      
+      <a href="https://gemini.google.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🌟</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Gemini</div>
+          <div class="tcard-desc">Google 多模态模型，原生支持图文音视频</div>
+        </div>
       </a>
-      <a href="https://www.deepseek.com" target="_blank" class="card" data-name="DeepSeek" data-cat="ai">
-        <div class="card-icon">🔬</div>
-        <div class="card-info"><div class="card-name">DeepSeek</div><div class="card-desc">国产顶级推理模型，开源免费</div></div>
+      
+      <a href="https://www.deepseek.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🔍</div>
+        <div class="tcard-info">
+          <div class="tcard-name">DeepSeek</div>
+          <div class="tcard-desc">国产开源模型，代码生成与数学推理见长</div>
+        </div>
       </a>
-      <a href="https://kimi.moonshot.cn" target="_blank" class="card" data-name="Kimi" data-cat="ai">
-        <div class="card-icon">🌙</div>
-        <div class="card-info"><div class="card-name">Kimi</div><div class="card-desc">月之暗面，超长上下文中文 AI</div></div>
+      
+      <a href="https://kimi.moonshot.cn" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">📄</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Kimi</div>
+          <div class="tcard-desc">月之暗面出品，200 万字超长上下文</div>
+        </div>
       </a>
-      <a href="https://tongyi.aliyun.com" target="_blank" class="card" data-name="通义千问" data-cat="ai">
-        <div class="card-icon">💬</div>
-        <div class="card-info"><div class="card-name">通义千问</div><div class="card-desc">阿里云大模型，功能全面</div></div>
+      
+      <a href="https://tongyi.aliyun.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">☁️</div>
+        <div class="tcard-info">
+          <div class="tcard-name">通义千问</div>
+          <div class="tcard-desc">阿里云 AI 助手，提供问答创作代码能力</div>
+        </div>
       </a>
-      <a href="https://www.perplexity.ai" target="_blank" class="card" data-name="Perplexity" data-cat="ai">
-        <div class="card-icon">🔍</div>
-        <div class="card-info"><div class="card-name">Perplexity</div><div class="card-desc">AI 搜索引擎，实时联网检索</div></div>
+      
+      <a href="https://www.perplexity.ai" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🔎</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Perplexity</div>
+          <div class="tcard-desc">AI 驱动的搜索引擎，实时准确答案</div>
+        </div>
       </a>
-      <a href="https://midjourney.com" target="_blank" class="card" data-name="Midjourney" data-cat="ai">
-        <div class="card-icon">🎨</div>
-        <div class="card-info"><div class="card-name">Midjourney</div><div class="card-desc">顶级 AI 图像生成，美学一流</div></div>
+      
+      <a href="https://midjourney.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🎨</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Midjourney</div>
+          <div class="tcard-desc">AI 图像生成工具，艺术创作服务</div>
+        </div>
+      </a>
+      
+      <a href="https://www.notion.so" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">📝</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Notion</div>
+          <div class="tcard-desc">一体化工作空间，笔记任务数据库管理</div>
+        </div>
+      </a>
+      
+      <a href="https://obsidian.md" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">💎</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Obsidian</div>
+          <div class="tcard-desc">Markdown 知识管理，双向链接插件生态</div>
+        </div>
+      </a>
+      
+      <a href="https://github.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🐙</div>
+        <div class="tcard-info">
+          <div class="tcard-name">GitHub</div>
+          <div class="tcard-desc">代码托管平台，版本控制协作开发</div>
+        </div>
+      </a>
+      
+      <a href="https://excalidraw.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">✏️</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Excalidraw</div>
+          <div class="tcard-desc">手绘风格的白板绘图工具，草图流程图</div>
+        </div>
+      </a>
+      
+      <a href="https://www.xmind.net" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🧩</div>
+        <div class="tcard-info">
+          <div class="tcard-name">XMind</div>
+          <div class="tcard-desc">专业的思维导图工具，多种布局模板</div>
+        </div>
+      </a>
+      
+      <a href="https://www.voidtools.com/zh-cn" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🔍</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Everything</div>
+          <div class="tcard-desc">极速本地文件搜索工具，瞬间检索</div>
+        </div>
+      </a>
+      
+      <a href="https://www.listary.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🚀</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Listary</div>
+          <div class="tcard-desc">文件搜索与启动器，热键快速访问</div>
+        </div>
+      </a>
+      
+      <a href="https://ditto-cp.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">📋</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Ditto</div>
+          <div class="tcard-desc">强大的剪贴板管理器，历史复制记录</div>
+        </div>
+      </a>
+      
+      <a href="https://pixpinapp.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">📸</div>
+        <div class="tcard-info">
+          <div class="tcard-name">PixPin</div>
+          <div class="tcard-desc">现代化截图与贴图工具，滚动截图</div>
+        </div>
+      </a>
+      
+      <a href="https://www.snipaste.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">📎</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Snipaste</div>
+          <div class="tcard-desc">截图与贴图工具，精准截图标注</div>
+        </div>
+      </a>
+      
+      <a href="https://github.com/massgravel/Microsoft-Activation-Scripts" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🔓</div>
+        <div class="tcard-info">
+          <div class="tcard-name">MAS激活</div>
+          <div class="tcard-desc">微软激活脚本，Windows Office激活</div>
+        </div>
+      </a>
+      
+      <a href="https://www.microsoft.com/zh-cn/power-platform/products/power-toys" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">⚡</div>
+        <div class="tcard-info">
+          <div class="tcard-name">PowerToys</div>
+          <div class="tcard-desc">微软系统增强工具集，窗口管理</div>
+        </div>
+      </a>
+      
+      <a href="https://learn.microsoft.com/zh-cn/windows/package-manager/winget" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">📦</div>
+        <div class="tcard-info">
+          <div class="tcard-name">winget</div>
+          <div class="tcard-desc">Windows 包管理器，命令行安装应用</div>
+        </div>
+      </a>
+      
+      <a href="https://quicklook.app" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">👁️</div>
+        <div class="tcard-info">
+          <div class="tcard-name">QuickLook</div>
+          <div class="tcard-desc">空格键快速预览，多种文件格式</div>
+        </div>
+      </a>
+      
+      <a href="https://geekuninstaller.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🗑️</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Geek卸载</div>
+          <div class="tcard-desc">专业软件卸载，清理残留文件</div>
+        </div>
+      </a>
+      
+      <a href="https://crystalmark.info/en/software/crystaldiskinfo" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">💾</div>
+        <div class="tcard-info">
+          <div class="tcard-name">硬盘监控</div>
+          <div class="tcard-desc">硬盘健康监控，SMART数据温度</div>
+        </div>
       </a>
     </div>
-  </div>
-
-  <!-- 视频平台 -->
-  <div class="cat-section" id="cat-video" data-cat="video">
-    <div class="cat-title">🎬&nbsp; 视频平台</div>
-    <div class="cards-grid">
-      <a href="https://www.bilibili.com" target="_blank" class="card" data-name="哔哩哔哩" data-cat="video">
-        <div class="card-icon">📺</div>
-        <div class="card-info"><div class="card-name">哔哩哔哩</div><div class="card-desc">国内最好的学习+娱乐视频平台</div></div>
+    
+    <!-- 2. 媒体与创作 -->
+    <div class="section-title" id="section-media">
+      <span class="icon">🎬</span>
+      <span>媒体与创作</span>
+    </div>
+    
+    <div class="tool-grid">
+      <a href="https://www.bilibili.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">📺</div>
+        <div class="tcard-info">
+          <div class="tcard-name">哔哩哔哩</div>
+          <div class="tcard-desc">视频社区平台，ACG内容创作</div>
+        </div>
       </a>
-      <a href="https://www.youtube.com" target="_blank" class="card" data-name="YouTube" data-cat="video">
-        <div class="card-icon">▶️</div>
-        <div class="card-info"><div class="card-name">YouTube</div><div class="card-desc">全球最大视频平台，海量内容</div></div>
+      
+      <a href="https://www.youtube.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">📺</div>
+        <div class="tcard-info">
+          <div class="tcard-name">YouTube</div>
+          <div class="tcard-desc">全球视频平台，海量内容资源</div>
+        </div>
       </a>
-      <a href="https://www.ted.com" target="_blank" class="card" data-name="TED Talks" data-cat="video">
-        <div class="card-icon">🎤</div>
-        <div class="card-info"><div class="card-name">TED Talks</div><div class="card-desc">全球顶尖演讲，开阔思维边界</div></div>
+      
+      <a href="https://www.ted.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">🎤</div>
+        <div class="tcard-info">
+          <div class="tcard-name">TED</div>
+          <div class="tcard-desc">思想分享平台，优质演讲视频</div>
+        </div>
       </a>
-      <a href="https://www.ixigua.com" target="_blank" class="card" data-name="西瓜视频" data-cat="video">
-        <div class="card-icon">🍉</div>
-        <div class="card-info"><div class="card-name">西瓜视频</div><div class="card-desc">中长视频，纪录片资源丰富</div></div>
+      
+      <a href="https://www.ixigua.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">🍉</div>
+        <div class="tcard-info">
+          <div class="tcard-name">西瓜视频</div>
+          <div class="tcard-desc">字节跳动视频平台，短视频内容</div>
+        </div>
+      </a>
+      
+      <a href="https://potplayer.tv" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">🎥</div>
+        <div class="tcard-info">
+          <div class="tcard-name">PotPlayer</div>
+          <div class="tcard-desc">多媒体播放器，支持多种格式</div>
+        </div>
+      </a>
+      
+      <a href="https://www.videolan.org/vlc" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">🎬</div>
+        <div class="tcard-info">
+          <div class="tcard-name">VLC</div>
+          <div class="tcard-desc">开源多媒体播放器，跨平台</div>
+        </div>
+      </a>
+      
+      <a href="https://lv.capcut.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">✂️</div>
+        <div class="tcard-info">
+          <div class="tcard-name">剪映</div>
+          <div class="tcard-desc">视频剪辑工具，简单易用</div>
+        </div>
+      </a>
+      
+      <a href="https://www.blackmagicdesign.com/products/davinciresolve" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">🎞️</div>
+        <div class="tcard-info">
+          <div class="tcard-name">DaVinci</div>
+          <div class="tcard-desc">专业视频剪辑调色软件</div>
+        </div>
+      </a>
+      
+      <a href="https://obsproject.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">🎙️</div>
+        <div class="tcard-info">
+          <div class="tcard-name">OBS</div>
+          <div class="tcard-desc">开源直播软件，录制推流</div>
+        </div>
+      </a>
+      
+      <a href="https://handbrake.fr" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">🔄</div>
+        <div class="tcard-info">
+          <div class="tcard-name">HandBrake</div>
+          <div class="tcard-desc">视频转码工具，开源免费</div>
+        </div>
+      </a>
+      
+      <a href="https://ffmpeg.org" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">🔧</div>
+        <div class="tcard-info">
+          <div class="tcard-name">FFmpeg</div>
+          <div class="tcard-desc">多媒体处理框架，命令行工具</div>
+        </div>
+      </a>
+      
+      <a href="https://www.screenpresso.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">📸</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Screenpresso</div>
+          <div class="tcard-desc">屏幕录制截图工具，轻量级</div>
+        </div>
+      </a>
+      
+      <a href="https://getsharex.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">📤</div>
+        <div class="tcard-info">
+          <div class="tcard-name">ShareX</div>
+          <div class="tcard-desc">屏幕截图录屏分享工具</div>
+        </div>
+      </a>
+      
+      <a href="https://www.figma.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">✏️</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Figma</div>
+          <div class="tcard-desc">界面设计工具，协作设计</div>
+        </div>
+      </a>
+      
+      <a href="https://photo.iqiyi.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">🖼️</div>
+        <div class="tcard-info">
+          <div class="tcard-name">爱奇艺看图</div>
+          <div class="tcard-desc">图片浏览工具，简洁快速</div>
+        </div>
+      </a>
+      
+      <a href="https://www.bandisoft.com/honeyview" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(138,53,214,.1);color:#8a35d6">🍯</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Honeyview</div>
+          <div class="tcard-desc">快速图像查看器，轻量级</div>
+        </div>
       </a>
     </div>
-  </div>
-
-  <!-- 书籍资源 -->
-  <div class="cat-section" id="cat-books" data-cat="books">
-    <div class="cat-title">📚&nbsp; 书籍资源</div>
-    <div class="cards-grid">
-      <a href="https://weread.qq.com" target="_blank" class="card" data-name="微信读书" data-cat="books">
-        <div class="card-icon">📖</div>
-        <div class="card-info"><div class="card-name">微信读书</div><div class="card-desc">海量正版书，无限卡免费畅读</div></div>
+    
+    <!-- 3. 学习与知识 -->
+    <div class="section-title" id="section-learn">
+      <span class="icon">📚</span>
+      <span>学习与知识</span>
+    </div>
+    
+    <div class="tool-grid">
+      <a href="https://weread.qq.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(26,158,90,.1);color:#1a9e5a">📖</div>
+        <div class="tcard-info">
+          <div class="tcard-name">微信读书</div>
+          <div class="tcard-desc">电子书阅读平台，社交阅读</div>
+        </div>
       </a>
-      <a href="https://www.douban.com/books" target="_blank" class="card" data-name="豆瓣读书" data-cat="books">
-        <div class="card-icon">🫘</div>
-        <div class="card-info"><div class="card-name">豆瓣读书</div><div class="card-desc">书评+书单，发现好书最佳入口</div></div>
+      
+      <a href="https://www.douban.com/books" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(26,158,90,.1);color:#1a9e5a">📖</div>
+        <div class="tcard-info">
+          <div class="tcard-name">豆瓣读书</div>
+          <div class="tcard-desc">书籍评分社区，书评推荐</div>
+        </div>
       </a>
-      <a href="https://z-lib.id" target="_blank" class="card" data-name="Z-Library" data-cat="books">
-        <div class="card-icon">🌐</div>
-        <div class="card-info"><div class="card-name">Z-Library</div><div class="card-desc">世界最大免费电子书库</div></div>
+      
+      <a href="https://z-lib.id" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(26,158,90,.1);color:#1a9e5a">📚</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Z-Library</div>
+          <div class="tcard-desc">电子书资源库，海量书籍</div>
+        </div>
       </a>
-      <a href="https://www.gutenberg.org" target="_blank" class="card" data-name="古腾堡计划" data-cat="books">
-        <div class="card-icon">📜</div>
-        <div class="card-info"><div class="card-name">古腾堡计划</div><div class="card-desc">7 万+ 经典文学免费下载</div></div>
+      
+      <a href="https://www.gutenberg.org" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(26,158,90,.1);color:#1a9e5a">📜</div>
+        <div class="tcard-info">
+          <div class="tcard-name">古腾堡</div>
+          <div class="tcard-desc">公共领域电子书项目</div>
+        </div>
       </a>
-      <a href="https://book.sohu.com" target="_blank" class="card" data-name="读书笔记" data-cat="books">
-        <div class="card-icon">✏️</div>
-        <div class="card-info"><div class="card-name">简悦</div><div class="card-desc">网页稍后读 + 阅读笔记工具</div></div>
+      
+      <a href="https://ksria.com/simpread" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(26,158,90,.1);color:#1a9e5a">👓</div>
+        <div class="tcard-info">
+          <div class="tcard-name">简悦</div>
+          <div class="tcard-desc">阅读模式工具，优化网页阅读</div>
+        </div>
+      </a>
+      
+      <a href="https://www.coursera.org" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(26,158,90,.1);color:#1a9e5a">🎓</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Coursera</div>
+          <div class="tcard-desc">在线学习平台，名校课程</div>
+        </div>
+      </a>
+      
+      <a href="https://www.khanacademy.org" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(26,158,90,.1);color:#1a9e5a">🎓</div>
+        <div class="tcard-info">
+          <div class="tcard-name">可汗学院</div>
+          <div class="tcard-desc">免费教育平台，K12课程</div>
+        </div>
+      </a>
+      
+      <a href="https://developer.mozilla.org" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(26,158,90,.1);color:#1a9e5a">🌐</div>
+        <div class="tcard-info">
+          <div class="tcard-name">MDN</div>
+          <div class="tcard-desc">Web开发文档，权威技术资料</div>
+        </div>
+      </a>
+      
+      <a href="https://www.yuque.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(26,158,90,.1);color:#1a9e5a">📝</div>
+        <div class="tcard-info">
+          <div class="tcard-name">语雀</div>
+          <div class="tcard-desc">知识库与文档协作平台</div>
+        </div>
+      </a>
+      
+      <a href="https://sspai.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(26,158,90,.1);color:#1a9e5a">💡</div>
+        <div class="tcard-info">
+          <div class="tcard-name">少数派</div>
+          <div class="tcard-desc">数字消费指南，效率工具推荐</div>
+        </div>
+      </a>
+      
+      <a href="https://web.okjike.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(26,158,90,.1);color:#1a9e5a">📱</div>
+        <div class="tcard-info">
+          <div class="tcard-name">即刻</div>
+          <div class="tcard-desc">兴趣社区，内容发现平台</div>
+        </div>
+      </a>
+      
+      <a href="https://www.pinterest.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(26,158,90,.1);color:#1a9e5a">📌</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Pinterest</div>
+          <div class="tcard-desc">视觉发现工具，创意灵感</div>
+        </div>
+      </a>
+      
+      <a href="https://are.na" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(26,158,90,.1);color:#1a9e5a">🧠</div>
+        <div class="tcard-info">
+          <div class="tcard-name">ARE.NA</div>
+          <div class="tcard-desc">视觉研究平台，创意收集</div>
+        </div>
+      </a>
+      
+      <a href="https://www.producthunt.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(26,158,90,.1);color:#1a9e5a">🚀</div>
+        <div class="tcard-info">
+          <div class="tcard-name">ProductHunt</div>
+          <div class="tcard-desc">新产品发现平台，创业工具</div>
+        </div>
       </a>
     </div>
-  </div>
-
-  <!-- 学习平台 -->
-  <div class="cat-section" id="cat-learn" data-cat="learn">
-    <div class="cat-title">🎓&nbsp; 学习平台</div>
-    <div class="cards-grid">
-      <a href="https://www.coursera.org" target="_blank" class="card" data-name="Coursera" data-cat="learn">
-        <div class="card-icon">🎓</div>
-        <div class="card-info"><div class="card-name">Coursera</div><div class="card-desc">顶尖大学课程，可获认证</div></div>
+    
+    <!-- 4. 设计与艺术 -->
+    <div class="section-title" id="section-design">
+      <span class="icon">🎨</span>
+      <span>设计与艺术</span>
+    </div>
+    
+    <div class="tool-grid">
+      <a href="https://www.canva.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">🖼️</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Canva</div>
+          <div class="tcard-desc">在线设计工具，模板丰富</div>
+        </div>
       </a>
-      <a href="https://www.khanacademy.org" target="_blank" class="card" data-name="可汗学院" data-cat="learn">
-        <div class="card-icon">📐</div>
-        <div class="card-info"><div class="card-name">可汗学院</div><div class="card-desc">免费系统化学习，K12 到大学</div></div>
+      
+      <a href="https://unsplash.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">📷</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Unsplash</div>
+          <div class="tcard-desc">免费高清图片素材库</div>
+        </div>
       </a>
-      <a href="https://developer.mozilla.org" target="_blank" class="card" data-name="MDN" data-cat="learn">
-        <div class="card-icon">🦊</div>
-        <div class="card-info"><div class="card-name">MDN</div><div class="card-desc">Web 开发权威参考文档</div></div>
+      
+      <a href="https://dribbble.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">🏀</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Dribbble</div>
+          <div class="tcard-desc">设计师作品展示平台</div>
+        </div>
       </a>
-      <a href="https://www.yuque.com" target="_blank" class="card" data-name="语雀" data-cat="learn">
-        <div class="card-icon">📝</div>
-        <div class="card-info"><div class="card-name">语雀</div><div class="card-desc">阿里出品，知识库与文档协作</div></div>
+      
+      <a href="https://www.iconfont.cn" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">🎨</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Iconfont</div>
+          <div class="tcard-desc">阿里巴巴矢量图标库</div>
+        </div>
       </a>
-      <a href="https://sspai.com" target="_blank" class="card" data-name="少数派" data-cat="learn">
-        <div class="card-icon">🔢</div>
-        <div class="card-info"><div class="card-name">少数派</div><div class="card-desc">高质量数字生活方式媒体</div></div>
+      
+      <a href="https://coolors.co" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">🌈</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Coolors</div>
+          <div class="tcard-desc">配色方案生成工具</div>
+        </div>
+      </a>
+      
+      <a href="https://fonts.google.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">🔤</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Google Fonts</div>
+          <div class="tcard-desc">免费开源字体库</div>
+        </div>
+      </a>
+      
+      <a href="https://500px.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">📸</div>
+        <div class="tcard-info">
+          <div class="tcard-name">500px</div>
+          <div class="tcard-desc">摄影作品分享社区</div>
+        </div>
+      </a>
+      
+      <a href="https://www.adobe.com/products/photoshop-lightroom.html" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">🖌️</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Lightroom</div>
+          <div class="tcard-desc">照片后期处理软件</div>
+        </div>
+      </a>
+      
+      <a href="https://vsco.co" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">🎨</div>
+        <div class="tcard-info">
+          <div class="tcard-name">VSCO</div>
+          <div class="tcard-desc">手机摄影滤镜应用</div>
+        </div>
+      </a>
+      
+      <a href="https://www.snapseed.online" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">📱</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Snapseed</div>
+          <div class="tcard-desc">Google照片编辑应用</div>
+        </div>
+      </a>
+      
+      <a href="https://www.pixiv.net" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">🎨</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Pixiv</div>
+          <div class="tcard-desc">日本插画交流社区</div>
+        </div>
+      </a>
+      
+      <a href="https://www.darktable.org" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">🌙</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Darktable</div>
+          <div class="tcard-desc">开源照片后期处理软件</div>
+        </div>
       </a>
     </div>
-  </div>
-
-  <!-- 效率工具 -->
-  <div class="cat-section" id="cat-tools" data-cat="tools">
-    <div class="cat-title">🔧&nbsp; 效率工具</div>
-    <div class="cards-grid">
-      <a href="https://www.notion.so" target="_blank" class="card" data-name="Notion" data-cat="tools">
-        <div class="card-icon">📋</div>
-        <div class="card-info"><div class="card-name">Notion</div><div class="card-desc">全能笔记+数据库+项目管理</div></div>
+    
+    <!-- 5. 音乐与乐器 -->
+    <div class="section-title" id="section-music">
+      <span class="icon">🎵</span>
+      <span>音乐与乐器</span>
+    </div>
+    
+    <div class="tool-grid">
+      <a href="https://www.ultimate-guitar.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(234,88,12,.1);color:#ea580c">🎸</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Ultimate Guitar</div>
+          <div class="tcard-desc">吉他谱库与社区</div>
+        </div>
       </a>
-      <a href="https://obsidian.md" target="_blank" class="card" data-name="Obsidian" data-cat="tools">
-        <div class="card-icon">💎</div>
-        <div class="card-info"><div class="card-name">Obsidian</div><div class="card-desc">本地优先笔记，双链知识图谱</div></div>
+      
+      <a href="https://yousician.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(234,88,12,.1);color:#ea580c">🎵</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Yousician</div>
+          <div class="tcard-desc">乐器学习应用，互动教学</div>
+        </div>
       </a>
-      <a href="https://www.figma.com" target="_blank" class="card" data-name="Figma" data-cat="tools">
-        <div class="card-icon">🖼️</div>
-        <div class="card-info"><div class="card-name">Figma</div><div class="card-desc">协作设计工具，原型必备</div></div>
+      
+      <a href="https://www.justinguitar.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(234,88,12,.1);color:#ea580c">🎸</div>
+        <div class="tcard-info">
+          <div class="tcard-name">JustinGuitar</div>
+          <div class="tcard-desc">免费吉他教学网站</div>
+        </div>
       </a>
-      <a href="https://github.com" target="_blank" class="card" data-name="GitHub" data-cat="tools">
-        <div class="card-icon">🐙</div>
-        <div class="card-info"><div class="card-name">GitHub</div><div class="card-desc">代码托管+开源社区</div></div>
+      
+      <a href="https://www.guitartabs.cc" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(234,88,12,.1);color:#ea580c">🎸</div>
+        <div class="tcard-info">
+          <div class="tcard-name">GuitarTabs</div>
+          <div class="tcard-desc">吉他谱与和弦图表</div>
+        </div>
       </a>
-      <a href="https://excalidraw.com" target="_blank" class="card" data-name="Excalidraw" data-cat="tools">
-        <div class="card-icon">✏️</div>
-        <div class="card-info"><div class="card-name">Excalidraw</div><div class="card-desc">手绘风格在线白板，头脑风暴</div></div>
+      
+      <a href="https://www.image-line.com/fl-studio" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(234,88,12,.1);color:#ea580c">🎹</div>
+        <div class="tcard-info">
+          <div class="tcard-name">FL Studio</div>
+          <div class="tcard-desc">数字音频工作站，音乐制作</div>
+        </div>
       </a>
-      <a href="https://www.xmind.net" target="_blank" class="card" data-name="XMind" data-cat="tools">
-        <div class="card-icon">🧩</div>
-        <div class="card-info"><div class="card-name">XMind</div><div class="card-desc">思维导图，整理思路利器</div></div>
+      
+      <a href="https://www.ableton.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(234,88,12,.1);color:#ea580c">🎛️</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Ableton Live</div>
+          <div class="tcard-desc">音乐创作与表演软件</div>
+        </div>
+      </a>
+      
+      <a href="https://www.apple.com/logic-pro" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(234,88,12,.1);color:#ea580c">🎚️</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Logic Pro</div>
+          <div class="tcard-desc">苹果专业音乐制作软件</div>
+        </div>
+      </a>
+      
+      <a href="https://www.apple.com/mac/garageband" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(234,88,12,.1);color:#ea580c">🎤</div>
+        <div class="tcard-info">
+          <div class="tcard-name">GarageBand</div>
+          <div class="tcard-desc">苹果免费音乐创作软件</div>
+        </div>
+      </a>
+      
+      <a href="https://www.audacityteam.org" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(234,88,12,.1);color:#ea580c">🎧</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Audacity</div>
+          <div class="tcard-desc">开源音频编辑软件</div>
+        </div>
+      </a>
+      
+      <a href="https://imslp.org" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(234,88,12,.1);color:#ea580c">📜</div>
+        <div class="tcard-info">
+          <div class="tcard-name">IMSLP</div>
+          <div class="tcard-desc">公共领域乐谱图书馆</div>
+        </div>
+      </a>
+      
+      <a href="https://musescore.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(234,88,12,.1);color:#ea580c">🎼</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Musescore</div>
+          <div class="tcard-desc">乐谱制作与分享平台</div>
+        </div>
+      </a>
+      
+      <a href="https://www.sheetmusicplus.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(234,88,12,.1);color:#ea580c">📄</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Sheet Music Plus</div>
+          <div class="tcard-desc">数字乐谱商店</div>
+        </div>
+      </a>
+      
+      <a href="https://www.8notes.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(234,88,12,.1);color:#ea580c">🎵</div>
+        <div class="tcard-info">
+          <div class="tcard-name">8notes</div>
+          <div class="tcard-desc">免费乐谱与音乐资源</div>
+        </div>
       </a>
     </div>
-  </div>
-
-  <!-- 设计资源 -->
-  <div class="cat-section" id="cat-design" data-cat="design">
-    <div class="cat-title">🎨&nbsp; 设计资源</div>
-    <div class="cards-grid">
-      <a href="https://www.canva.com" target="_blank" class="card" data-name="Canva" data-cat="design">
-        <div class="card-icon">🖌️</div>
-        <div class="card-info"><div class="card-name">Canva</div><div class="card-desc">在线图文设计，模板超多</div></div>
+    
+    <!-- 6. DIY与手工 -->
+    <div class="section-title" id="section-diy">
+      <span class="icon">🛠️</span>
+      <span>DIY与手工</span>
+    </div>
+    
+    <div class="tool-grid">
+      <a href="https://www.lceda.cn" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(5,150,105,.1);color:#059669">⚡</div>
+        <div class="tcard-info">
+          <div class="tcard-name">立创EDA</div>
+          <div class="tcard-desc">在线电路设计工具</div>
+        </div>
       </a>
-      <a href="https://unsplash.com" target="_blank" class="card" data-name="Unsplash" data-cat="design">
-        <div class="card-icon">🖼️</div>
-        <div class="card-info"><div class="card-name">Unsplash</div><div class="card-desc">高质量免费商用摄影图库</div></div>
+      
+      <a href="https://www.szlcsc.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(5,150,105,.1);color:#059669">🛒</div>
+        <div class="tcard-info">
+          <div class="tcard-name">立创商城</div>
+          <div class="tcard-desc">电子元器件采购平台</div>
+        </div>
       </a>
-      <a href="https://dribbble.com" target="_blank" class="card" data-name="Dribbble" data-cat="design">
-        <div class="card-icon">🏀</div>
-        <div class="card-info"><div class="card-name">Dribbble</div><div class="card-desc">顶尖设计师作品展示社区</div></div>
+      
+      <a href="https://www.arduino.cc" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(5,150,105,.1);color:#059669">🤖</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Arduino</div>
+          <div class="tcard-desc">开源电子原型平台</div>
+        </div>
       </a>
-      <a href="https://www.iconfont.cn" target="_blank" class="card" data-name="Iconfont" data-cat="design">
-        <div class="card-icon">🔣</div>
-        <div class="card-info"><div class="card-name">Iconfont</div><div class="card-desc">阿里图标库，海量免费图标</div></div>
+      
+      <a href="https://www.instructables.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(5,150,105,.1);color:#059669">🔨</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Instructables</div>
+          <div class="tcard-desc">DIY项目教程社区</div>
+        </div>
       </a>
-      <a href="https://coolors.co" target="_blank" class="card" data-name="Coolors" data-cat="design">
-        <div class="card-icon">🎨</div>
-        <div class="card-info"><div class="card-name">Coolors</div><div class="card-desc">配色方案生成工具，一键出图</div></div>
+      
+      <a href="https://makezine.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(5,150,105,.1);color:#059669">🔧</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Make Magazine</div>
+          <div class="tcard-desc">创客杂志与项目</div>
+        </div>
       </a>
-      <a href="https://fonts.google.com" target="_blank" class="card" data-name="Google Fonts" data-cat="design">
-        <div class="card-icon">🔤</div>
-        <div class="card-info"><div class="card-name">Google Fonts</div><div class="card-desc">免费开源字体库，设计必备</div></div>
+      
+      <a href="https://www.thingiverse.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(5,150,105,.1);color:#059669">🖨️</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Thingiverse</div>
+          <div class="tcard-desc">3D打印模型分享平台</div>
+        </div>
+      </a>
+      
+      <a href="https://item.taobao.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(5,150,105,.1);color:#059669">🛍️</div>
+        <div class="tcard-info">
+          <div class="tcard-name">淘宝手工区</div>
+          <div class="tcard-desc">手工材料工具采购</div>
+        </div>
+      </a>
+      
+      <a href="https://hackaday.io" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(5,150,105,.1);color:#059669">🔌</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Hackaday</div>
+          <div class="tcard-desc">硬件黑客项目社区</div>
+        </div>
+      </a>
+      
+      <a href="https://www.raspberrypi.org" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(5,150,105,.1);color:#059669">🍓</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Raspberry Pi</div>
+          <div class="tcard-desc">树莓派微型计算机</div>
+        </div>
+      </a>
+      
+      <a href="https://makerfaire.com" target="_blank" class="tcard">
+        <div class="tcard-icon" style="background:rgba(5,150,105,.1);color:#059669">🎪</div>
+        <div class="tcard-info">
+          <div class="tcard-name">Maker Faire</div>
+          <div class="tcard-desc">创客博览会与活动</div>
+        </div>
       </a>
     </div>
-  </div>
+  <!-- DIY与手工分类结束 -->
 
-  <!-- 摄影资源 -->
-  <div class="cat-section" id="cat-photo" data-cat="photo">
-    <div class="cat-title">📷&nbsp; 摄影资源</div>
-    <div class="cards-grid">
-      <a href="https://500px.com" target="_blank" class="card" data-name="500px" data-cat="photo">
-        <div class="card-icon">📸</div>
-        <div class="card-info"><div class="card-name">500px</div><div class="card-desc">全球摄影师社区，高质量作品集</div></div>
-      </a>
-      <a href="https://www.adobe.com/products/photoshop-lightroom.html" target="_blank" class="card" data-name="Lightroom" data-cat="photo">
-        <div class="card-icon">🌅</div>
-        <div class="card-info"><div class="card-name">Lightroom</div><div class="card-desc">Adobe 专业调色软件</div></div>
-      </a>
-      <a href="https://vsco.co" target="_blank" class="card" data-name="VSCO" data-cat="photo">
-        <div class="card-icon">🌿</div>
-        <div class="card-info"><div class="card-name">VSCO</div><div class="card-desc">胶片风格滤镜，移动端修图</div></div>
-      </a>
-      <a href="https://www.snapseed.online" target="_blank" class="card" data-name="Snapseed" data-cat="photo">
-        <div class="card-icon">✂️</div>
-        <div class="card-info"><div class="card-name">Snapseed</div><div class="card-desc">Google 出品免费修图，功能专业</div></div>
-      </a>
-      <a href="https://www.pixiv.net" target="_blank" class="card" data-name="Pixiv" data-cat="photo">
-        <div class="card-icon">🖼️</div>
-        <div class="card-info"><div class="card-name">Pixiv</div><div class="card-desc">日系插画+摄影创意社区</div></div>
-      </a>
-      <a href="https://www.darktable.org" target="_blank" class="card" data-name="Darktable" data-cat="photo">
-        <div class="card-icon">🌑</div>
-        <div class="card-info"><div class="card-name">Darktable</div><div class="card-desc">免费开源 RAW 暗室处理软件</div></div>
-      </a>
-    </div>
   </div>
-
-  <!-- 乐器 & 音乐 -->
-  <div class="cat-section" id="cat-music" data-cat="music">
-    <div class="cat-title">🎸&nbsp; 乐器 &amp; 音乐</div>
-    <div class="cards-grid">
-      <a href="https://www.ultimate-guitar.com" target="_blank" class="card" data-name="Ultimate Guitar" data-cat="music">
-        <div class="card-icon">🎸</div>
-        <div class="card-info"><div class="card-name">Ultimate Guitar</div><div class="card-desc">全球最大吉他谱库，Tab 海量</div></div>
-      </a>
-      <a href="https://www.chordify.net" target="_blank" class="card" data-name="Chordify" data-cat="music">
-        <div class="card-icon">🎵</div>
-        <div class="card-info"><div class="card-name">Chordify</div><div class="card-desc">自动分析歌曲和弦，跟弹神器</div></div>
-      </a>
-      <a href="https://musescore.com" target="_blank" class="card" data-name="MuseScore" data-cat="music">
-        <div class="card-icon">🎼</div>
-        <div class="card-info"><div class="card-name">MuseScore</div><div class="card-desc">免费乐谱编辑与分享平台</div></div>
-      </a>
-      <a href="https://www.yousician.com" target="_blank" class="card" data-name="Yousician" data-cat="music">
-        <div class="card-icon">🏆</div>
-        <div class="card-info"><div class="card-name">Yousician</div><div class="card-desc">吉他/钢琴游戏化教学 App</div></div>
-      </a>
-      <a href="https://splice.com" target="_blank" class="card" data-name="Splice" data-cat="music">
-        <div class="card-icon">🎛️</div>
-        <div class="card-info"><div class="card-name">Splice</div><div class="card-desc">海量音效采样素材库</div></div>
-      </a>
-      <a href="https://www.soundtrap.com" target="_blank" class="card" data-name="Soundtrap" data-cat="music">
-        <div class="card-icon">🎙️</div>
-        <div class="card-info"><div class="card-name">Soundtrap</div><div class="card-desc">在线 DAW，随时随地录音编曲</div></div>
-      </a>
-    </div>
-  </div>
-
-  <!-- DIY & 手工 -->
-  <div class="cat-section" id="cat-diy" data-cat="diy">
-    <div class="cat-title">🪚&nbsp; DIY &amp; 手工</div>
-    <div class="cards-grid">
-      <a href="https://www.lceda.cn" target="_blank" class="card" data-name="立创EDA" data-cat="diy">
-        <div class="card-icon">⚡</div>
-        <div class="card-info"><div class="card-name">立创EDA</div><div class="card-desc">在线 PCB 设计，电子制作入门</div></div>
-      </a>
-      <a href="https://www.szlcsc.com" target="_blank" class="card" data-name="立创商城" data-cat="diy">
-        <div class="card-icon">🛒</div>
-        <div class="card-info"><div class="card-name">立创商城</div><div class="card-desc">电子元器件采购，价格实惠</div></div>
-      </a>
-      <a href="https://www.instructables.com" target="_blank" class="card" data-name="Instructables" data-cat="diy">
-        <div class="card-icon">🔨</div>
-        <div class="card-info"><div class="card-name">Instructables</div><div class="card-desc">全球最大 DIY 教程社区</div></div>
-      </a>
-      <a href="https://makezine.com" target="_blank" class="card" data-name="Make" data-cat="diy">
-        <div class="card-icon">⚙️</div>
-        <div class="card-info"><div class="card-name">Make Magazine</div><div class="card-desc">创客文化杂志，DIY 项目灵感</div></div>
-      </a>
-      <a href="https://www.thingiverse.com" target="_blank" class="card" data-name="Thingiverse" data-cat="diy">
-        <div class="card-icon">🖨️</div>
-        <div class="card-info"><div class="card-name">Thingiverse</div><div class="card-desc">3D 打印模型免费下载</div></div>
-      </a>
-      <a href="https://item.taobao.com" target="_blank" class="card" data-name="淘宝DIY" data-cat="diy">
-        <div class="card-icon">🛍️</div>
-        <div class="card-info"><div class="card-name">淘宝手工区</div><div class="card-desc">木工/皮革/编织材料一站购</div></div>
-      </a>
-    </div>
-  </div>
-
-  <!-- 灵感发现 -->
-  <div class="cat-section" id="cat-inspire" data-cat="inspire">
-    <div class="cat-title">💡&nbsp; 灵感发现</div>
-    <div class="cards-grid">
-      <a href="https://sspai.com" target="_blank" class="card" data-name="少数派" data-cat="inspire">
-        <div class="card-icon">🔢</div>
-        <div class="card-info"><div class="card-name">少数派</div><div class="card-desc">数字生活方式，发现好工具好内容</div></div>
-      </a>
-      <a href="https://www.pinterest.com" target="_blank" class="card" data-name="Pinterest" data-cat="inspire">
-        <div class="card-icon">📌</div>
-        <div class="card-info"><div class="card-name">Pinterest</div><div class="card-desc">视觉灵感图钉板，无尽创意来源</div></div>
-      </a>
-      <a href="https://are.na" target="_blank" class="card" data-name="ARE.NA" data-cat="inspire">
-        <div class="card-icon">🔲</div>
-        <div class="card-info"><div class="card-name">ARE.NA</div><div class="card-desc">小众创意灵感收集平台</div></div>
-      </a>
-      <a href="https://www.producthunt.com" target="_blank" class="card" data-name="Product Hunt" data-cat="inspire">
-        <div class="card-icon">🐱</div>
-        <div class="card-info"><div class="card-name">Product Hunt</div><div class="card-desc">每日最新产品，发现新鲜工具</div></div>
-      </a>
-    </div>
-  </div>
-
-</main>
-
-<!-- 搜索 MODAL -->
-<div class="modal-overlay" id="searchModal" onclick="closeModal(event)">
-  <div class="modal-box">
-    <div class="modal-search">
-      <span>🔍</span>
-      <input type="text" id="modalInput" placeholder="搜索工具…" oninput="modalSearch(this.value)" autocomplete="off"/>
-      <span style="font-size:.72rem;color:var(--text3);cursor:pointer" onclick="closeModalDirect()">ESC</span>
-    </div>
-    <div class="modal-results" id="modalResults"></div>
-    <div class="modal-hint">输入关键词搜索 · ESC 关闭</div>
-  </div>
-</div>
 
 <script>
-/* ---------- 深色模式 ---------- */
-let dark = false;
-function toggleTheme(){
-  dark=!dark;
-  document.body.classList.toggle('dark',dark);
-  document.getElementById('themeBtn').textContent=dark?'☀️':'🌙';
-  localStorage.setItem('theme', dark ? 'dark' : 'light');
+// 主题切换
+function toggleTheme() {
+  document.body.classList.toggle('dark');
+  const btn = document.getElementById('themeBtn');
+  btn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
 }
 
-// 恢复主题偏好
-if (localStorage.getItem('theme') === 'dark') {
-  toggleTheme();
+// 搜索功能
+function filterCards(query) {
+  const cards = document.querySelectorAll('.tcard');
+  const lowerQuery = query.toLowerCase();
+  
+  cards.forEach(card => {
+    const name = card.querySelector('.tcard-name').textContent.toLowerCase();
+    const desc = card.querySelector('.tcard-desc').textContent.toLowerCase();
+    const shouldShow = name.includes(lowerQuery) || desc.includes(lowerQuery);
+    card.style.display = shouldShow ? 'flex' : 'none';
+  });
 }
 
-/* ---------- Tab 筛选 ---------- */
-document.querySelectorAll('.tab-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const cat=btn.dataset.cat;
-    document.querySelectorAll('.cat-section').forEach(sec=>{
-      sec.style.display=(cat==='all'||sec.dataset.cat===cat)?'':'none';
+// 简单直接的Tab切换功能
+document.addEventListener('DOMContentLoaded', function() {
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // 更新按钮状态
+      tabButtons.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      const category = this.dataset.cat;
+      
+      if (category === 'all') {
+        // 显示所有分类标题和所有工具卡片
+        document.querySelectorAll('.section-title').forEach(title => {
+          title.style.display = 'flex';
+        });
+        document.querySelectorAll('.tool-grid').forEach(grid => {
+          grid.style.display = 'grid';
+        });
+        document.querySelectorAll('.tcard').forEach(card => {
+          card.style.display = 'flex';
+        });
+      } else {
+        // 隐藏所有分类标题
+        document.querySelectorAll('.section-title').forEach(title => {
+          title.style.display = 'none';
+        });
+        
+        // 隐藏所有工具网格容器
+        document.querySelectorAll('.tool-grid').forEach(grid => {
+          grid.style.display = 'none';
+        });
+        
+        // 隐藏所有工具卡片（双重保障）
+        document.querySelectorAll('.tcard').forEach(card => {
+          card.style.display = 'none';
+        });
+        
+        // 显示目标分类的标题
+        const targetTitle = document.getElementById('section-' + category);
+        if (targetTitle) {
+          targetTitle.style.display = 'flex';
+          
+          // 显示目标分类的工具网格
+          const toolGrid = targetTitle.nextElementSibling;
+          if (toolGrid && toolGrid.classList.contains('tool-grid')) {
+            toolGrid.style.display = 'grid';
+            
+            // 显示该网格内的所有工具卡片
+            const cards = toolGrid.querySelectorAll('.tcard');
+            cards.forEach(card => {
+              card.style.display = 'flex';
+            });
+          }
+        }
+      }
     });
-    document.getElementById('inlineSearch').value='';
   });
 });
 
-/* ---------- 内联搜索 ---------- */
-function filterCards(q){
-  q=q.trim().toLowerCase();
-  document.querySelectorAll('.cat-section').forEach(sec=>{
-    let anyVisible=false;
-    sec.querySelectorAll('.card').forEach(c=>{
-      const match=c.dataset.name.toLowerCase().includes(q)||
-                  c.querySelector('.card-desc').textContent.toLowerCase().includes(q);
-      c.style.display=match?'':'none';
-      if(match) anyVisible=true;
-    });
-    sec.style.display=anyVisible?'':'none';
-  });
-  // 重置 tab
-  if(q===''){
-    document.querySelectorAll('.cat-section').forEach(s=>s.style.display='');
-    const activeTab=document.querySelector('.tab-btn.active');
-    if(activeTab) activeTab.click();
-  }
-}
-
-/* ---------- Modal 搜索 ---------- */
-const allCards=[...document.querySelectorAll('.card')];
-function openModal(){
-  document.getElementById('searchModal').classList.add('open');
-  setTimeout(()=>document.getElementById('modalInput').focus(),50);
-  modalSearch('');
-}
-function closeModalDirect(){
-  document.getElementById('searchModal').classList.remove('open');
-}
-function closeModal(e){
-  if(e.target===document.getElementById('searchModal')) closeModalDirect();
-}
-function modalSearch(q){
-  q=q.trim().toLowerCase();
-  const res=document.getElementById('modalResults');
-  const filtered=q?allCards.filter(c=>
-    c.dataset.name.toLowerCase().includes(q)||
-    c.querySelector('.card-desc').textContent.toLowerCase().includes(q)
-  ):allCards.slice(0,12);
-  if(filtered.length===0){
-    res.innerHTML='<div class="modal-empty">没有找到相关工具</div>';
-    return;
-  }
-  res.innerHTML=filtered.map(c=>`
-    <a href="${c.href}" target="_blank" class="mresult" onclick="closeModalDirect()">
-      <span class="mresult-icon">${c.querySelector('.card-icon').textContent}</span>
-      <div>
-        <div class="mresult-name">${c.dataset.name}</div>
-        <div class="mresult-cat">${c.querySelector('.card-desc').textContent}</div>
-      </div>
-    </a>
-  `).join('');
-}
-document.addEventListener('keydown',e=>{
-  if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openModal();}
-  if(e.key==='Escape') closeModalDirect();
-});
-
-/* ---------- hash 跳转定位 ---------- */
-window.addEventListener('DOMContentLoaded',()=>{
-  const h=location.hash.replace('#','');
-  if(h){
-    const catBtn=document.querySelector(`.tab-btn[data-cat="${h}"]`);
-    if(catBtn) catBtn.click();
-    const sec=document.getElementById('cat-'+h);
-    if(sec) setTimeout(()=>sec.scrollIntoView({behavior:'smooth',block:'start'}),200);
+// 页面加载时初始化
+document.addEventListener('DOMContentLoaded', function() {
+  // 检查当前主题
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (prefersDark) {
+    document.body.classList.add('dark');
+    document.getElementById('themeBtn').textContent = '☀️';
   }
 });
 </script>

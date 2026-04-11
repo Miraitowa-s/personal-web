@@ -4,7 +4,58 @@
 
 ## 必学和弦（C调）
 
+<div style="text-align: center; margin: 20px 0;">
+  <div style="display: inline-block; background: #f0f2f5; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 10px;">
+      <div style="text-align: center;">
+        <div style="font-size: 20px; font-weight: bold; color: #e8632a; margin-bottom: 4px;">C</div>
+        <div style="font-size: 12px; color: #666;">食指: 2弦1品</div>
+        <div style="font-size: 12px; color: #666;">中指: 4弦2品</div>
+        <div style="font-size: 12px; color: #666;">无名指: 5弦3品</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 20px; font-weight: bold; color: #e8632a; margin-bottom: 4px;">G</div>
+        <div style="font-size: 12px; color: #666;">中指: 5弦2品</div>
+        <div style="font-size: 12px; color: #666;">无名指: 6弦3品</div>
+        <div style="font-size: 12px; color: #666;">小指: 1弦3品</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 20px; font-weight: bold; color: #e8632a; margin-bottom: 4px;">Am</div>
+        <div style="font-size: 12px; color: #666;">食指: 2弦1品</div>
+        <div style="font-size: 12px; color: #666;">中指: 4弦2品</div>
+        <div style="font-size: 12px; color: #666;">无名指: 3弦2品</div>
+      </div>
+    </div>
+    <p style="font-size: 14px; color: #666; margin-top: 8px;">C、G、Am、Em、Dm、F 和弦指法示意图</p>
+  </div>
+</div>
+
 ### 1. C 和弦
+
+<div style="display: flex; gap: 20px; flex-wrap: wrap; margin: 10px 0;">
+  <div style="flex: 1; min-width: 200px;">
+    <div style="width: 100%; height: 150px; background: #f8f9fa; border: 1px solid #e8eaed; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+      <div style="text-align: center;">
+        <div style="font-size: 16px; color: #666; margin-bottom: 8px;">🎸 C和弦按法</div>
+        <div style="font-size: 12px; color: #999;">食指：2弦1品</div>
+        <div style="font-size: 12px; color: #999;">中指：4弦2品</div>
+        <div style="font-size: 12px; color: #999;">无名指：5弦3品</div>
+      </div>
+    </div>
+    <p style="font-size: 13px; color: #666; text-align: center;">左手按法示意图</p>
+  </div>
+  <div style="flex: 1; min-width: 200px;">
+    <div style="width: 100%; height: 150px; background: #f8f9fa; border: 1px solid #e8eaed; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+      <div style="text-align: center;">
+        <div style="font-size: 16px; color: #666; margin-bottom: 8px;">📊 六线谱图</div>
+        <div style="font-size: 12px; color: #999;">e|-0-|</div>
+        <div style="font-size: 12px; color: #999;">B|-1-| 食指</div>
+        <div style="font-size: 12px; color: #999;">G|-0-|</div>
+      </div>
+    </div>
+    <p style="font-size: 13px; color: #666; text-align: center;">六线谱+和弦图</p>
+  </div>
+</div>
 
 ```
 e|--0--|
