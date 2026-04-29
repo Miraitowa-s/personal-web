@@ -15,6 +15,7 @@
   </a>
   <div class="nav-links">
     <a href="#about">关于</a>
+    <a href="#life-track">人生轨迹</a>
     <a href="#works">创作与收藏</a>
     <a href="knowledge.html">知识库</a>
     <a href="#journey">大事记</a>
@@ -68,6 +69,91 @@
         <p>这里，</p>
         <p>是好奇心栖息的角落。</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LIFE TRACK ========== -->
+<section id="life-track">
+  <div class="life-header">
+    <p class="sec-eyebrow">My Journey</p>
+    <h2 class="sec-title">人生轨迹</h2>
+    <div class="sec-bar"></div>
+  </div>
+  <p class="life-hint">← 拖动或左右滑动，翻阅那些值得被记住的时刻 →</p>
+
+  <div class="life-track-wrap">
+    <div class="life-track" id="lifeTrack">
+
+      <!-- 2018 西安旅行 -->
+      <div class="lc-item" onclick="openLifeGallery(this)">
+        <div class="lc-year"><span class="lc-date">2018.06</span><span class="lc-place">📍 陕西 西安</span></div>
+        <div class="lc-dot"></div>
+        <div class="lc-card">
+          <div class="lc-media">
+            <img src="My Journey/18年6月/xian travel01.jpg" alt="西安旅行">
+            <span class="lc-media-tag">📷 2张</span>
+          </div>
+          <div class="lc-body">
+            <div class="lc-title">烟火长安</div>
+            <div class="lc-desc">城墙之上，看朝暮流转；街巷深处，听千年低语。那年夏天，我把脚步借给了古都。</div>
+          </div>
+          <input type="hidden" value="My Journey/18年6月/xian travel01.jpg|My Journey/18年6月/xian travel02.jpg">
+        </div>
+      </div>
+
+      <!-- 2023 毕业季 -->
+      <div class="lc-item" onclick="openLifeGallery(this)">
+        <div class="lc-year"><span class="lc-date">2023.06</span><span class="lc-place">📍 河南 郑州</span></div>
+        <div class="lc-dot"></div>
+        <div class="lc-card">
+          <div class="lc-media">
+            <img src="My Journey/23年6月/graduate01.jpg" alt="毕业季">
+            <span class="lc-media-tag">📷 2张</span>
+          </div>
+          <div class="lc-body">
+            <div class="lc-title">青春终章</div>
+            <div class="lc-desc">穿上毕业服那一刻，四年的时光忽然有了重量。愿此去繁花相伴，前路星光相随。</div>
+          </div>
+          <input type="hidden" value="My Journey/23年6月/graduate01.jpg|My Journey/23年6月/graduate02.jpg">
+        </div>
+      </div>
+
+      <!-- 2023 杨婚礼 -->
+      <div class="lc-item" onclick="openLifeGallery(this)">
+        <div class="lc-year"><span class="lc-date">2023.09</span><span class="lc-place">📍 云南 昆明</span></div>
+        <div class="lc-dot"></div>
+        <div class="lc-card">
+          <div class="lc-media">
+            <img src="My Journey/23年9月/yang wedding.jpg" alt="婚礼">
+            <span class="lc-media-tag">📷 1张</span>
+          </div>
+          <div class="lc-body">
+            <div class="lc-title">见证幸福</div>
+            <div class="lc-desc">……</div>
+          </div>
+          <input type="hidden" value="My Journey/23年9月/yang wedding.jpg">
+        </div>
+      </div>
+
+      <!-- 2026 饼饼婚礼 -->
+      <div class="lc-item" onclick="openLifeGallery(this)">
+        <div class="lc-year"><span class="lc-date">2026.04</span><span class="lc-place">📍 四川 成都</span></div>
+        <div class="lc-dot"></div>
+        <div class="lc-card">
+          <div class="lc-media">
+            <video src="My Journey/26年4月/bingbing wedding.mp4" muted loop playsinline></video>
+            <div class="lc-play">▶</div>
+            <span class="lc-media-tag">🎬 视频</span>
+          </div>
+          <div class="lc-body">
+            <div class="lc-title">“柿”饼之禧</div>
+            <div class="lc-desc">同样的誓言，不同的面孔，同样动人。愿你们此后每一天，都像今天这般明亮。</div>
+          </div>
+          <input type="hidden" value="video:My Journey/26年4月/bingbing wedding.mp4">
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -135,74 +221,46 @@
 
     <div class="works-divider" style="margin-top:3.5rem">收集的工具</div>
     <div class="tool-grid">
-      <a href="tools.html#video" class="tcard">
-        <div class="tcard-icon">🎬</div>
-        <div>
-          <div class="tcard-name">视频平台</div>
-          <div class="tcard-sub">B站 · YouTube · TED</div>
-        </div>
-      </a>
-      <a href="tools.html#books" class="tcard">
-        <div class="tcard-icon">📚</div>
-        <div>
-          <div class="tcard-name">书籍资源</div>
-          <div class="tcard-sub">微信读书 · 豆瓣 · Z-Lib</div>
-        </div>
-      </a>
-      <a href="tools.html#learn" class="tcard">
-        <div class="tcard-icon">🎓</div>
-        <div>
-          <div class="tcard-name">学习平台</div>
-          <div class="tcard-sub">Coursera · Khan · B站</div>
-        </div>
-      </a>
-      <a href="tools.html#tools" class="tcard">
-        <div class="tcard-icon">🔧</div>
-        <div>
-          <div class="tcard-name">效率工具</div>
-          <div class="tcard-sub">Notion · Obsidian · Figma</div>
-        </div>
-      </a>
-      <a href="tools.html#ai" class="tcard">
+      <a href="tools.html#section-ai" class="tcard">
         <div class="tcard-icon">🤖</div>
         <div>
-          <div class="tcard-name">AI & 大模型</div>
+          <div class="tcard-name">AI与智能工具</div>
           <div class="tcard-sub">ChatGPT · Claude · Gemini</div>
         </div>
       </a>
-      <a href="tools.html#design" class="tcard">
+      <a href="tools.html#section-productivity" class="tcard">
+        <div class="tcard-icon">🔧</div>
+        <div>
+          <div class="tcard-name">效率与工具</div>
+          <div class="tcard-sub">Notion · Obsidian · Figma</div>
+        </div>
+      </a>
+      <a href="tools.html#section-media" class="tcard">
+        <div class="tcard-icon">🎬</div>
+        <div>
+          <div class="tcard-name">媒体与知识</div>
+          <div class="tcard-sub">B站 · YouTube · 豆瓣</div>
+        </div>
+      </a>
+      <a href="tools.html#section-design" class="tcard">
         <div class="tcard-icon">🎨</div>
         <div>
-          <div class="tcard-name">设计资源</div>
+          <div class="tcard-name">设计与艺术</div>
           <div class="tcard-sub">Canva · Unsplash · Dribbble</div>
         </div>
       </a>
-      <a href="tools.html#photo" class="tcard">
-        <div class="tcard-icon">📷</div>
-        <div>
-          <div class="tcard-name">摄影资源</div>
-          <div class="tcard-sub">500px · Lightroom · VSCO</div>
-        </div>
-      </a>
-      <a href="tools.html#music" class="tcard">
+      <a href="tools.html#section-music" class="tcard">
         <div class="tcard-icon">🎸</div>
         <div>
-          <div class="tcard-name">乐器 & 音乐</div>
+          <div class="tcard-name">音乐与乐器</div>
           <div class="tcard-sub">Ultimate Guitar · 汇音堂</div>
         </div>
       </a>
-      <a href="tools.html#diy" class="tcard">
+      <a href="tools.html#section-diy" class="tcard">
         <div class="tcard-icon">🪚</div>
         <div>
-          <div class="tcard-name">DIY & 手工</div>
+          <div class="tcard-name">DIY与手工</div>
           <div class="tcard-sub">立创商城 · 哔哩哔哩</div>
-        </div>
-      </a>
-      <a href="tools.html#inspire" class="tcard">
-        <div class="tcard-icon">💡</div>
-        <div>
-          <div class="tcard-name">灵感发现</div>
-          <div class="tcard-sub">少数派 · Pinterest · ARE.NA</div>
         </div>
       </a>
     </div>
@@ -250,7 +308,7 @@
   <div class="footer-top">
     <div>
       <div class="footer-brand">周云飞 · 星空山野</div>
-      <div class="footer-sub">简洁 · 真实 · 持续生长</div>
+      <div class="footer-sub">众生平庸，你是人间星光</div>
     </div>
     <div class="footer-col">
       <h4>导航</h4>
@@ -269,11 +327,33 @@
   </div>
   <div class="footer-bottom">
     <span>© 2026 周云飞 All Rights Reserved.</span>
-    <span>用心记录，认真生活</span>
+    <span>花在开，风在吹，雾弥漫</span>
   </div>
 </footer>
 
 <script>
+  // 人生轨迹拖拽滚动
+  const lifeTrack = document.getElementById('lifeTrack');
+  if (lifeTrack) {
+    let ltDown = false, ltStartX = 0, ltScrollLeft = 0;
+    lifeTrack.addEventListener('mousedown', e => {
+      ltDown = true;
+      lifeTrack.classList.add('grabbing');
+      ltStartX = e.pageX - lifeTrack.offsetLeft;
+      ltScrollLeft = lifeTrack.scrollLeft;
+    });
+    document.addEventListener('mouseup', () => {
+      ltDown = false;
+      lifeTrack.classList.remove('grabbing');
+    });
+    lifeTrack.addEventListener('mousemove', e => {
+      if (!ltDown) return;
+      e.preventDefault();
+      const x = e.pageX - lifeTrack.offsetLeft;
+      lifeTrack.scrollLeft = ltScrollLeft - (x - ltStartX) * 1.1;
+    });
+  }
+
   // 主题切换
   let dark = false;
   function toggleTheme() {
@@ -317,7 +397,82 @@
 
   window.addEventListener('scroll', updateNav, { passive: true });
   updateNav();
+  // 人生轨迹弹窗
+  let lifeLbImages = [];
+  let lifeLbIndex = 0;
+
+  function openLifeGallery(el) {
+    const hidden = el.querySelector('input[type=hidden]');
+    if (!hidden) return;
+    const raw = hidden.value;
+    const lb = document.getElementById('lifeLightbox');
+    const imgWrap = document.getElementById('lifeLbImgWrap');
+    const videoWrap = document.getElementById('lifeLbVideoWrap');
+    const counter = document.getElementById('lifeLbCounter');
+
+    // 判断是否是视频
+    if (raw.startsWith('video:')) {
+      lifeLbImages = [];
+      const src = raw.replace('video:', '');
+      document.getElementById('lifeLbVideo').src = src;
+      imgWrap.style.display = 'none';
+      videoWrap.style.display = 'block';
+      counter.textContent = '';
+    } else {
+      lifeLbImages = raw.split('|');
+      lifeLbIndex = 0;
+      imgWrap.style.display = 'block';
+      videoWrap.style.display = 'none';
+      counter.textContent = '1 / ' + lifeLbImages.length;
+      document.getElementById('lifeLbImg').src = lifeLbImages[0];
+    }
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function lifeLbNav(dir) {
+    if (!lifeLbImages.length) return;
+    lifeLbIndex = (lifeLbIndex + dir + lifeLbImages.length) % lifeLbImages.length;
+    document.getElementById('lifeLbImg').src = lifeLbImages[lifeLbIndex];
+    document.getElementById('lifeLbCounter').textContent = (lifeLbIndex + 1) + ' / ' + lifeLbImages.length;
+  }
+
+  function closeLifeGallery(e) {
+    if (e && e.target !== e.currentTarget && !e.target.classList.contains('lc-lightbox-close')) return;
+    const lb = document.getElementById('lifeLightbox');
+    lb.classList.remove('open');
+    document.getElementById('lifeLbVideo').pause();
+    document.getElementById('lifeLbVideo').src = '';
+    document.body.style.overflow = '';
+  }
+
+  // 键盘控制弹窗
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lifeLightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLifeGallery({ target: lb, currentTarget: lb });
+    if (e.key === 'ArrowLeft') lifeLbNav(-1);
+    if (e.key === 'ArrowRight') lifeLbNav(1);
+  });
 </script>
+
+<!-- 人生轨迹弹窗 -->
+<div class="lc-lightbox" id="lifeLightbox" onclick="closeLifeGallery(event)">
+  <div class="lc-lightbox-inner">
+    <button class="lc-lightbox-close" onclick="closeLifeGallery(event)" title="关闭">✕</button>
+    <div class="lc-lightbox-counter" id="lifeLbCounter"></div>
+    <!-- 图片大图展示 -->
+    <div class="lc-lightbox-img-wrap" id="lifeLbImgWrap">
+      <img id="lifeLbImg" src="" alt="">
+      <button class="lc-lightbox-arrow lc-lightbox-prev" onclick="event.stopPropagation();lifeLbNav(-1)">‹</button>
+      <button class="lc-lightbox-arrow lc-lightbox-next" onclick="event.stopPropagation();lifeLbNav(1)">›</button>
+    </div>
+    <!-- 视频展示 -->
+    <div class="lc-lightbox-video-wrap" id="lifeLbVideoWrap" style="display:none">
+      <video id="lifeLbVideo" controls></video>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

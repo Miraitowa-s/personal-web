@@ -379,16 +379,14 @@
   <p class="eyebrow">My Works</p>
   <h1>我的作品</h1>
   <div class="page-hero-line"></div>
-  <p>这里收录了我在软件、摄影、手工、音乐四个方向上的创作，持续更新中。</p>
+  <p>这里收录了我在软件和摄影上的创作，持续更新中。</p>
 </div>
 
 <!-- TAB -->
 <div class="tab-bar">
-  <button class="tab-btn active" onclick="switchTab('all',this)">全部</button>
+      <button class="tab-btn active" onclick="switchTab('all',this)">全部</button>
   <button class="tab-btn" onclick="switchTab('web',this)">🌐 软件</button>
   <button class="tab-btn" onclick="switchTab('photo',this)">📷 摄影</button>
-  <button class="tab-btn" onclick="switchTab('diy',this)">🛠️ DIY</button>
-  <button class="tab-btn" onclick="switchTab('music',this)">🎸 音乐</button>
 </div>
 
 <!-- MAIN -->
@@ -424,6 +422,18 @@
           </div>
         </div>
       </a>
+      
+      <a href="knowledge.html?home=true" class="wcard">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#dbeafe,#93c5fd)">📚</div>
+        <div class="wcard-body">
+          <div class="wcard-title">个人知识库</div>
+          <div class="wcard-desc">9大分类54篇深度技术文章，涵盖AI、前后端、摄影、音乐等领域。</div>
+          <div class="wcard-foot">
+            <span class="badge b-web">软件</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 
@@ -435,104 +445,14 @@
       <div class="cat-line"></div>
     </div>
     <div class="wgrid-3">
-      <!-- 街拍摄影 -->
-      <div class="wcard" onclick="openGallery('street')">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fef3c7,#fcd34d)">🏙️</div>
+      <!-- 风光摄影 -->
+      <div class="wcard" onclick="openGallery('landscape')">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#d1fae5,#6ee7b7)">🏔️</div>
         <div class="wcard-body">
-          <div class="wcard-title">街拍摄影</div>
-          <div class="wcard-desc">城市街头的光影与人文，记录那些稍纵即逝的生动瞬间。</div>
+          <div class="wcard-title">风光摄影</div>
+          <div class="wcard-desc">山川湖海，日出日落，用镜头记录自然的壮美与宁静。</div>
           <div class="wcard-foot">
             <span class="badge b-photo">摄影</span>
-            <span class="wcard-arrow">查看 →</span>
-          </div>
-        </div>
-      </div>
-      <!-- 人像摄影 -->
-      <div class="wcard" onclick="openGallery('portrait')">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fce7f3,#f9a8d4)">🧑‍🎨</div>
-        <div class="wcard-body">
-          <div class="wcard-title">人像摄影</div>
-          <div class="wcard-desc">用镜头捕捉人物神态与情绪，每一张都是故事的凝固。</div>
-          <div class="wcard-foot">
-            <span class="badge b-photo">摄影</span>
-            <span class="wcard-arrow">查看 →</span>
-          </div>
-        </div>
-      </div>
-      <!-- 私人照片 -->
-      <div class="wcard" onclick="openGallery('private')">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fce7f3,#ddd6fe)">🔒</div>
-        <div class="wcard-body">
-          <div class="wcard-title">私人照片</div>
-          <div class="wcard-desc">私人相册，记录与朋友的日常、珍贵的时光片段。</div>
-          <div class="wcard-foot">
-            <span class="badge b-private">私密</span>
-            <span class="wcard-arrow">查看 →</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DIY & 手工 -->
-  <div class="cat-block" id="diy" data-cat="diy">
-    <div class="cat-head">
-      <span class="cat-icon">🛠️</span>
-      <span class="cat-title">DIY & 手工</span>
-      <div class="cat-line"></div>
-    </div>
-    <div class="wgrid">
-      <div class="wcard" onclick="openGallery('diy1')">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#ede9fe,#c4b5fd)">🛠️</div>
-        <div class="wcard-body">
-          <div class="wcard-title">手工制作</div>
-          <div class="wcard-desc">从零动手，改装、拼接、制作，享受创造一件实物的过程。</div>
-          <div class="wcard-foot">
-            <span class="badge b-write">手工</span>
-            <span class="wcard-arrow">查看 →</span>
-          </div>
-        </div>
-      </div>
-      <div class="wcard" onclick="openGallery('diy2')">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#d1fae5,#a7f3d0)">🪚</div>
-        <div class="wcard-body">
-          <div class="wcard-title">改装项目</div>
-          <div class="wcard-desc">拆解、改造、重新组装，赋予旧物新的生命与功能。</div>
-          <div class="wcard-foot">
-            <span class="badge b-write">手工</span>
-            <span class="wcard-arrow">查看 →</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 音乐 -->
-  <div class="cat-block" id="music" data-cat="music">
-    <div class="cat-head">
-      <span class="cat-icon">🎸</span>
-      <span class="cat-title">音乐</span>
-      <div class="cat-line"></div>
-    </div>
-    <div class="wgrid">
-      <div class="wcard" onclick="openGallery('guitar')">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#dbeafe,#818cf8)">🎸</div>
-        <div class="wcard-body">
-          <div class="wcard-title">吉他练习</div>
-          <div class="wcard-desc">自学吉他中，偶尔录几段不算成熟的练习，算是留个成长脚印。</div>
-          <div class="wcard-foot">
-            <span class="badge b-music">音乐</span>
-            <span class="wcard-arrow">查看 →</span>
-          </div>
-        </div>
-      </div>
-      <div class="wcard" onclick="openGallery('cover')">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#e0f2fe,#7dd3fc)">🎵</div>
-        <div class="wcard-body">
-          <div class="wcard-title">翻唱 & 原创</div>
-          <div class="wcard-desc">尝试翻唱喜欢的曲子，偶尔也写写简单的旋律片段。</div>
-          <div class="wcard-foot">
-            <span class="badge b-music">音乐</span>
             <span class="wcard-arrow">查看 →</span>
           </div>
         </div>
@@ -632,84 +552,16 @@
   }
 
   const galleries = {
-    street: {
-      emoji: '🏙️', title: '街拍摄影',
-      desc: '城市街头的光与影，那些一闪而过的生动瞬间。',
+    landscape: {
+      emoji: '🏔️', title: '风光摄影',
+      desc: '山川湖海，日出日落，用镜头记录自然的壮美与宁静。',
       private: false,
       photos: [
-        { src: 'photos/street/street1.jpg', caption: '街拍 01' },
-        { src: 'photos/street/street2.jpg', caption: '街拍 02' },
-        { src: 'photos/street/street3.jpg', caption: '街拍 03' },
-        { src: 'photos/street/street4.jpg', caption: '街拍 04' },
-        { src: 'photos/street/street5.jpg', caption: '街拍 05' },
-        { src: 'photos/street/street6.jpg', caption: '街拍 06' },
-        { src: 'photos/street/street7.jpg', caption: '街拍 07' },
-        { src: 'photos/street/street8.jpg', caption: '街拍 08' },
-        { src: 'photos/street/street9.jpg', caption: '街拍 09' },
-        { src: 'photos/street/street10.jpg', caption: '街拍 10' },
-      ]
-    },
-    portrait: {
-      emoji: '🧑‍🎨', title: '人像摄影',
-      desc: '用镜头捕捉真实的神态与情绪。',
-      private: false,
-      photos: [
-        { src: 'photos/portrait/portrait1.jpg', caption: '人像 01' },
-        { src: 'photos/portrait/portrait2.jpg', caption: '人像 02' },
-      ]
-    },
-    private: {
-      emoji: '🔒', title: '私人照片',
-      desc: '与朋友的日常，珍贵的私人时光。',
-      private: true,
-      password: '171442', // 修改此处设置密码
-      photos: [
-        { src: 'photos/private/private1.jpg', caption: '私人 01' },
-        { src: 'photos/private/private2.png', caption: '私人 02' },
-        { src: 'photos/private/private3.png', caption: '私人 03' },
-        { src: 'photos/private/private4.png', caption: '私人 04' },
-        { src: 'photos/private/private5.jpg', caption: '私人 05' },
-        { src: 'photos/private/private6.jpg', caption: '私人 06' },
-      ]
-    },
-    diy1: {
-      emoji: '🛠️', title: '手工制作',
-      desc: '从零动手，享受创造一件实物的过程。',
-      private: false, type: 'video',
-      videos: [
-        // B站视频：填写 bvid（BV号）、title（标题）、cover（封面图可选）、date（日期）
-        // 示例：{ bvid: 'BV1xx411c7mD', title: '做了一个木质笔筒', date: '2025-08', cover: '' }
-        // 本地视频：{ src: 'videos/diy1.mp4', title: '手工作品01', date: '2025-08', cover: '' }
-        { bvid: 'BV1xx411c7mD', title: '手工制作 · 示例01', date: '2025-08', cover: '' },
-        { bvid: 'BV1yy411c7mE', title: '手工制作 · 示例02', date: '2025-09', cover: '' },
-      ]
-    },
-    diy2: {
-      emoji: '🪚', title: '改装项目',
-      desc: '拆解、改造，赋予旧物新的生命。',
-      private: false, type: 'video',
-      videos: [
-        { bvid: 'BV1zz411c7mF', title: '改装项目 · 示例01', date: '2025-10', cover: '' },
-        { bvid: 'BV1aa411c7mG', title: '改装项目 · 示例02', date: '2025-11', cover: '' },
-      ]
-    },
-    guitar: {
-      emoji: '🎸', title: '吉他练习',
-      desc: '自学吉他，留个成长脚印。',
-      private: false, type: 'video',
-      videos: [
-        { bvid: 'BV1bb411c7mH', title: '吉他练习 · 示例01', date: '2025-07', cover: '' },
-        { bvid: 'BV1cc411c7mI', title: '吉他练习 · 示例02', date: '2025-09', cover: '' },
-        { bvid: 'BV1dd411c7mJ', title: '吉他练习 · 示例03', date: '2025-11', cover: '' },
-      ]
-    },
-    cover: {
-      emoji: '🎵', title: '翻唱 & 原创',
-      desc: '翻唱喜欢的曲子，或写写简单旋律。',
-      private: false, type: 'video',
-      videos: [
-        { bvid: 'BV1ee411c7mK', title: '翻唱 · 示例01', date: '2025-08', cover: '' },
-        { bvid: 'BV1ff411c7mL', title: '翻唱 · 示例02', date: '2025-10', cover: '' },
+        { src: 'photos/landscape/DSCF4078.JPG', caption: '风光 01' },
+        { src: 'photos/landscape/DSCF7145.JPG', caption: '风光 02' },
+        { src: 'photos/landscape/DSCF7189.JPG', caption: '风光 03' },
+        { src: 'photos/landscape/DSCF7196.JPG', caption: '风光 04' },
+        { src: 'photos/landscape/DSCF7271.JPG', caption: '风光 05' },
       ]
     }
   };
