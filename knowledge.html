@@ -287,27 +287,6 @@
     .sb-outline-h3.active-heading { color:var(--accent); }
     .sb-outline-h3.top-level { display:block; padding-left:2.6rem; }
 
-    /* 拖拽样式 */
-    .sb-cat[draggable] { cursor:grab; }
-    .sb-cat[draggable]:active { cursor:grabbing; }
-    .sb-doc-item[draggable] { cursor:grab; }
-    .sb-doc-item[draggable]:active { cursor:grabbing; }
-    .drag-over-cat { background:var(--accent-bg); border-radius:var(--r); }
-    .drag-over-doc { background:var(--accent-bg2); border-radius:var(--r); }
-    .drag-handle {
-      display:inline-flex; align-items:center;
-      margin-right:.25rem; color:var(--text3);
-      font-size:.65rem; opacity:0;
-      transition:opacity var(--t);
-      cursor:grab; user-select:none; flex-shrink:0;
-    }
-    .sb-cat-header:hover .drag-handle,
-    .sb-doc-item:hover .drag-handle { opacity:1; }
-    .drag-placeholder {
-      height:2px; background:var(--accent);
-      border-radius:1px; margin:2px 0;
-      pointer-events:none;
-    }
 
     /* 无结果 */
     .sb-no-result {
@@ -717,74 +696,74 @@
   // 新增分类/文章时，同步更新此处
   const EMBEDDED_TREE = [
     { id:'ai-llm', name:'ai-llm', docs:[
-      { file:'ai-learning-roadmap.md',      title:'AI 与大模型学习路径指南' },
-      { file:'llm-guide.md',                title:'大语言模型完全指南' },
-      { file:'deep-learning-basics.md',     title:'深度学习基础' },
-      { file:'transformer-architecture.md', title:'Transformer 架构详解' },
-      { file:'fine-tuning-practical-guide.md', title:'AI 微调实战指南' },
-      { file:'prompt-engineering.md',       title:'Prompt Engineering 指南' },
-      { file:'rag-guide.md',                title:'RAG 检索增强生成' },
-      { file:'ollama-guide.md',             title:'Ollama 本地大模型部署' },
+      { file:'01-ai-learning-roadmap.md',      title:'AI 与大模型学习路径指南' },
+      { file:'02-llm-guide.md',                title:'大语言模型完全指南' },
+      { file:'03-deep-learning-basics.md',     title:'深度学习基础' },
+      { file:'04-transformer-architecture.md', title:'Transformer 架构详解' },
+      { file:'05-fine-tuning-practical-guide.md', title:'AI 微调实战指南' },
+      { file:'06-prompt-engineering.md',       title:'Prompt Engineering 指南' },
+      { file:'07-rag-guide.md',                title:'RAG 检索增强生成' },
+      { file:'08-ollama-guide.md',             title:'Ollama 本地大模型部署' },
     ]},
     { id:'ai-agent', name:'ai-agent', docs:[
-      { file:'ai-agent-basics.md',       title:'AI Agent 基础概念指南' },
-      { file:'ai-agent-practice.md',     title:'AI Agent 实战' },
-      { file:'langchain-guide.md',       title:'LangChain 开发指南' },
-      { file:'nlp-guide.md',             title:'自然语言处理基础' },
-      { file:'nlp-foundation-models.md', title:'预训练模型体系' },
-      { file:'mcp-protocol.md',          title:'MCP 协议：AI 工具调用标准' },
+      { file:'01-ai-agent-basics.md',       title:'AI Agent 基础概念指南' },
+      { file:'02-ai-agent-practice.md',     title:'AI Agent 实战' },
+      { file:'03-langchain-guide.md',       title:'LangChain 开发指南' },
+      { file:'04-nlp-guide.md',             title:'自然语言处理基础' },
+      { file:'05-nlp-foundation-models.md', title:'预训练模型体系' },
+      { file:'06-mcp-protocol.md',          title:'MCP 协议：AI 工具调用标准' },
     ]},
     { id:'data-science', name:'data-science', docs:[
-      { file:'data-science-guide.md',  title:'数据科学学习指南' },
-      { file:'machine-learning.md',    title:'机器学习基础' },
-      { file:'sklearn-guide.md',       title:'Scikit-learn 实战' },
-      { file:'pandas-guide.md',        title:'Pandas 数据处理指南' },
-      { file:'numpy-guide.md',         title:'NumPy 数值计算指南' },
-      { file:'data-visualization.md',  title:'数据可视化' },
+      { file:'01-data-science-guide.md',  title:'数据科学学习指南' },
+      { file:'02-machine-learning.md',    title:'机器学习基础' },
+      { file:'03-sklearn-guide.md',       title:'Scikit-learn 实战' },
+      { file:'04-pandas-guide.md',        title:'Pandas 数据处理指南' },
+      { file:'05-numpy-guide.md',         title:'NumPy 数值计算指南' },
+      { file:'06-data-visualization.md',  title:'数据可视化' },
     ]},
     { id:'frontend', name:'frontend', docs:[
-      { file:'frontend-overview.md',           title:'前端技术栈全览指南' },
-      { file:'js-tutorial.md',                 title:'JavaScript 核心教程' },
-      { file:'css3-tutorial.md',               title:'CSS3 样式指南' },
-      { file:'html5-features.md',              title:'HTML5 新特性' },
-      { file:'css-layout-guide.md',            title:'CSS 布局：Flexbox & Grid' },
-      { file:'typescript-guide.md',            title:'TypeScript 类型指南' },
-      { file:'react-basics.md',                title:'React 基础入门' },
-      { file:'vue3-composition-api.md',        title:'Vue3 Composition API' },
-      { file:'nextjs-guide.md',                title:'Next.js SSR 指南' },
-      { file:'testing-frameworks-guide.md',    title:'前端测试框架完全指南' },
-      { file:'web-performance-optimization.md',title:'前端性能优化实战' },
+      { file:'01-frontend-overview.md',           title:'前端技术栈全览指南' },
+      { file:'02-js-tutorial.md',                 title:'JavaScript 核心教程' },
+      { file:'03-css3-tutorial.md',               title:'CSS3 样式指南' },
+      { file:'04-html5-features.md',              title:'HTML5 新特性' },
+      { file:'05-css-layout-guide.md',            title:'CSS 布局：Flexbox & Grid' },
+      { file:'06-typescript-guide.md',            title:'TypeScript 类型指南' },
+      { file:'07-react-basics.md',                title:'React 基础入门' },
+      { file:'08-vue3-composition-api.md',        title:'Vue3 Composition API' },
+      { file:'09-nextjs-guide.md',                title:'Next.js SSR 指南' },
+      { file:'10-testing-frameworks-guide.md',    title:'前端测试框架完全指南' },
+      { file:'11-web-performance-optimization.md',title:'前端性能优化实战' },
     ]},
     { id:'backend-eng', name:'backend-eng', docs:[
-      { file:'backend-overview.md',          title:'后端 & 工程技术指南' },
-      { file:'python3-basics.md',            title:'Python3 基础' },
-      { file:'python3-advanced.md',          title:'Python3 进阶' },
-      { file:'api-design-best-practices.md', title:'API 设计最佳实践' },
-      { file:'mysql-guide.md',               title:'MySQL 数据库指南' },
-      { file:'mongodb-guide.md',             title:'MongoDB NoSQL 指南' },
-      { file:'sql-basics.md',                title:'SQL 基础语法' },
-      { file:'git-guide.md',                 title:'Git 版本控制指南' },
-      { file:'http-guide.md',                title:'HTTP 协议详解' },
-      { file:'tcpip-guide.md',               title:'TCP/IP 协议栈' },
-      { file:'network-basics.md',            title:'网络基础' },
+      { file:'01-backend-overview.md',          title:'后端 & 工程技术指南' },
+      { file:'02-python3-basics.md',            title:'Python3 基础' },
+      { file:'03-python3-advanced.md',          title:'Python3 进阶' },
+      { file:'04-api-design-best-practices.md', title:'API 设计最佳实践' },
+      { file:'05-mysql-guide.md',               title:'MySQL 数据库指南' },
+      { file:'06-mongodb-guide.md',             title:'MongoDB NoSQL 指南' },
+      { file:'07-sql-basics.md',                title:'SQL 基础语法' },
+      { file:'08-git-guide.md',                 title:'Git 版本控制指南' },
+      { file:'09-http-guide.md',                title:'HTTP 协议详解' },
+      { file:'10-tcpip-guide.md',               title:'TCP/IP 协议栈' },
+      { file:'11-network-basics.md',            title:'网络基础' },
     ]},
     { id:'guitar', name:'guitar', docs:[
-      { file:'practice-guide.md',      title:'吉他练习方法与时间管理指南' },
-      { file:'basic-chords.md',        title:'基础和弦入门' },
-      { file:'music-theory-basics.md', title:'吉他乐理入门' },
-      { file:'fingerstyle-guide.md',   title:'指弹吉他入门' },
+      { file:'01-practice-guide.md',      title:'吉他练习方法与时间管理指南' },
+      { file:'02-basic-chords.md',        title:'基础和弦入门' },
+      { file:'03-music-theory-basics.md', title:'吉他乐理入门' },
+      { file:'04-fingerstyle-guide.md',   title:'指弹吉他入门' },
     ]},
     { id:'photography', name:'photography', docs:[
-      { file:'camera-gear-guide.md',        title:'相机装备选购指南' },
-      { file:'exposure-triangle.md',        title:'曝光三角' },
-      { file:'composition.md',              title:'构图原则' },
-      { file:'lightroom-editing.md',        title:'Lightroom 后期调色' },
-      { file:'post-processing-workflow.md', title:'后期实战工作流' },
-      { file:'street-photography.md',       title:'街头摄影指南' },
+      { file:'01-camera-gear-guide.md',        title:'相机装备选购指南' },
+      { file:'02-exposure-triangle.md',        title:'曝光三角' },
+      { file:'03-composition.md',              title:'构图原则' },
+      { file:'04-lightroom-editing.md',        title:'Lightroom 后期调色' },
+      { file:'05-post-processing-workflow.md', title:'后期实战工作流' },
+      { file:'06-street-photography.md',       title:'街头摄影指南' },
     ]},
     { id:'diy', name:'diy', docs:[
-      { file:'tools-guide.md',        title:'DIY 工具入门指南' },
-      { file:'woodworking-basics.md', title:'木工基础' },
+      { file:'01-tools-guide.md',        title:'DIY 工具入门指南' },
+      { file:'02-woodworking-basics.md', title:'木工基础' },
     ]},
   ];
 
@@ -903,13 +882,9 @@
       return;
     }
 
-    // 应用已保存的排序
-    applySavedOrder();
-
     sbTree.innerHTML = tree.map(cat => `
-      <div class="sb-cat" data-cat-id="${cat.id}" draggable="true">
+      <div class="sb-cat" data-cat-id="${cat.id}">
         <div class="sb-cat-header" onclick="toggleCat(this)">
-          <span class="drag-handle" title="拖拽排序">⠿</span>
           <span class="arrow">▶</span>
           <span class="cat-icon">${catIcon(cat.id)}</span>
           <span class="cat-name">${catLabel(cat.id)}</span>
@@ -919,9 +894,7 @@
             <div class="sb-doc-item"
                  data-cat="${cat.id}"
                  data-file="${escHtml(doc.file)}"
-                 data-title="${escHtml(doc.title)}"
-                 draggable="true">
-              <span class="drag-handle" title="拖拽排序">⠿</span>
+                 data-title="${escHtml(doc.title)}">
               <span class="sb-doc-label" title="${escHtml(doc.title)}"
                     onclick="loadDoc('${cat.id}','${escJs(doc.file)}',this.closest('.sb-doc-item'))">${escHtml(doc.title)}</span>
             </div>
@@ -933,8 +906,6 @@
     // 默认展开所有分类
     sbTree.querySelectorAll('.sb-cat-header').forEach(h => openCat(h));
 
-    // 绑定拖拽逻辑
-    bindDrag();
   }
 
   function toggleCat(header) {
@@ -1494,171 +1465,6 @@
       const el = document.getElementById(item.dataset.target);
       if (el) observer.observe(el);
     });
-  }
-
-  // ═══════════════════════════════════════
-  //  拖拽排序
-  // ═══════════════════════════════════════
-  const ORDER_KEY = 'kb_order';
-  // ═══════════════════════════════════════
-  //  拖拽排序（容器级事件委托，修复上往下拖无效 bug）
-  // ═══════════════════════════════════════
-  let dragSrc  = null;
-  let dragType = null; // 'cat' | 'doc'
-  let _dragFromHandle = false; // 是否从 handle 发起
-
-  function bindDrag() {
-    const sbTree = document.getElementById('sbTree');
-
-    // 记录是否从 drag-handle 按下
-    sbTree.addEventListener('mousedown', e => {
-      _dragFromHandle = !!e.target.closest('.drag-handle');
-    });
-
-    // ── dragstart：统一在容器上捕获 ──
-    sbTree.addEventListener('dragstart', e => {
-      if (!_dragFromHandle) {
-        e.preventDefault();
-        return;
-      }
-      const cat  = e.target.closest('.sb-cat');
-      const item = e.target.closest('.sb-doc-item');
-      if (item) {
-        dragSrc  = item;
-        dragType = 'doc';
-        e.dataTransfer.effectAllowed = 'move';
-        e.stopPropagation();
-        setTimeout(() => item.style.opacity = '.4', 0);
-      } else if (cat) {
-        dragSrc  = cat;
-        dragType = 'cat';
-        e.dataTransfer.effectAllowed = 'move';
-        setTimeout(() => cat.style.opacity = '.4', 0);
-      }
-    }, true);
-
-    // ── dragend：清理 ──
-    sbTree.addEventListener('dragend', () => {
-      if (dragSrc) dragSrc.style.opacity = '';
-      sbTree.querySelectorAll('.drag-placeholder').forEach(p => p.remove());
-      sbTree.querySelectorAll('.drag-over-cat').forEach(el => el.classList.remove('drag-over-cat'));
-      dragSrc  = null;
-      dragType = null;
-      _dragFromHandle = false;
-    });
-
-    // ── dragover：计算插入位置，显示占位线 ──
-    sbTree.addEventListener('dragover', e => {
-      if (!dragSrc) return;
-      e.preventDefault();
-      e.dataTransfer.dropEffect = 'move';
-      sbTree.querySelectorAll('.drag-placeholder').forEach(p => p.remove());
-
-      if (dragType === 'cat') {
-        const overCat = e.target.closest('.sb-cat');
-        if (!overCat || overCat === dragSrc) return;
-        const rect = overCat.getBoundingClientRect();
-        const ph = document.createElement('div');
-        ph.className = 'drag-placeholder';
-        if (e.clientY < rect.top + rect.height / 2) overCat.before(ph);
-        else overCat.after(ph);
-
-      } else if (dragType === 'doc') {
-        const overItem = e.target.closest('.sb-doc-item');
-        if (!overItem || overItem === dragSrc) return;
-        // 只允许同分类内
-        if (overItem.closest('.sb-doc-list') !== dragSrc.closest('.sb-doc-list')) return;
-        const rect = overItem.getBoundingClientRect();
-        const ph = document.createElement('div');
-        ph.className = 'drag-placeholder';
-        if (e.clientY < rect.top + rect.height / 2) overItem.before(ph);
-        else overItem.after(ph);
-      }
-    });
-
-    // ── drop：执行移动 ──
-    sbTree.addEventListener('drop', e => {
-      if (!dragSrc) return;
-      e.preventDefault();
-      sbTree.querySelectorAll('.drag-placeholder').forEach(p => p.remove());
-
-      if (dragType === 'cat') {
-        const overCat = e.target.closest('.sb-cat');
-        if (!overCat || overCat === dragSrc) return;
-        const rect = overCat.getBoundingClientRect();
-        if (e.clientY < rect.top + rect.height / 2) overCat.before(dragSrc);
-        else overCat.after(dragSrc);
-        saveCatOrder();
-
-      } else if (dragType === 'doc') {
-        const overItem = e.target.closest('.sb-doc-item');
-        if (!overItem || overItem === dragSrc) return;
-        const list = dragSrc.closest('.sb-doc-list');
-        if (overItem.closest('.sb-doc-list') !== list) return;
-        const rect = overItem.getBoundingClientRect();
-        if (e.clientY < rect.top + rect.height / 2) overItem.before(dragSrc);
-        else overItem.after(dragSrc);
-        saveDocOrder(list);
-      }
-    });
-  }
-
-  // 保存分类顺序到 localStorage
-  function saveCatOrder() {
-    const sbTree = document.getElementById('sbTree');
-    const catOrder = [...sbTree.querySelectorAll('.sb-cat')].map(c => c.dataset.catId);
-    const saved = getSavedOrder();
-    saved.catOrder = catOrder;
-    localStorage.setItem(ORDER_KEY, JSON.stringify(saved));
-    // 同步 tree 数组顺序
-    tree.sort((a, b) => {
-      const ai = catOrder.indexOf(a.id), bi = catOrder.indexOf(b.id);
-      return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
-    });
-  }
-
-  // 保存某分类内文章顺序
-  function saveDocOrder(list) {
-    const catId = list.closest('.sb-cat').dataset.catId;
-    const docOrder = [...list.querySelectorAll('.sb-doc-item')].map(d => d.dataset.file);
-    const saved = getSavedOrder();
-    if (!saved.docOrders) saved.docOrders = {};
-    saved.docOrders[catId] = docOrder;
-    localStorage.setItem(ORDER_KEY, JSON.stringify(saved));
-    // 同步 tree 数组顺序
-    const catObj = tree.find(c => c.id === catId);
-    if (catObj) {
-      catObj.docs.sort((a, b) => {
-        const ai = docOrder.indexOf(a.file), bi = docOrder.indexOf(b.file);
-        return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
-      });
-    }
-  }
-
-  function getSavedOrder() {
-    try { return JSON.parse(localStorage.getItem(ORDER_KEY)) || {}; } catch { return {}; }
-  }
-
-  // 在渲染前，把 tree 数组按已保存顺序重新排列
-  function applySavedOrder() {
-    const saved = getSavedOrder();
-    if (saved.catOrder && saved.catOrder.length) {
-      tree.sort((a, b) => {
-        const ai = saved.catOrder.indexOf(a.id), bi = saved.catOrder.indexOf(b.id);
-        return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
-      });
-    }
-    if (saved.docOrders) {
-      tree.forEach(cat => {
-        const order = saved.docOrders[cat.id];
-        if (order && order.length) {
-          cat.docs.sort((a, b) => {
-            const ai = order.indexOf(a.file), bi = order.indexOf(b.file);
-            return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
-          });
-        }
-      });
-    }
   }
 
   // ═══════════════════════════════════════
