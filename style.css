@@ -857,15 +857,16 @@ body.dark #life-track {
 .life-track::-webkit-scrollbar-thumb:hover { background: var(--text); }
 .life-track.grabbing { cursor: grabbing; }
 
-/* 贯穿中轴线 */
-.life-track::before {
-  content: '';
+/* 贯穿中轴线 — 宽度由 JS 动态设置为 scrollWidth */
+.lc-line {
   position: absolute;
   top: 106px;
-  left: 0; right: 0;
+  left: 0;
   height: 2px;
   background: var(--border);
   z-index: 0;
+  pointer-events: none;
+  flex-shrink: 0;
 }
 
 /* 单个节点 */

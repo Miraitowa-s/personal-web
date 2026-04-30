@@ -29,7 +29,7 @@
     <span class="hero-eyebrow">Personal Homepage</span>
     <h1>星空山野</h1>
     <div class="hero-line"></div>
-    <h2>这里是周云飞的个人主页 · 记录创作与收藏</h2>
+    <h2>邓布利多 你说的对 爱是世界上最伟大的魔法</h2>
     <div class="hero-actions">
       <a class="btn-primary" href="#works">查看作品</a>
       <a class="btn-ghost" href="tools.html">进入工具库</a>
@@ -84,6 +84,7 @@
 
   <div class="life-track-wrap">
     <div class="life-track" id="lifeTrack">
+      <div class="lc-line"></div>
 
       <!-- 2018 西安旅行 -->
       <div class="lc-item" onclick="openLifeGallery(this)">
@@ -99,6 +100,23 @@
             <div class="lc-desc">城墙之上，看朝暮流转；街巷深处，听千年低语。那年夏天，我把脚步借给了古都。</div>
           </div>
           <input type="hidden" value="My Journey/18年6月/xian travel01.jpg|My Journey/18年6月/xian travel02.jpg">
+        </div>
+      </div>
+
+      <!-- 2022 新的开始 -->
+      <div class="lc-item" onclick="openLifeGallery(this)">
+        <div class="lc-year"><span class="lc-date">2022.09</span><span class="lc-place">📍 安徽 合肥</span></div>
+        <div class="lc-dot"></div>
+        <div class="lc-card">
+          <div class="lc-media">
+            <img src="My Journey/22年9月/79774230169a9e32ee0e325a56856fd6.jpg" alt="2022年9月">
+            <span class="lc-media-tag">📷 1张</span>
+          </div>
+          <div class="lc-body">
+            <div class="lc-title">一起同窗</div>
+            <div class="lc-desc">敬这三年的埋头苦读，敬食堂里永远在排的长队。我们带着期待与忐忑，走进了崭新的世界。</div>
+          </div>
+          <input type="hidden" value="My Journey/22年9月/79774230169a9e32ee0e325a56856fd6.jpg">
         </div>
       </div>
 
@@ -133,6 +151,23 @@
             <div class="lc-desc">……</div>
           </div>
           <input type="hidden" value="My Journey/23年9月/yang wedding.jpg">
+        </div>
+      </div>
+
+      <!-- 2025 四月 -->
+      <div class="lc-item" onclick="openLifeGallery(this)">
+        <div class="lc-year"><span class="lc-date">2025.04</span><span class="lc-place">📍 贵州 贵阳</span></div>
+        <div class="lc-dot"></div>
+        <div class="lc-card">
+          <div class="lc-media">
+            <img src="My Journey/25年4月/微信图片_20260430101249_2832_35.jpg" alt="2025年4月">
+            <span class="lc-media-tag">📷 3张</span>
+          </div>
+          <div class="lc-body">
+            <div class="lc-title">不负相遇</div>
+            <div class="lc-desc">四月的风吹过，带来了新的故事。贵阳街头的蘸水藏着生活里那些普通却珍贵的片刻。</div>
+          </div>
+          <input type="hidden" value="My Journey/25年4月/微信图片_20260430101249_2832_35.jpg|My Journey/25年4月/微信图片_20260430101251_2833_35.jpg|My Journey/25年4月/微信图片_20260430101251_2834_35.jpg">
         </div>
       </div>
 
@@ -335,6 +370,15 @@
   // 人生轨迹拖拽滚动
   const lifeTrack = document.getElementById('lifeTrack');
   if (lifeTrack) {
+    // 同步横线宽度到 scrollWidth
+    const lcLine = lifeTrack.querySelector('.lc-line');
+    function syncLcLine() {
+      if (lcLine) lcLine.style.width = lifeTrack.scrollWidth + 'px';
+    }
+    // DOM 加载后执行，再延迟一次确保图片等资源撑开宽度
+    syncLcLine();
+    window.addEventListener('load', syncLcLine);
+
     let ltDown = false, ltStartX = 0, ltScrollLeft = 0;
     lifeTrack.addEventListener('mousedown', e => {
       ltDown = true;
