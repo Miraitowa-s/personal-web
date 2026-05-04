@@ -730,17 +730,21 @@ body.dark nav:not(.scrolled) {
 
 /* Logo 不需要 filter */
 
-/* 区块暗色背景 */
+/* 区块暗色背景 — 交替深浅，制造节奏感 */
 body.dark #about {
-  background:#161618;
+  background: #161618;        /* 偏亮 */
+}
+
+body.dark #life-track {
+  background: var(--page-bg); /* 最深 #0f0f11 */
 }
 
 body.dark #works {
-  background:var(--page-bg);
+  background: #161618;        /* 偏亮 */
 }
 
 body.dark #journey {
-  background:#161618;
+  background: var(--bg);      /* 中间调 #111113 */
 }
 
 /* 卡片暗色 */
@@ -804,10 +808,6 @@ body.dark .tool-more:hover {
    ============================================================ */
 #life-track {
   padding: 100px 8%;
-}
-
-body.dark #life-track {
-  background: transparent;
 }
 
 .life-header {
