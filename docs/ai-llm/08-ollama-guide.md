@@ -1,10 +1,10 @@
 # Ollama 本地大模型部署指南
 
-> Ollama 是一个开源的本地大模型运行平台，让用户能够在个人电脑上运行和交互多种 LLM。
+> Ollama 是一个开源的本地大语言模型运行框架，专为在本地机器上便捷部署和运行大型语言模型（LLM）而设计。Ollama 支持多种操作系统，包括 macOS、Windows、Linux 以及通过 Docker 容器运行。
 
 ## 一、Ollama 简介
 
-Ollama 是一个轻量级、可扩展的本地大模型运行框架，核心优势：
+Ollama 是一个开源的大型语言模型（LLM）平台，旨在让用户能够轻松地在本地运行、管理和与大型语言模型进行交互。核心优势：
 
 - **本地运行**：数据不出本地，隐私安全
 - **开箱即用**：一条命令下载和运行模型
@@ -13,41 +13,113 @@ Ollama 是一个轻量级、可扩展的本地大模型运行框架，核心优�
 - **API 兼容**：提供 OpenAI 兼容的 API 接口
 - **硬件加速**：支持 GPU（NVIDIA/AMD）和 Apple Silicon
 
+![img](https://www.runoob.com/wp-content/uploads/2025/02/bala-ollama.webp)
+
 ## 二、安装
 
 ### 2.1 系统要求
 
 | 配置 | 最低要求 | 推荐配置 |
 |------|---------|---------|
-| 内存 | 8GB | 16GB+ |
+| CPU | 多核处理器 | 4核或以上 |
+| GPU | 可选（运行大模型推荐） | NVIDIA GPU，CUDA 支持，8GB+ VRAM |
+| 内存 | 8GB RAM | 16GB+ RAM |
 | 硬盘 | 10GB | 50GB+ SSD |
-| GPU | 可选 | NVIDIA GPU 8GB+ VRAM |
-| 系统 | Windows 10+ / macOS / Ubuntu | - |
+| 系统 | Windows 10+ / macOS / Ubuntu 20.04+ | — |
 
-> 模型大小决定资源需求：7B 模型需要约 8GB 内存，13B 需要约 16GB。
+> 💡 模型大小决定资源需求：7B 模型约需 8GB 内存，13B 约需 16GB，33B 约需 32GB。Ollama 默认使用 4-bit 量化，实际占用会更小（7B 约 4.5GB）。
 
-### 2.2 安装方式
+### 2.2 下载安装包
 
-**macOS / Linux**：
+打开 Ollama 官方下载页面，根据你的操作系统选择对应版本：
+
+> 官方下载地址：https://ollama.com/download
+
+![Ollama 官方下载页面](https://www.runoob.com/wp-content/uploads/2025/02/c8a389a9-0156-4549-9db4-ffdca51b421d.png)
+
+页面会自动识别你的操作系统，也可以手动选择 Windows / macOS / Linux 版本。
+
+### 2.3 Windows 安装
+
+#### 第一步：下载
+
+- 直接下载链接：https://ollama.com/download/OllamaSetup.exe
+- 或使用 winget 命令安装：`winget install Ollama.Ollama`
+
+#### 第二步：运行安装程序
+
+双击下载好的 `OllamaSetup.exe`，按照安装向导提示完成安装：
+
+![Windows 安装向导](https://www.runoob.com/wp-content/uploads/2025/02/0__Y21oZ83BrPS7Wei.png)
+
+> 💡 安装程序会自动将 Ollama 添加到系统 PATH，无需手动配置环境变量。
+
+#### 第三步：自定义安装路径（可选）
+
+如果不想安装到 C 盘，可以通过命令行指定目录：
+
 ```bash
-curl -fsSL https://ollama.com/install.sh | sh
+# 方法一：命令行参数
+OllamaSetup.exe /DIR="D:\Tools\Ollama"
+
+# 方法二：通过环境变量修改模型存储位置
+# 设置 OLLAMA_MODELS 环境变量可改变模型下载位置
+setx OLLAMA_MODELS "D:\OllamaModels"
 ```
 
-**Windows**：
-- 下载安装包：https://ollama.com/download
-- 或使用winget：`winget install Ollama.Ollama`
+> ⚠️ 默认模型存储路径为 `%USERPROFILE%\.ollama\models`，大模型文件可能占用数十GB空间，建议提前规划。
 
-**Docker**：
-```bash
-docker run -d -v ollama:/root/.ollama -p 11434:11434 ollama/ollama
-```
+#### 验证安装
 
-### 2.3 验证安装
+打开 **命令提示符（CMD）** 或 **PowerShell**，输入：
 
 ```bash
 ollama --version
 # ollama version is 0.x.x
 ```
+
+如果显示版本号，说明安装成功。
+
+### 2.4 macOS 安装
+
+- 下载地址：https://ollama.com/download/Ollama-darwin.zip
+- 下载后双击安装包，按提示拖拽到 Applications 即可
+- 支持 Apple Silicon（M1/M2/M3/M4）的 Metal 加速
+
+```bash
+# 验证安装
+ollama --version
+```
+
+### 2.5 Linux 安装
+
+Linux 提供一键安装脚本，打开终端执行：
+
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+安装完成后验证：
+
+```bash
+ollama --version
+```
+
+### 2.6 Docker 安装
+
+如果你熟悉 Docker，也可以通过容器运行 Ollama：
+
+```bash
+# 拉取镜像
+docker pull ollama/ollama
+
+# 运行容器（-d 后台运行，-v 持久化模型数据）
+docker run -d -v ollama:/root/.ollama -p 11434:11434 ollama/ollama
+```
+
+访问 `http://localhost:11434` 即可确认服务已启动。
+
+> 官方 Docker 镜像地址：https://hub.docker.com/r/ollama/ollama
 
 ## 三、基本使用
 
