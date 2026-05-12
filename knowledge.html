@@ -27,7 +27,16 @@
       overflow: hidden !important;
     }
   </style>
+  <meta name="description" content="周云飞的个人知识库，涵盖 AI 与大模型、前端开发、后端工程、摄影、吉他等 9 大分类 55 篇深度文章。"/>
+  <meta property="og:title" content="知识库 · 周云飞"/>
+  <meta property="og:description" content="9 大分类、55 篇深度文章，涵盖 AI、前后端、摄影、音乐等领域的学习笔记与实践总结。"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="https://yourdomain.com/image/pic.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
   <title>知识库 · 周云飞</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" media="(prefers-color-scheme: light)"/>
+  <link rel="icon" type="image/svg+xml" href="favicon-dark.svg" media="(prefers-color-scheme: dark)"/>
   <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
   <script src="embedded_content.js?v=202604291914"></script>
   <script>
@@ -816,14 +825,14 @@
   // ═══════════════════════════════════════
   function toggleTheme() {
     const dark = !document.body.classList.contains('dark');
-    localStorage.setItem('kb_theme', dark ? 'dark' : 'light');
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
     applyTheme(dark);
   }
   function applyTheme(dark) {
     document.body.classList.toggle('dark', dark);
     document.getElementById('themeBtn').textContent = dark ? '☀️' : '🌙';
   }
-  applyTheme(localStorage.getItem('kb_theme') === 'dark');
+  applyTheme(localStorage.getItem('theme') === 'dark');
 
   // ═══════════════════════════════════════
   //  移动端侧边栏

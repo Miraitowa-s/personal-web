@@ -3,11 +3,20 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="周云飞的作品集——软件项目、摄影相册、DIY 手工与音乐创作。"/>
+  <meta property="og:title" content="我的作品 · 周云飞"/>
+  <meta property="og:description" content="软件、摄影、DIY 与音乐，用作品记录成长。"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="https://yourdomain.com/image/pic.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
   <title>我的作品 · 周云飞</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" media="(prefers-color-scheme: light)"/>
+  <link rel="icon" type="image/svg+xml" href="favicon-dark.svg" media="(prefers-color-scheme: dark)"/>
   <style>
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     :root {
-      --bg:#f8f7f5; --surface:#fff; --border:#e8e8e4;
+      --bg:#f5f5f3; --surface:#fff; --border:#e6e6e2;
       --text:#1a1a1a; --text2:#666; --text3:#aaa;
       --accent:#4f6ef7; --r:14px;
       --sh:0 6px 28px rgba(0,0,0,0.09);
@@ -43,6 +52,31 @@
       cursor:pointer; font-size:1rem; transition:all var(--t);
     }
     .theme-toggle:hover { background:var(--text); border-color:var(--text); filter:invert(1); }
+
+    /* 汉堡菜单（移动端） */
+    .hamburger {
+      display:none; width:36px; height:36px; border-radius:50%;
+      border:1.5px solid var(--border); background:var(--surface);
+      align-items:center; justify-content:center; cursor:pointer;
+      font-size:1.1rem; transition:all var(--t); flex-shrink:0;
+    }
+    .hamburger:hover { background:var(--text); border-color:var(--text); filter:invert(1); }
+    .hamburger svg { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; }
+    .mobile-menu {
+      display:none; position:fixed; top:72px; left:0; right:0; z-index:290;
+      background:var(--surface); border-bottom:1px solid var(--border);
+      box-shadow:0 12px 40px rgba(0,0,0,0.1); padding:0.5rem 0;
+      transform:translateY(-8px); opacity:0;
+      transition:transform 0.25s ease, opacity 0.25s ease; pointer-events:none;
+    }
+    .mobile-menu.open { transform:translateY(0); opacity:1; pointer-events:all; }
+    .mobile-menu a {
+      display:block; padding:.85rem 8%; font-size:.95rem;
+      color:var(--text2); transition:all var(--t);
+    }
+    .mobile-menu a:hover { background:var(--bg); color:var(--text); }
+    .mobile-menu-overlay { display:none; position:fixed; inset:0; z-index:280; background:rgba(0,0,0,0.2); }
+    .mobile-menu-overlay.show { display:block; }
 
     /* ===== PAGE HERO ===== */
     .page-hero {
@@ -80,15 +114,9 @@
 
     /* ===== 作品卡片 ===== */
     /* 所有分类统一3列，保持卡片宽度一致 */
-    .wgrid {
+    .wgrid, .wgrid-3 {
       display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:1.2rem;
-    }
-    /* 摄影分类也是3列 */
-    .wgrid-3 {
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
+      grid-template-columns:repeat(4, 1fr);
       gap:1.2rem;
     }
     .wcard {
@@ -320,11 +348,16 @@
       position:absolute; top:0; left:0; width:100%; height:100%;
     }
 
+    @media(max-width:1100px){
+      .wgrid, .wgrid-3 { grid-template-columns:repeat(3,1fr); }
+    }
     @media(max-width:900px){
       .wgrid, .wgrid-3 { grid-template-columns:repeat(2,1fr); }
     }
     @media(max-width:680px){
       .nav-links { display:none; }
+      .hamburger { display:flex; }
+      .mobile-menu { display:block; }
       .wgrid, .wgrid-3 { grid-template-columns:1fr; }
       .photo-grid { grid-template-columns:repeat(2,1fr); }
       .video-grid { grid-template-columns:repeat(2,1fr); }
@@ -333,7 +366,6 @@
     /* ===== DARK MODE ===== */
     body.dark {
       --bg:#111113; --surface:#1c1c1f; --border:#2e2e34;
-      --text:#f0f0f2; --text2:#b0b0bb; --text3:#666670;
     }
     body.dark nav { background:rgba(17,17,19,.92); border-bottom-color:rgba(255,255,255,.06); }
     body.dark .tab-bar { background:rgba(17,17,19,.92); border-bottom-color:var(--border); }
@@ -355,6 +387,10 @@
     body.dark .page-hero { background:
       radial-gradient(ellipse 70% 60% at 50% 0%, rgba(79,110,247,.15) 0%, transparent 65%), var(--bg);
     }
+    body.dark .hamburger { border-color:rgba(255,255,255,.2); background:rgba(255,255,255,.08); color:#fff; }
+    body.dark .hamburger:hover { background:rgba(255,255,255,.9); color:#111; }
+    body.dark .mobile-menu { background:var(--surface); border-color:var(--border); }
+    body.dark .mobile-menu a:hover { background:rgba(255,255,255,.06); }
   </style>
 </head>
 <body>
@@ -371,8 +407,21 @@
     <a href="tools.html">工具库</a>
     <a href="knowledge.html">知识库</a>
   </div>
+  <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="菜单">
+    <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+  </button>
   <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="切换明暗模式">🌙</button>
 </nav>
+
+<!-- 移动端菜单遮罩 -->
+<div class="mobile-menu-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#about">关于</a>
+  <a href="index.html#works">作品</a>
+  <a href="index.html#journey">大事记</a>
+  <a href="tools.html">工具库</a>
+  <a href="knowledge.html">知识库</a>
+</div>
 
 <!-- PAGE HERO -->
 <div class="page-hero">
@@ -384,9 +433,11 @@
 
 <!-- TAB -->
 <div class="tab-bar">
-      <button class="tab-btn active" onclick="switchTab('all',this)">全部</button>
+  <button class="tab-btn active" onclick="switchTab('all',this)">全部</button>
   <button class="tab-btn" onclick="switchTab('web',this)">🌐 软件</button>
   <button class="tab-btn" onclick="switchTab('photo',this)">📷 摄影</button>
+  <button class="tab-btn" onclick="switchTab('diy',this)">🛠️ DIY</button>
+  <button class="tab-btn" onclick="switchTab('music',this)">🎸 音乐</button>
 </div>
 
 <!-- MAIN -->
@@ -457,6 +508,152 @@
           </div>
         </div>
       </div>
+      <!-- 人像摄影 -->
+      <div class="wcard" onclick="openGallery('portrait')">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fce7f3,#f9a8d4)">🧍</div>
+        <div class="wcard-body">
+          <div class="wcard-title">人像摄影</div>
+          <div class="wcard-desc">记录人与光影的邂逅，捕捉真实情绪流动的瞬间。</div>
+          <div class="wcard-foot">
+            <span class="badge b-photo">摄影</span>
+            <span class="wcard-arrow">查看 →</span>
+          </div>
+        </div>
+      </div>
+      <!-- 街拍纪实 -->
+      <div class="wcard" style="cursor:default">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fef3c7,#fcd34d)">🏙️</div>
+        <div class="wcard-body">
+          <div class="wcard-title">街拍纪实</div>
+          <div class="wcard-desc">城市角落、市井烟火，用镜头讲述平凡生活的动人故事。</div>
+          <div class="wcard-foot">
+            <span class="badge b-photo">摄影</span>
+            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
+          </div>
+        </div>
+      </div>
+      <!-- 微距 & 静物 -->
+      <div class="wcard" style="cursor:default">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fce7f3,#f9a8d4)">🌸</div>
+        <div class="wcard-body">
+          <div class="wcard-title">微距 & 静物</div>
+          <div class="wcard-desc">一花一叶、一杯一盏，发现日常中被忽略的细节之美。</div>
+          <div class="wcard-foot">
+            <span class="badge b-photo">摄影</span>
+            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIY & 手工 -->
+  <div class="cat-block" id="diy" data-cat="diy">
+    <div class="cat-head">
+      <span class="cat-icon">🛠️</span>
+      <span class="cat-title">DIY & 手工</span>
+      <div class="cat-line"></div>
+    </div>
+    <div class="wgrid-3">
+      <div class="wcard" style="cursor:default">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#ede9fe,#c4b5fd)">🔨</div>
+        <div class="wcard-body">
+          <div class="wcard-title">木工 & 改装</div>
+          <div class="wcard-desc">从零动手，锯切、打磨、拼装，享受把想法变成实物的过程。</div>
+          <div class="wcard-foot">
+            <span class="badge b-write">手工</span>
+            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
+          </div>
+        </div>
+      </div>
+      <div class="wcard" style="cursor:default">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#e0f2fe,#7dd3fc)">🔌</div>
+        <div class="wcard-body">
+          <div class="wcard-title">电子 & Arduino</div>
+          <div class="wcard-desc">焊接电路、刷固件、接传感器，DIY 小玩意儿的快乐无可替代。</div>
+          <div class="wcard-foot">
+            <span class="badge b-write">手工</span>
+            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
+          </div>
+        </div>
+      </div>
+      <div class="wcard" style="cursor:default">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fef9c3,#fde68a)">🎨</div>
+        <div class="wcard-body">
+          <div class="wcard-title">皮具 & 手作</div>
+          <div class="wcard-desc">裁皮、缝线、封边，用双手打造独一无二的随身物件。</div>
+          <div class="wcard-foot">
+            <span class="badge b-write">手工</span>
+            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
+          </div>
+        </div>
+      </div>
+      <div class="wcard" style="cursor:default">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#d1fae5,#6ee7b7)">🪴</div>
+        <div class="wcard-body">
+          <div class="wcard-title">园艺 & 植物</div>
+          <div class="wcard-desc">播种、修剪、造景，在绿意中寻找内心的宁静与秩序。</div>
+          <div class="wcard-foot">
+            <span class="badge b-write">手工</span>
+            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 音乐 -->
+  <div class="cat-block" id="music" data-cat="music">
+    <div class="cat-head">
+      <span class="cat-icon">🎸</span>
+      <span class="cat-title">音乐</span>
+      <div class="cat-line"></div>
+    </div>
+    <div class="wgrid-3">
+      <div class="wcard" style="cursor:default">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#dbeafe,#818cf8)">🎸</div>
+        <div class="wcard-body">
+          <div class="wcard-title">吉他练习</div>
+          <div class="wcard-desc">自学民谣指弹，偶尔录几段不算成熟的练习，留个成长脚印。</div>
+          <div class="wcard-foot">
+            <span class="badge b-music">音乐</span>
+            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
+          </div>
+        </div>
+      </div>
+      <div class="wcard" style="cursor:default">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fef9c3,#fde68a)">🎵</div>
+        <div class="wcard-body">
+          <div class="wcard-title">翻弹 & 原创</div>
+          <div class="wcard-desc">喜欢把喜欢的歌扒下来弹，也会偶尔写几小节属于自己的旋律。</div>
+          <div class="wcard-foot">
+            <span class="badge b-music">音乐</span>
+            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
+          </div>
+        </div>
+      </div>
+      <div class="wcard" style="cursor:default">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fce7f3,#f9a8d4)">🎹</div>
+        <div class="wcard-body">
+          <div class="wcard-title">键盘 & 编曲</div>
+          <div class="wcard-desc">MIDI 键盘入门，尝试用软件编排属于自己的音乐片段。</div>
+          <div class="wcard-foot">
+            <span class="badge b-music">音乐</span>
+            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
+          </div>
+        </div>
+      </div>
+      <div class="wcard" style="cursor:default">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#e0f2fe,#7dd3fc)">🎧</div>
+        <div class="wcard-body">
+          <div class="wcard-title">音乐收藏</div>
+          <div class="wcard-desc">整理喜欢的专辑、歌单和现场演出，记录音乐品味的变化轨迹。</div>
+          <div class="wcard-foot">
+            <span class="badge b-music">音乐</span>
+            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -505,6 +702,27 @@
     localStorage.setItem('theme', dark ? 'dark' : 'light');
   }
   if (localStorage.getItem('theme') === 'dark') toggleTheme();
+
+  // 移动端菜单
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('mobileOverlay');
+    const isOpen = menu.classList.contains('open');
+    if (isOpen) {
+      menu.classList.remove('open');
+      overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    } else {
+      menu.classList.add('open');
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('mobileOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
 
   // ===== Tab 切换 =====
   function switchTab(cat, btn) {
@@ -563,6 +781,12 @@
         { src: 'photos/landscape/DSCF7196.JPG', caption: '风光 04' },
         { src: 'photos/landscape/DSCF7271.JPG', caption: '风光 05' },
       ]
+    },
+    portrait: {
+      emoji: '🧍', title: '人像摄影',
+      desc: '记录人与光影的邂逅，捕捉真实情绪流动的瞬间。',
+      private: false,
+      photos: []
     }
   };
 

@@ -21,10 +21,24 @@
     <a href="#journey">大事记</a>
   </div>
   <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="切换明暗模式">🌙</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="菜单">
+    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
 </nav>
+
+<!-- 移动端菜单 -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobileMenu()">关于</a>
+  <a href="#life-track" onclick="closeMobileMenu()">人生轨迹</a>
+  <a href="#works" onclick="closeMobileMenu()">创作与收藏</a>
+  <a href="knowledge.html">知识库</a>
+  <a href="#journey" onclick="closeMobileMenu()">大事记</a>
+</div>
+<div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
 
 <!-- ========== HERO ========== -->
 <section class="hero" id="home">
+  <div class="hero-bg" id="heroBg"></div>
   <div class="hero-content">
     <span class="hero-eyebrow">Personal Homepage</span>
     <h1>星空山野</h1>
@@ -41,8 +55,11 @@
   </div>
 </section>
 
+<!-- 页面过渡遮罩 -->
+<div class="page-transition" id="pageTransition"></div>
+
 <!-- ========== ABOUT ========== -->
-<section id="about">
+<section id="about" class="reveal">
   <div class="container">
     <div class="about-inner">
       <p class="sec-eyebrow">About Me</p>
@@ -74,7 +91,7 @@
 </section>
 
 <!-- ========== LIFE TRACK ========== -->
-<section id="life-track">
+<section id="life-track" class="reveal">
   <div class="life-header">
     <p class="sec-eyebrow">My Journey</p>
     <h2 class="sec-title">人生轨迹</h2>
@@ -194,15 +211,15 @@
 </section>
 
 <!-- ========== WORKS ========== -->
-<section id="works">
-  <div class="container">
-    <div class="works-header">
-      <p class="sec-eyebrow">Works & Collections</p>
-      <h2 class="sec-title">创作与收藏</h2>
-      <div class="sec-bar"></div>
-      <p class="sec-desc">两个维度：亲手做的内容创作，以及精心筛选的好站工具收藏。</p>
-    </div>
+<section id="works" class="reveal">
+  <div class="works-header">
+    <p class="sec-eyebrow">Works & Collections</p>
+    <h2 class="sec-title">创作与收藏</h2>
+    <div class="sec-bar"></div>
+    <p class="sec-desc">两个维度：亲手做的内容创作，以及精心筛选的好站工具收藏。</p>
+  </div>
 
+  <div class="works-body">
     <div class="works-divider">我的作品</div>
     <div class="my-works-grid">
       <a href="works.html#web" class="wcard">
@@ -291,14 +308,14 @@
 </section>
 
 <!-- ========== JOURNEY ========== -->
-<section id="journey">
-  <div class="container">
-    <div class="journey-header">
-      <p class="sec-eyebrow">Milestone</p>
-      <h2 class="sec-title">小站大事记</h2>
-      <div class="sec-bar"></div>
-    </div>
-    <p class="journey-hint">← 左右滑动查看更多 →</p>
+<section id="journey" class="reveal">
+  <div class="journey-header">
+    <p class="sec-eyebrow">Milestone</p>
+    <h2 class="sec-title">小站大事记</h2>
+    <div class="sec-bar"></div>
+  </div>
+  <p class="journey-hint">← 左右滑动查看更多 →</p>
+  <div class="journey-body">
     <div class="journey-track">
       <div class="jcard">
         <div class="jcard-date">2025</div>
@@ -307,6 +324,14 @@
       <div class="jcard">
         <div class="jcard-date">2026.3</div>
         <div class="jcard-event">网页设计编码，个人主页正式上线</div>
+      </div>
+      <div class="jcard">
+        <div class="jcard-date">2026.4</div>
+        <div class="jcard-event">新增知识库模块，沉淀学习内容</div>
+      </div>
+      <div class="jcard">
+        <div class="jcard-date">2026.5</div>
+        <div class="jcard-event">工具库重构，分类更清晰</div>
       </div>
       <div class="jcard">
         <div class="jcard-date">2026</div>
@@ -325,7 +350,7 @@
 </section>
 
 <!-- ========== FOOTER ========== -->
-<footer>
+<footer class="reveal">
   <div class="footer-top">
     <div>
       <div class="footer-brand">周云飞 · 星空山野</div>
@@ -484,6 +509,71 @@
     if (e.key === 'ArrowLeft') lifeLbNav(-1);
     if (e.key === 'ArrowRight') lifeLbNav(1);
   });
+
+  // ===== 移动端菜单 =====
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('mobileMenuOverlay');
+    menu.classList.toggle('open');
+    overlay.classList.toggle('show');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('mobileMenuOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  // ===== Hero 背景图懒加载 =====
+  (function() {
+    const bg = document.getElementById('heroBg');
+    if (!bg) return;
+    const img = new Image();
+    img.src = 'image/pic.jpg';
+    img.onload = () => {
+      bg.classList.add('loaded');
+      requestAnimationFrame(() => bg.classList.add('fade-in'));
+    };
+    // 3秒兜底
+    setTimeout(() => { if (!bg.classList.contains('loaded')) bg.classList.add('loaded', 'fade-in'); }, 3000);
+  })();
+
+  // 小站大事记拖拽滚动
+  const journeyTrack = document.querySelector('.journey-track');
+  if (journeyTrack) {
+    let jtDown = false, jtStartX = 0, jtScrollLeft = 0;
+    journeyTrack.addEventListener('mousedown', e => {
+      jtDown = true;
+      journeyTrack.classList.add('grabbing');
+      jtStartX = e.pageX - journeyTrack.offsetLeft;
+      jtScrollLeft = journeyTrack.scrollLeft;
+    });
+    document.addEventListener('mouseup', () => {
+      jtDown = false;
+      journeyTrack.classList.remove('grabbing');
+    });
+    journeyTrack.addEventListener('mousemove', e => {
+      if (!jtDown) return;
+      e.preventDefault();
+      const x = e.pageX - journeyTrack.offsetLeft;
+      journeyTrack.scrollLeft = jtScrollLeft - (x - jtStartX) * 1.1;
+    });
+  }
+
+  // ===== 滚动动画 reveal =====
+  (function() {
+    const reveals = document.querySelectorAll('.reveal');
+    if (!reveals.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => io.observe(el));
+  })();
 </script>
 
 <!-- 人生轨迹弹窗 -->

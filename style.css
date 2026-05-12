@@ -338,7 +338,7 @@ nav.scrolled .theme-toggle {
 section { padding:100px 8%; }
 
 .container {
-  max-width:900px;
+  max-width:1100px;
   margin:0 auto;
 }
 
@@ -455,6 +455,11 @@ section { padding:100px 8%; }
   font-weight:600;
 }
 
+.works-body {
+  max-width:1100px;
+  margin:0 auto;
+}
+
 .works-divider::after {
   content:'';
   flex:1;
@@ -467,8 +472,6 @@ section { padding:100px 8%; }
   display:grid;
   grid-template-columns:repeat(4, 1fr);
   gap:1rem;
-  max-width:900px;
-  margin:0 auto;
 }
 
 .wcard {
@@ -556,8 +559,6 @@ section { padding:100px 8%; }
   display:grid;
   grid-template-columns:repeat(4, 1fr);
   gap:1rem;
-  max-width:900px;
-  margin:0 auto;
 }
 
 .tcard {
@@ -640,27 +641,44 @@ section { padding:100px 8%; }
   text-align:center;
 }
 
+.journey-body {
+  position:relative;
+  overflow:hidden;
+  max-width:1100px;
+  margin:0 auto;
+}
+
 .journey-track {
   display:flex;
   gap:1rem;
   overflow-x:auto;
-  padding-bottom:1rem;
+  padding:40px 0 8px;
   scrollbar-width:thin;
-  scrollbar-color:var(--border) transparent;
-  justify-content:center;
+  scrollbar-color:var(--text3) transparent;
+  justify-content:flex-start;
   flex-wrap:nowrap;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  cursor:grab;
+  user-select:none;
 }
 
-.journey-track::-webkit-scrollbar { height:4px; }
+.journey-track::-webkit-scrollbar { height:3px; }
+
+.journey-track::-webkit-scrollbar-track { background:transparent; }
 
 .journey-track::-webkit-scrollbar-thumb {
-  background:var(--border);
+  background:var(--text3);
   border-radius:2px;
 }
 
+.journey-track::-webkit-scrollbar-thumb:hover { background:var(--text); }
+.journey-track.grabbing { cursor:grabbing; }
+
 .jcard {
-  flex-shrink:0;
-  width:170px;
+  flex:0 0 auto;
+  width:260px;
+  scroll-snap-align:center;
   background:rgba(255,255,255,.8);
   border-radius:10px;
   padding:1.1rem 1.2rem;
