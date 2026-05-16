@@ -346,6 +346,7 @@
     <a href="index.html#journey">大事记</a>
     <a href="tools.html" style="color:var(--text);font-weight:600">工具库</a>
     <a href="knowledge.html">知识库</a>
+    <a href="resume.html">简历</a>
   </div>
   <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="菜单">
     <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
@@ -361,9 +362,8 @@
   <a href="index.html#journey">大事记</a>
   <a href="tools.html" style="color:var(--text);font-weight:600">工具库</a>
   <a href="knowledge.html">知识库</a>
+  <a href="resume.html">简历</a>
 </div>
-
-<!-- HERO -->
 <div class="hero">
   <span class="hero-eyebrow">Tool Collections</span>
   <h1>工具收藏库</h1>
@@ -1228,12 +1228,25 @@ function closeMobileMenu() {
 // 搜索功能
 function filterCards(query) {
   const cards = document.querySelectorAll('.tcard');
-  const lowerQuery = query.toLowerCase();
+  const lowerQuery = query.toLowerCase().trim();
   cards.forEach(card => {
     const name = card.querySelector('.tcard-name').textContent.toLowerCase();
     const desc = card.querySelector('.tcard-desc').textContent.toLowerCase();
-    const shouldShow = name.includes(lowerQuery) || desc.includes(lowerQuery);
+    const shouldShow = !lowerQuery || name.includes(lowerQuery) || desc.includes(lowerQuery);
     card.style.display = shouldShow ? 'flex' : 'none';
+  });
+  // 搜索时同步隐藏/显示空分类
+  document.querySelectorAll('.tool-grid').forEach(grid => {
+    const visibleCards = grid.querySelectorAll('.tcard[style*="flex"], .tcard:not([style*="none"])');
+    const cat = grid.dataset.category;
+    const title = document.getElementById('section-' + cat);
+    const desc = title?.nextElementSibling;
+    if (lowerQuery) {
+      const hasMatch = visibleCards.length > 0;
+      if (title) title.style.display = hasMatch ? 'flex' : 'none';
+      if (desc && desc.classList.contains('cat-desc')) desc.style.display = hasMatch ? 'block' : 'none';
+      grid.style.display = hasMatch ? 'grid' : 'none';
+    }
   });
 }
 
@@ -1245,6 +1258,7 @@ document.addEventListener('DOMContentLoaded', function() {
       tabButtons.forEach(b => b.classList.remove('active'));
       this.classList.add('active');
       const category = this.dataset.cat;
+
       // 显示/隐藏分类标题
       document.querySelectorAll('.section-title').forEach(title => {
         if (category === 'all') {
@@ -1266,7 +1280,7 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         }
       });
-      // 显示/隐藏工具网格
+      // 显示/隐藏工具网格 + 恢复卡片显示
       document.querySelectorAll('.tool-grid').forEach(grid => {
         if (category === 'all') {
           grid.style.display = 'grid';
@@ -1274,11 +1288,13 @@ document.addEventListener('DOMContentLoaded', function() {
           grid.style.display = grid.dataset.category === category ? 'grid' : 'none';
         }
       });
-      // 搜索框同步过滤
+      // 重置所有卡片显示状态（避免之前搜索的隐藏残留）
+      document.querySelectorAll('.tcard').forEach(card => {
+        card.style.display = 'flex';
+      });
+      // 清空搜索框
       const searchInput = document.getElementById('inlineSearch');
-      if (searchInput && searchInput.value) {
-        filterCards(searchInput.value);
-      }
+      if (searchInput) searchInput.value = '';
     });
   });
 });

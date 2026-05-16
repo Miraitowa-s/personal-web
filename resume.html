@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>个人简历 · 周云飞</title>
+  <link rel="icon" type="image/svg+xml" href="image/favicon.svg" media="(prefers-color-scheme: light)"/>
+  <link rel="icon" type="image/svg+xml" href="image/favicon-dark.svg" media="(prefers-color-scheme: dark)"/>
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --bg:#f5f5f3; --surface:#fff; --border:#e6e6e2;
+      --text:#1a1a1a; --text2:#666; --text3:#aaa;
+      --accent:#4f6ef7; --r:14px;
+      --sh:0 6px 28px rgba(0,0,0,0.09);
+      --sh-sm:0 2px 12px rgba(0,0,0,0.07);
+      --t:0.22s ease;
+    }
+    html { scroll-behavior:smooth; }
+    body {
+      background:var(--bg); color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB",sans-serif;
+      line-height:1.7; overflow-x:hidden;
+    }
+    a { text-decoration:none; color:inherit; }
+
+    /* ===== NAV ===== */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:300;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 5%; height:60px;
+      background:rgba(245,245,243,.88);
+      border-bottom:1px solid var(--border);
+      backdrop-filter:blur(12px);
+    }
+    .nav-logo { display:flex; align-items:center; gap:.8rem; text-decoration:none; }
+    .nav-logo img { width:140px; height:auto; object-fit:contain; display:block; }
+    .nav-links { display:flex; gap:2rem; }
+    .nav-links a { font-size:0.95rem; color:var(--text2); transition:color var(--t); }
+    .nav-links a:hover { color:var(--text); }
+    .nav-links a.active { color:var(--text); font-weight:600; }
+    .theme-toggle {
+      background:none; border:1px solid var(--border); border-radius:8px;
+      padding:4px 10px; cursor:pointer; font-size:1rem; color:var(--text2);
+      transition:all var(--t); margin-left:1rem;
+    }
+    .theme-toggle:hover { background:var(--surface); }
+    .hamburger {
+      display:none; flex-direction:column; justify-content:center; gap:5px;
+      background:none; border:none; cursor:pointer; padding:6px;
+    }
+    .hamburger svg { width:22px; height:22px; stroke:var(--text); stroke-width:2; fill:none; stroke-linecap:round; }
+
+    /* Mobile menu */
+    .mobile-menu-overlay {
+      display:none; position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:280;
+    }
+    .mobile-menu {
+      display:none; position:fixed; top:60px; right:0; z-index:290;
+      background:var(--surface); border-left:1px solid var(--border); border-bottom:1px solid var(--border);
+      width:200px; padding:1rem 0; border-radius:0 0 0 12px;
+    }
+    .mobile-menu a {
+      display:block; padding:.65rem 1.4rem; font-size:.95rem;
+      color:var(--text2); transition:color var(--t), background var(--t);
+    }
+    .mobile-menu a:hover { color:var(--text); background:var(--bg); }
+    .mobile-menu.open, .mobile-menu-overlay.open { display:block; }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      padding: 110px 5% 50px;
+      max-width:1100px; margin:0 auto;
+    }
+    .eyebrow {
+      font-size:.78rem; font-weight:700; letter-spacing:.12em;
+      color:var(--accent); text-transform:uppercase; margin-bottom:.6rem;
+    }
+    .page-hero h1 {
+      font-size:clamp(2rem,5vw,3rem); font-weight:800; line-height:1.15;
+      letter-spacing:-.02em; margin-bottom:1rem;
+    }
+    .page-hero-line {
+      width:48px; height:4px; background:var(--accent); border-radius:2px; margin-bottom:1rem;
+    }
+    .page-hero p { font-size:1.05rem; color:var(--text2); max-width:520px; }
+
+    /* ===== RESUME LAYOUT ===== */
+    .resume-wrap {
+      max-width:1100px; margin:0 auto; padding:0 5% 80px;
+      display:grid; grid-template-columns:1fr 300px; gap:3rem; align-items:start;
+    }
+
+    /* ===== SECTIONS ===== */
+    .rs {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--r); padding:1.6rem 1.8rem; margin-bottom:1.6rem;
+    }
+    .rs-title {
+      font-size:.72rem; font-weight:700; letter-spacing:.1em;
+      text-transform:uppercase; color:var(--accent); margin-bottom:1.2rem;
+    }
+
+    /* Timeline item */
+    .tl-item { display:flex; gap:1rem; margin-bottom:1.4rem; }
+    .tl-item:last-child { margin-bottom:0; }
+    .tl-dot {
+      width:10px; height:10px; border-radius:50%; background:var(--accent);
+      margin-top:6px; flex-shrink:0;
+    }
+    .tl-right { flex:1; }
+    .tl-title { font-weight:700; font-size:.95rem; }
+    .tl-meta { font-size:.8rem; color:var(--text3); margin:.2rem 0 .5rem; }
+    .tl-desc { font-size:.88rem; color:var(--text2); line-height:1.65; }
+
+    /* Skill bar */
+    .skill-row { margin-bottom:1rem; }
+    .skill-row:last-child { margin-bottom:0; }
+    .skill-label { display:flex; justify-content:space-between; font-size:.85rem; margin-bottom:.4rem; }
+    .skill-label span:last-child { color:var(--text3); font-size:.78rem; }
+    .skill-bar { height:6px; background:var(--border); border-radius:3px; overflow:hidden; }
+    .skill-fill { height:100%; background:var(--accent); border-radius:3px; transition:width 1s ease; }
+
+    /* Tag chips */
+    .tag-cloud { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .chip {
+      font-size:.78rem; padding:.28rem .75rem;
+      background:var(--bg); border:1px solid var(--border);
+      border-radius:20px; color:var(--text2);
+      transition:background var(--t), border-color var(--t), color var(--t);
+    }
+    .chip:hover { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+    /* Profile card */
+    .profile-card {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--r); padding:1.8rem; text-align:center; margin-bottom:1.6rem;
+    }
+    .profile-avatar {
+      width:80px; height:80px; border-radius:50%;
+      background:linear-gradient(135deg,#6ee7b7,#4f6ef7);
+      margin:0 auto 1rem;
+      display:flex; align-items:center; justify-content:center;
+      font-size:2rem;
+    }
+    .profile-name { font-size:1.2rem; font-weight:800; margin-bottom:.25rem; }
+    .profile-title { font-size:.85rem; color:var(--text2); margin-bottom:1rem; }
+    .profile-divider { height:1px; background:var(--border); margin:1rem 0; }
+    .profile-info { font-size:.83rem; color:var(--text2); display:flex; flex-direction:column; gap:.5rem; text-align:left; }
+    .profile-info span { display:flex; align-items:center; gap:.5rem; }
+
+    /* Contact links */
+    .contact-links { display:flex; flex-direction:column; gap:.6rem; margin-top:.8rem; }
+    .contact-link {
+      display:flex; align-items:center; gap:.6rem;
+      font-size:.85rem; color:var(--text2);
+      padding:.5rem .8rem; border-radius:8px;
+      border:1px solid var(--border); background:var(--bg);
+      transition:all var(--t);
+    }
+    .contact-link:hover { color:var(--accent); border-color:var(--accent); background:var(--surface); }
+    .contact-link .icon { font-size:1rem; }
+
+    /* Download btn */
+    .dl-btn {
+      display:flex; align-items:center; justify-content:center; gap:.5rem;
+      width:100%; padding:.7rem 1rem; border-radius:10px; margin-top:.8rem;
+      background:var(--accent); color:#fff; font-size:.88rem; font-weight:600;
+      border:none; cursor:pointer; transition:opacity var(--t);
+    }
+    .dl-btn:hover { opacity:.85; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align:center; padding:2rem 5%;
+      font-size:.82rem; color:var(--text3);
+      border-top:1px solid var(--border);
+    }
+    footer a { color:var(--text2); }
+    footer a:hover { color:var(--text); }
+
+    /* ===== DARK MODE ===== */
+    body.dark {
+      --bg:#111113; --surface:#1c1c1f; --border:rgba(255,255,255,.09);
+      --text:#f0f0ef; --text2:#999; --text3:#555;
+    }
+    body.dark nav { background:rgba(17,17,19,.92); }
+    body.dark .mobile-menu { background:var(--surface); }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:700px) {
+      .nav-links { display:none; }
+      .hamburger { display:flex; }
+      .resume-wrap { grid-template-columns:1fr; }
+      .resume-sidebar { order:-1; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="image/logo.png" alt="Logo"/>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#about">关于</a>
+    <a href="works.html">作品</a>
+    <a href="tools.html">工具库</a>
+    <a href="knowledge.html">知识库</a>
+    <a href="resume.html" class="active">简历</a>
+  </div>
+  <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="菜单">
+    <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+  </button>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="切换明暗模式">🌙</button>
+</nav>
+
+<div class="mobile-menu-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#about" onclick="closeMobileMenu()">关于</a>
+  <a href="works.html" onclick="closeMobileMenu()">作品</a>
+  <a href="tools.html" onclick="closeMobileMenu()">工具库</a>
+  <a href="knowledge.html" onclick="closeMobileMenu()">知识库</a>
+  <a href="resume.html" onclick="closeMobileMenu()">简历</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <p class="eyebrow">Resume</p>
+  <h1>个人简历</h1>
+  <div class="page-hero-line"></div>
+  <p>热爱技术与创作，关注 AI、前端与摄影，持续学习，持续折腾。</p>
+</div>
+
+<!-- RESUME -->
+<div class="resume-wrap">
+
+  <!-- 左侧主列 -->
+  <div class="resume-main">
+
+    <!-- 教育经历 -->
+    <div class="rs">
+      <div class="rs-title">🎓 教育经历</div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-right">
+          <div class="tl-title">请填写你的学校</div>
+          <div class="tl-meta">专业名称 · 2020 — 2024</div>
+          <div class="tl-desc">在校期间主修方向，参与的项目或比赛简要描述。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 项目经历 -->
+    <div class="rs">
+      <div class="rs-title">🚀 项目经历</div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-right">
+          <div class="tl-title">星空山野 · 个人网站</div>
+          <div class="tl-meta">个人项目 · 2025 — 至今</div>
+          <div class="tl-desc">纯手写 HTML/CSS/JS 个人站点，涵盖知识库（55+篇技术文章）、影视评论系统、摄影相册、工具导航库、个人时间线、弹幕墙等模块。纯前端架构，零框架依赖，支持暗色模式与移动端适配，部署于 Cloudflare Pages。</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-right">
+          <div class="tl-title">项目二（请填写）</div>
+          <div class="tl-meta">角色 · 年份</div>
+          <div class="tl-desc">项目简介，使用的技术栈，达成的成果。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 技能熟练度 -->
+    <div class="rs">
+      <div class="rs-title">⚡ 技能熟练度</div>
+      <div class="skill-row">
+        <div class="skill-label"><span>HTML / CSS</span><span>熟练</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label"><span>JavaScript</span><span>熟练</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label"><span>Python</span><span>掌握</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label"><span>AI / LLM 应用</span><span>掌握</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label"><span>摄影后期</span><span>掌握</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+      </div>
+    </div>
+
+    <!-- 技术栈标签 -->
+    <div class="rs">
+      <div class="rs-title">🧰 技术标签</div>
+      <div class="tag-cloud">
+        <span class="chip">HTML5</span>
+        <span class="chip">CSS3</span>
+        <span class="chip">JavaScript</span>
+        <span class="chip">Python</span>
+        <span class="chip">Node.js</span>
+        <span class="chip">Git</span>
+        <span class="chip">GitHub Pages</span>
+        <span class="chip">Cloudflare</span>
+        <span class="chip">Prompt Engineering</span>
+        <span class="chip">RAG</span>
+        <span class="chip">Ollama</span>
+        <span class="chip">Markdown</span>
+        <span class="chip">Lightroom</span>
+        <span class="chip">吉他</span>
+      </div>
+    </div>
+
+    <!-- 工作经历 -->
+    <div class="rs">
+      <div class="rs-title">💼 工作经历</div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-right">
+          <div class="tl-title">请填写公司 / 组织名称</div>
+          <div class="tl-meta">岗位名称 · 2024 — 至今</div>
+          <div class="tl-desc">负责的工作内容、参与的项目、使用的技术栈、取得的成果。</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-right">
+          <div class="tl-title">实习 / 兼职经历（如适用）</div>
+          <div class="tl-meta">岗位 · 年份</div>
+          <div class="tl-desc">简要描述工作内容和收获。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 证书与荣誉 -->
+    <div class="rs">
+      <div class="rs-title">📜 证书与荣誉</div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-right">
+          <div class="tl-title">证书 / 竞赛名称</div>
+          <div class="tl-meta">颁发机构 · 2024</div>
+          <div class="tl-desc">简要说明或成绩。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 自我评价 -->
+    <div class="rs">
+      <div class="rs-title">📝 自我评价</div>
+      <div class="tl-desc" style="line-height:1.8">
+        热爱技术与创作，擅长从前端到后端的独立开发。对 AI 技术有深入实践，熟悉大模型应用开发（Prompt Engineering、RAG、本地部署）。业余时间活跃于摄影和音乐领域，注重审美与细节。相信「持续折腾」是最好的学习方式，享受从零到一构建产品的过程。
+      </div>
+    </div>
+
+  </div><!-- /resume-main -->
+
+  <!-- 右侧侧边栏 -->
+  <div class="resume-sidebar">
+
+    <!-- 个人信息卡 -->
+    <div class="profile-card">
+      <div class="profile-avatar">🧑</div>
+      <div class="profile-name">周云飞</div>
+      <div class="profile-title">开发者 · 摄影爱好者 · 吉他手</div>
+      <div class="profile-divider"></div>
+      <div class="profile-info">
+        <span>📍 <span>（填写城市）</span></span>
+        <span>🎓 <span>（填写学历）</span></span>
+        <span>💼 <span>（填写状态，如求职中）</span></span>
+      </div>
+    </div>
+
+    <!-- 联系方式 -->
+    <div class="rs">
+      <div class="rs-title">📬 联系方式</div>
+      <div class="contact-links">
+        <a href="https://github.com/Miraitowa-s" target="_blank" rel="noopener" class="contact-link">
+          <span class="icon">🐙</span>GitHub
+        </a>
+        <a href="https://space.bilibili.com/" target="_blank" rel="noopener" class="contact-link">
+          <span class="icon">📺</span>哔哩哔哩
+        </a>
+        <a href="mailto:your@email.com" class="contact-link">
+          <span class="icon">✉️</span>发邮件
+        </a>
+      </div>
+      <button class="dl-btn" onclick="window.print()">
+        📄 打印 / 导出 PDF
+      </button>
+    </div>
+
+    <!-- 兴趣爱好 -->
+    <div class="rs">
+      <div class="rs-title">🎯 兴趣爱好</div>
+      <div class="tag-cloud">
+        <span class="chip">摄影</span>
+        <span class="chip">吉他</span>
+        <span class="chip">阅读</span>
+        <span class="chip">看电影</span>
+        <span class="chip">DIY</span>
+        <span class="chip">AI 折腾</span>
+        <span class="chip">骑行</span>
+      </div>
+    </div>
+
+    <!-- 在线作品 -->
+    <div class="rs">
+      <div class="rs-title">🌐 在线作品</div>
+      <div class="contact-links">
+        <a href="index.html" class="contact-link">
+          <span class="icon">🏠</span>星空山野 · 个人网站
+        </a>
+        <a href="https://github.com/Miraitowa-s" target="_blank" rel="noopener" class="contact-link">
+          <span class="icon">🐙</span>GitHub
+        </a>
+        <a href="works.html" class="contact-link">
+          <span class="icon">📷</span>摄影作品集
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /resume-sidebar -->
+
+</div><!-- /resume-wrap -->
+
+<footer>
+  <span>© 2026 周云飞 · 星空山野 &nbsp;|&nbsp;
+  <a href="index.html">← 返回主页</a></span>
+</footer>
+
+<script>
+  // Theme
+  (function(){
+    const saved = localStorage.getItem('theme') || 'light';
+    if(saved === 'dark') document.body.classList.add('dark');
+    const btn = document.getElementById('themeBtn');
+    if(btn) btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+  })();
+  function toggleTheme(){
+    const isDark = document.body.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';
+  }
+
+  // Mobile menu
+  function toggleMobileMenu(){
+    document.getElementById('mobileMenu').classList.toggle('open');
+    document.getElementById('mobileOverlay').classList.toggle('open');
+  }
+  function closeMobileMenu(){
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('mobileOverlay').classList.remove('open');
+  }
+
+  // Skill bar animation on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.skill-fill').forEach(el => {
+          el.style.width = el.style.width; // trigger reflow
+        });
+      }
+    });
+  });
+  document.querySelectorAll('.rs').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

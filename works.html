@@ -137,6 +137,7 @@
     .b-photo { background:#fff8e1; color:#d97706; }
     .b-write { background:#f4e8ff; color:#8a35d6; }
     .b-music { background:#e0f2fe; color:#0284c7; }
+    .b-film  { background:#f1f0ff; color:#6d28d9; }
     .b-private { background:#fce7f3; color:#db2777; }
     .wcard-arrow { font-size:.75rem; color:var(--text3); transition:color var(--t), transform var(--t); display:inline-block; }
     .wcard:hover .wcard-arrow { color:var(--accent); transform:translateX(3px); }
@@ -153,7 +154,7 @@
     .gallery-overlay.open { opacity:1; pointer-events:all; }
     .gallery-box {
       background:var(--surface); border-radius:20px;
-      width:100%; max-width:900px;
+      width:100%; max-width:880px;
       max-height:min(90vh, 800px);
       display:flex; flex-direction:column;
       overflow:hidden;
@@ -283,6 +284,84 @@
       color:rgba(255,255,255,.6); font-size:.8rem; white-space:nowrap;
     }
 
+    /* ===== 响应式 media 补充 ===== */
+  @media(max-width:680px){
+    .film-list { grid-template-columns:1fr; }
+  }
+
+  /* ===== 影评弹窗内容 ===== */
+    .film-list {
+      display:grid; grid-template-columns:repeat(2,1fr); gap:.7rem;
+    }
+    .film-item {
+      background:var(--bg); border-radius:12px; padding:1rem;
+      border:1px solid var(--border); cursor:pointer;
+      transition:box-shadow var(--t), border-color var(--t);
+      display:flex; flex-direction:column;
+    }
+    .film-item:hover { box-shadow:0 4px 20px rgba(0,0,0,.08); border-color:var(--accent); }
+    .film-item-head { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:.4rem; gap:.4rem; }
+    .film-item-title { font-size:.92rem; font-weight:700; line-height:1.3; }
+    .film-item-meta { display:flex; gap:.5rem; font-size:.68rem; color:var(--text3); align-items:center; flex-wrap:wrap; }
+    .film-item-meta .dot { width:3px; height:3px; border-radius:50%; background:var(--text3); }
+    .film-rating { display:flex; gap:1px; font-size:.72rem; flex-shrink:0; }
+    .film-rating .star { color:#fbbf24; }
+    .film-rating .star.empty { color:#d4d4d0; }
+    .film-item-brief { font-size:.76rem; color:var(--text2); line-height:1.55; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; flex:1; }
+    .film-tags { display:flex; gap:.3rem; margin-top:.45rem; flex-wrap:wrap; }
+    .film-tag { font-size:.6rem; padding:.1rem .4rem; border-radius:4px; background:var(--surface); color:var(--text3); border:1px solid var(--border); cursor:default; }
+
+    /* Tag 过滤条 */
+    .film-filter { display:flex; gap:.35rem; flex-wrap:wrap; margin-bottom:.8rem; padding-bottom:.6rem; border-bottom:1px solid var(--border); }
+    .film-filter-tag {
+      font-size:.65rem; padding:.2rem .55rem; border-radius:99px;
+      background:var(--surface); color:var(--text3); border:1px solid var(--border);
+      cursor:pointer; transition:all var(--t); user-select:none;
+    }
+    .film-filter-tag:hover { border-color:var(--accent); color:var(--accent); }
+    .film-filter-tag.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .film-filter-count { font-size:.65rem; color:var(--text3); margin-left:auto; align-self:center; white-space:nowrap; }
+    .film-tag-hl { background:var(--accent) !important; color:#fff !important; border-color:var(--accent) !important; }
+
+    /* 影评详情 */
+    .film-detail { padding:0; }
+    .film-detail-back {
+      display:inline-flex; align-items:center; gap:.3rem;
+      font-size:.78rem; color:var(--accent); cursor:pointer;
+      margin-bottom:.8rem; background:none; border:none; font-family:inherit;
+    }
+    .film-detail-back:hover { text-decoration:underline; }
+    .film-detail-header { display:flex; gap:1rem; margin-bottom:1rem; align-items:flex-start; }
+    .film-poster {
+      width:90px; height:128px; border-radius:8px; flex-shrink:0;
+      background:linear-gradient(135deg,#1a1a2e,#16213e);
+      display:flex; align-items:center; justify-content:center; font-size:2.4rem;
+      overflow:hidden;
+    }
+    .film-poster img { width:100%; height:100%; object-fit:cover; }
+    .film-info { flex:1; }
+    .film-info h2 { font-size:1.15rem; font-weight:800; margin-bottom:.25rem; }
+    .film-info .film-sub { font-size:.78rem; color:var(--text2); margin-bottom:.4rem; }
+    .film-info .film-meta-row { font-size:.74rem; color:var(--text3); margin-bottom:.2rem; }
+    .film-rating-lg { font-size:1rem; margin-top:.4rem; flex-shrink:0; text-align:center; padding:0 0.5rem; }
+    .film-rating-lg .star { color:#fbbf24; }
+    .film-rating-lg .star.empty { color:#d4d4d0; }
+    .film-rating-lg .score { font-weight:800; color:#f59e0b; margin-left:.35rem; }
+    .film-body { font-size:.85rem; color:var(--text2); line-height:1.75; }
+    .film-body p { margin-bottom:.7rem; }
+    .film-body .film-spoiler {
+      background:var(--bg); border-radius:8px; padding:.85rem 1rem;
+      border:1px dashed var(--border); font-style:italic; font-size:.82rem;
+    }
+
+    @media(max-width:680px){
+      .gallery-box { max-width:calc(100vw - 32px); }
+      .film-list { grid-template-columns:1fr; }
+      .film-detail-header { flex-direction:column; align-items:center; text-align:center; }
+      .film-poster { width:80px; height:114px; }
+      .film-rating-lg { text-align:left; padding:0; }
+    }
+
     /* ===== FOOTER ===== */
     footer {
       background:var(--text); color:rgba(255,255,255,.55);
@@ -375,6 +454,7 @@
     body.dark .badge.b-photo { background:rgba(217,119,6,.15); color:#fbbf24; }
     body.dark .badge.b-write { background:rgba(138,53,214,.15); color:#c084fc; }
     body.dark .badge.b-music { background:rgba(2,132,199,.15); color:#38bdf8; }
+    body.dark .badge.b-film  { background:rgba(109,40,217,.15); color:#a78bfa; }
     body.dark .badge.b-private { background:rgba(219,39,119,.15); color:#f472b6; }
     body.dark .nav-links a { color:var(--text2); }
     body.dark .nav-links a:hover { color:var(--text); }
@@ -391,6 +471,10 @@
     body.dark .hamburger:hover { background:rgba(255,255,255,.9); color:#111; }
     body.dark .mobile-menu { background:var(--surface); border-color:var(--border); }
     body.dark .mobile-menu a:hover { background:rgba(255,255,255,.06); }
+    body.dark .film-item { background:rgba(28,28,31,.6); border-color:var(--border); }
+    body.dark .film-item:hover { border-color:var(--accent); }
+    body.dark .film-tag { background:rgba(28,28,31,.8); border-color:var(--border); }
+    body.dark .film-spoiler { background:rgba(28,28,31,.5); }
   </style>
 </head>
 <body>
@@ -406,6 +490,7 @@
     <a href="index.html#journey">大事记</a>
     <a href="tools.html">工具库</a>
     <a href="knowledge.html">知识库</a>
+    <a href="resume.html">简历</a>
   </div>
   <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="菜单">
     <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
@@ -421,6 +506,7 @@
   <a href="index.html#journey">大事记</a>
   <a href="tools.html">工具库</a>
   <a href="knowledge.html">知识库</a>
+  <a href="resume.html">简历</a>
 </div>
 
 <!-- PAGE HERO -->
@@ -436,7 +522,7 @@
   <button class="tab-btn active" onclick="switchTab('all',this)">全部</button>
   <button class="tab-btn" onclick="switchTab('web',this)">🌐 软件</button>
   <button class="tab-btn" onclick="switchTab('photo',this)">📷 摄影</button>
-  <button class="tab-btn" onclick="switchTab('diy',this)">🛠️ DIY</button>
+  <button class="tab-btn" onclick="switchTab('film',this)">🎬 影评</button>
   <button class="tab-btn" onclick="switchTab('music',this)">🎸 音乐</button>
 </div>
 
@@ -532,73 +618,6 @@
           </div>
         </div>
       </div>
-      <!-- 微距 & 静物 -->
-      <div class="wcard" style="cursor:default">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fce7f3,#f9a8d4)">🌸</div>
-        <div class="wcard-body">
-          <div class="wcard-title">微距 & 静物</div>
-          <div class="wcard-desc">一花一叶、一杯一盏，发现日常中被忽略的细节之美。</div>
-          <div class="wcard-foot">
-            <span class="badge b-photo">摄影</span>
-            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DIY & 手工 -->
-  <div class="cat-block" id="diy" data-cat="diy">
-    <div class="cat-head">
-      <span class="cat-icon">🛠️</span>
-      <span class="cat-title">DIY & 手工</span>
-      <div class="cat-line"></div>
-    </div>
-    <div class="wgrid-3">
-      <div class="wcard" style="cursor:default">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#ede9fe,#c4b5fd)">🔨</div>
-        <div class="wcard-body">
-          <div class="wcard-title">木工 & 改装</div>
-          <div class="wcard-desc">从零动手，锯切、打磨、拼装，享受把想法变成实物的过程。</div>
-          <div class="wcard-foot">
-            <span class="badge b-write">手工</span>
-            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
-          </div>
-        </div>
-      </div>
-      <div class="wcard" style="cursor:default">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#e0f2fe,#7dd3fc)">🔌</div>
-        <div class="wcard-body">
-          <div class="wcard-title">电子 & Arduino</div>
-          <div class="wcard-desc">焊接电路、刷固件、接传感器，DIY 小玩意儿的快乐无可替代。</div>
-          <div class="wcard-foot">
-            <span class="badge b-write">手工</span>
-            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
-          </div>
-        </div>
-      </div>
-      <div class="wcard" style="cursor:default">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fef9c3,#fde68a)">🎨</div>
-        <div class="wcard-body">
-          <div class="wcard-title">皮具 & 手作</div>
-          <div class="wcard-desc">裁皮、缝线、封边，用双手打造独一无二的随身物件。</div>
-          <div class="wcard-foot">
-            <span class="badge b-write">手工</span>
-            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
-          </div>
-        </div>
-      </div>
-      <div class="wcard" style="cursor:default">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#d1fae5,#6ee7b7)">🪴</div>
-        <div class="wcard-body">
-          <div class="wcard-title">园艺 & 植物</div>
-          <div class="wcard-desc">播种、修剪、造景，在绿意中寻找内心的宁静与秩序。</div>
-          <div class="wcard-foot">
-            <span class="badge b-write">手工</span>
-            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -621,36 +640,47 @@
           </div>
         </div>
       </div>
-      <div class="wcard" style="cursor:default">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fef9c3,#fde68a)">🎵</div>
+    </div>
+  </div>
+
+  <!-- 影评 -->
+  <div class="cat-block" id="film" data-cat="film">
+    <div class="cat-head">
+      <span class="cat-icon">🎬</span>
+      <span class="cat-title">影评</span>
+      <div class="cat-line"></div>
+    </div>
+    <div class="wgrid-3">
+      <div class="wcard" onclick="openFilmReview('anime')">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#2d1b69,#7c3aed)">✨</div>
         <div class="wcard-body">
-          <div class="wcard-title">翻弹 & 原创</div>
-          <div class="wcard-desc">喜欢把喜欢的歌扒下来弹，也会偶尔写几小节属于自己的旋律。</div>
+          <div class="wcard-title">动漫</div>
+          <div class="wcard-desc">二次元的光影世界，那些跨越次元的感动与共鸣。</div>
           <div class="wcard-foot">
-            <span class="badge b-music">音乐</span>
-            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
+            <span class="badge b-film">0 篇</span>
+            <span class="wcard-arrow">查看 →</span>
           </div>
         </div>
       </div>
-      <div class="wcard" style="cursor:default">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fce7f3,#f9a8d4)">🎹</div>
+      <div class="wcard" onclick="openFilmReview('tv')">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#1e3a5f,#2563eb)">📺</div>
         <div class="wcard-body">
-          <div class="wcard-title">键盘 & 编曲</div>
-          <div class="wcard-desc">MIDI 键盘入门，尝试用软件编排属于自己的音乐片段。</div>
+          <div class="wcard-title">影视</div>
+          <div class="wcard-desc">剧集与纪录，那些需要时间慢慢品味的长篇叙事。</div>
           <div class="wcard-foot">
-            <span class="badge b-music">音乐</span>
-            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
+            <span class="badge b-film">0 篇</span>
+            <span class="wcard-arrow">查看 →</span>
           </div>
         </div>
       </div>
-      <div class="wcard" style="cursor:default">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#e0f2fe,#7dd3fc)">🎧</div>
+      <div class="wcard" onclick="openFilmReview('movie')">
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">🎞️</div>
         <div class="wcard-body">
-          <div class="wcard-title">音乐收藏</div>
-          <div class="wcard-desc">整理喜欢的专辑、歌单和现场演出，记录音乐品味的变化轨迹。</div>
+          <div class="wcard-title">电影</div>
+          <div class="wcard-desc">那些让人沉默很久的故事，关于人性、命运与选择的深度思考。</div>
           <div class="wcard-foot">
-            <span class="badge b-music">音乐</span>
-            <span class="wcard-arrow" style="color:var(--text3);font-size:.75rem">整理中…</span>
+            <span class="badge b-film">8 篇</span>
+            <span class="wcard-arrow">查看 →</span>
           </div>
         </div>
       </div>
@@ -984,6 +1014,217 @@
   function closeLightbox() {
     document.getElementById('lightbox').classList.remove('open');
   }
+
+  /* ===== 影评：从 MD 文件动态加载 =====
+   * reviews/movie/*.md  → 电影
+   * reviews/tv/*.md     → 影视
+   * reviews/anime/*.md  → 动漫
+   *
+   * 每个分类的文件列表通过 reviews/{cat}/index.json 获取
+   * index.json 格式：["shawshank.md","interstellar.md",...]
+   * 新增影评：写好 .md 文件后，把文件名加进对应 index.json 即可
+   */
+
+  // 分类元信息
+  const filmCats = {
+    anime: { emoji: '✨', title: '动漫', desc: '二次元的光影世界，那些跨越次元的感动与共鸣。' },
+    tv:    { emoji: '📺', title: '影视', desc: '剧集与纪录，那些需要时间慢慢品味的长篇叙事。' },
+    movie: { emoji: '🎞️', title: '电影', desc: '那些让人沉默很久的故事，关于人性、命运与选择的深度思考。' }
+  };
+
+  // 缓存已加载的影评数据
+  const filmCache = {};
+
+  // ===== 解析 Frontmatter MD =====
+  function parseMD(text) {
+    const fmMatch = text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+    if (!fmMatch) return null;
+    const fm = {};
+    fmMatch[1].split('\n').forEach(line => {
+      const m = line.match(/^(\w+):\s*(.*)$/);
+      if (!m) return;
+      let [, key, val] = m;
+      val = val.trim();
+      if (key === 'tags') {
+        fm.tags = val.replace(/[\[\]]/g, '').split(',').map(t => t.trim()).filter(Boolean);
+      } else if (key === 'rating' || key === 'year') {
+        fm[key] = parseFloat(val);
+      } else {
+        fm[key] = val;
+      }
+    });
+    let body = fmMatch[2].trim();
+    // 提取摘要（> 开头第一行）
+    const briefMatch = body.match(/^>\s*(.+)/m);
+    fm.brief = briefMatch ? briefMatch[1].trim() : '';
+    // 去掉摘要行
+    body = body.replace(/^>.*\n?/m, '').trim();
+    // 处理 :::spoiler ... ::: 块
+    body = body.replace(/:::spoiler\n([\s\S]*?):::/g, (_, inner) => {
+      return `<div class="film-spoiler">${inner.trim()}</div>`;
+    });
+    // 段落转 <p>
+    fm.content = body.split(/\n\n+/).map(p => {
+      p = p.trim();
+      if (!p) return '';
+      if (p.startsWith('<div')) return p;
+      return `<p>${p.replace(/\n/g, '<br>')}</p>`;
+    }).join('');
+    return fm;
+  }
+
+  // ===== 加载某分类的所有影评 =====
+  async function loadFilmCat(cat) {
+    if (filmCache[cat]) return filmCache[cat];
+    try {
+      const idxRes = await fetch(`reviews/${cat}/index.json`);
+      if (!idxRes.ok) { filmCache[cat] = []; return []; }
+      const files = await idxRes.json();
+      const reviews = [];
+      for (const file of files) {
+        try {
+          const res = await fetch(`reviews/${cat}/${encodeURIComponent(file)}`);
+          if (!res.ok) continue;
+          const text = await res.text();
+          const data = parseMD(text);
+          if (data) reviews.push(data);
+        } catch(e) { /* 单文件失败跳过 */ }
+      }
+      filmCache[cat] = reviews;
+      return reviews;
+    } catch(e) {
+      filmCache[cat] = [];
+      return [];
+    }
+  }
+
+  let filmCurrentView = {};
+  let filmActiveFilter = {};  // { cat: 'tag名' } 或 {} 表示不过滤
+
+  // ===== 打开影评 =====
+  async function openFilmReview(cat) {
+    const meta = filmCats[cat];
+    filmCurrentView[cat] = 'list';
+    document.getElementById('galleryEmoji').textContent = meta.emoji;
+    document.getElementById('galleryTitleText').textContent = meta.title;
+    document.getElementById('galleryContent').innerHTML = `<div class="gallery-body"><div style="text-align:center;padding:3rem;color:var(--text3)">加载中…</div></div>`;
+    document.getElementById('galleryOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    const reviews = await loadFilmCat(cat);
+    renderFilmList(cat, reviews);
+  }
+
+  function renderFilmList(cat, reviews, filterTag) {
+    filmCurrentView[cat] = 'list';
+    if (!reviews || reviews.length === 0) {
+      document.getElementById('galleryContent').innerHTML = `
+        <div class="gallery-body">
+          <div class="photo-placeholder">
+            <div class="ph-icon">${filmCats[cat].emoji}</div>
+            <div>暂无影评，敬请期待…</div>
+          </div>
+        </div>`;
+      return;
+    }
+    // 提取所有 tag 及出现次数
+    const tagCount = {};
+    reviews.forEach(r => (r.tags || []).forEach(t => { tagCount[t] = (tagCount[t] || 0) + 1; }));
+    // 按出现次数降序排列
+    const sortedTags = Object.entries(tagCount).sort((a, b) => b[1] - a[1]);
+
+    // 过滤
+    const activeTag = filterTag || filmActiveFilter[cat] || '';
+    const filtered = activeTag ? reviews.filter(r => (r.tags || []).includes(activeTag)) : reviews;
+
+    // 过滤条 HTML
+    let filterHtml = `<div class="film-filter">`;
+    filterHtml += `<span class="film-filter-tag${!activeTag ? ' active' : ''}" onclick="filmFilterBy('${cat}','')">全部</span>`;
+    sortedTags.forEach(([tag, count]) => {
+      filterHtml += `<span class="film-filter-tag${activeTag === tag ? ' active' : ''}" onclick="filmFilterBy('${cat}','${tag}')">${tag} <small>${count}</small></span>`;
+    });
+    filterHtml += `<span class="film-filter-count">${filtered.length} / ${reviews.length}</span>`;
+    filterHtml += `</div>`;
+
+    let html = `<div class="gallery-body">${filterHtml}<div class="film-list">`;
+    filtered.forEach((r, i) => {
+      // 找到在原始 reviews 中的真实 index
+      const realIndex = reviews.indexOf(r);
+      const stars = renderStars(r.rating);
+      html += `
+        <div class="film-item" onclick="showFilmDetail('${cat}',${realIndex})">
+          <div class="film-item-head">
+            <span class="film-item-title">${r.title}</span>
+            <div class="film-rating">${stars}</div>
+          </div>
+          <div class="film-item-meta">
+            <span>${r.year || ''}</span><span class="dot"></span>
+            <span>${r.director || ''}</span><span class="dot"></span>
+            <span>${r.duration || ''}</span>
+          </div>
+          <div class="film-item-brief">${r.brief || ''}</div>
+          <div class="film-tags">${(r.tags||[]).map(t => `<span class="film-tag${t === activeTag ? ' film-tag-hl' : ''}">${t}</span>`).join('')}</div>
+        </div>
+      `;
+    });
+    html += `</div></div>`;
+    document.getElementById('galleryContent').innerHTML = html;
+  }
+
+  function filmFilterBy(cat, tag) {
+    if (tag) {
+      filmActiveFilter[cat] = tag;
+    } else {
+      delete filmActiveFilter[cat];
+    }
+    renderFilmList(cat, filmCache[cat] || []);
+  }
+
+  function showFilmDetail(cat, index) {
+    const reviews = filmCache[cat] || [];
+    const r = reviews[index];
+    if (!r) return;
+    filmCurrentView[cat] = 'detail';
+    const stars = renderStars(r.rating);
+    let html = `<div class="gallery-body"><div class="film-detail">
+      <button class="film-detail-back" onclick="renderFilmList('${cat}', filmCache['${cat}'])">← 返回${filmCats[cat].title}列表</button>
+      <div class="film-detail-header">
+        <div class="film-poster">${r.poster ? `<img src="reviews/${cat}/${r.poster}" alt="${r.title}"/>` : '🎬'}</div>
+        <div class="film-info">
+          <h2>${r.title}</h2>
+          <div class="film-sub">${r.sub || ''}</div>
+          <div class="film-meta-row">导演：${r.director || ''}</div>
+          <div class="film-meta-row">时长：${r.duration || ''}</div>
+        </div>
+        <div class="film-rating-lg">${stars}<span class="score">${(r.rating||0).toFixed(1)}</span></div>
+      </div>
+      <div class="film-tags" style="margin-bottom:1rem">${(r.tags||[]).map(t => `<span class="film-tag">${t}</span>`).join('')}</div>
+      <div class="film-body">${r.content || ''}</div>
+    </div></div>`;
+    document.getElementById('galleryContent').innerHTML = html;
+  }
+
+  function renderStars(rating) {
+    rating = Math.max(0, Math.min(10, rating || 0));
+    const full = Math.floor(rating / 2);
+    const half = rating % 2 >= 1 ? 1 : 0;
+    const empty = 5 - full - half;
+    let s = '';
+    for (let i = 0; i < full; i++) s += '<span class="star">★</span>';
+    if (half) s += '<span class="star">★</span>';
+    for (let i = 0; i < empty; i++) s += '<span class="star empty">★</span>';
+    return s;
+  }
+
+  // ===== 更新影评卡片数量徽章 =====
+  async function updateFilmBadges() {
+    for (const cat of ['anime','tv','movie']) {
+      const reviews = await loadFilmCat(cat);
+      const badge = document.querySelector(`[onclick="openFilmReview('${cat}')"] .badge`);
+      if (badge) badge.textContent = reviews.length + ' 篇';
+    }
+  }
+  // 页面加载后异步更新数量
+  updateFilmBadges();
 
   // 键盘支持
   document.addEventListener('keydown', e => {
