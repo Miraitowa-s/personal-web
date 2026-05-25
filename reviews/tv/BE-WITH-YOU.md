@@ -5,8 +5,8 @@ year: 2023
 director: 毕鑫业
 duration: 24集
 rating: 9.5
-tags: [剧集,喜剧,古装,友情]
-poster: BE-WITH-YOU.jpg
+tags: [国产,喜剧,古装,友情]
+poster: BE-WITH-YOU.webp
 ---
 
 >  一部治愈又解压的古风轻喜剧，没有狗血剧情和沉重内核，全程主打轻松诙谐，却在嬉笑打闹中藏着真挚的情谊

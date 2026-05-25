@@ -5,8 +5,8 @@ year: 2013
 director: 石平信司
 duration: 62集
 rating: 8.2
-tags: [动漫,剧集,奇幻,智谋,异世界]
-poster:
+tags: [日漫, 奇幻, 智谋, 异世界, 网游, 政治]
+poster: ji-lu-de-di-ping-xian.webp
 ---
 
 > 不是打怪升级拯救世界，而是建制度、定法律、搞外交——网游穿越的正确打开方式

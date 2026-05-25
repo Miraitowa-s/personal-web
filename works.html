@@ -7,86 +7,12 @@
   <meta property="og:title" content="我的作品 · 周云飞"/>
   <meta property="og:description" content="软件、摄影、DIY 与音乐，用作品记录成长。"/>
   <meta property="og:type" content="website"/>
-  <meta property="og:image" content="https://yourdomain.com/image/pic.jpg"/>
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
+  <meta property="og:image" content="image/pic.jpg"/>
   <title>我的作品 · 周云飞</title>
   <link rel="icon" type="image/svg+xml" href="image/favicon.svg" media="(prefers-color-scheme: light)"/>
   <link rel="icon" type="image/svg+xml" href="image/favicon-dark.svg" media="(prefers-color-scheme: dark)"/>
+  <link rel="stylesheet" href="css/common.css"/>
   <style>
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    :root {
-      --bg:#f5f5f3; --surface:#fff; --border:#e6e6e2;
-      --text:#1a1a1a; --text2:#666; --text3:#aaa;
-      --accent:#4f6ef7; --r:14px;
-      --sh:0 6px 28px rgba(0,0,0,0.09);
-      --t:0.22s ease;
-    }
-    html { scroll-behavior:smooth; }
-    body {
-      background:var(--bg); color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB",sans-serif;
-      line-height:1.7; overflow-x:hidden;
-    }
-    a { text-decoration:none; color:inherit; }
-
-    /* ===== NAV ===== */
-    nav {
-      position:fixed; top:0; left:0; right:0; z-index:300;
-      height:72px; display:flex; align-items:center; justify-content:space-between;
-      padding:0 8%;
-      background:rgba(248,247,245,.92); backdrop-filter:blur(20px);
-      -webkit-backdrop-filter:blur(20px);
-      border-bottom:1px solid rgba(0,0,0,.06);
-      transition:background 0.22s ease;
-    }
-    .nav-logo { display:flex; align-items:center; gap:.8rem; text-decoration:none; padding:8px 0; }
-    .nav-logo img { width:140px; height:auto; flex-shrink:0; object-fit:contain; display:block; }
-    .nav-links { display:flex; gap:2rem; }
-    .nav-links a { font-size:0.95rem; color:var(--text2); transition:color var(--t); font-family:"Microsoft YaHei","微软雅黑",sans-serif; }
-    .nav-links a:hover { color:var(--text); }
-    .theme-toggle {
-      width:36px; height:36px; border-radius:50%;
-      border:1.5px solid var(--border); background:var(--surface);
-      display:flex; align-items:center; justify-content:center;
-      cursor:pointer; font-size:1rem; transition:all var(--t);
-    }
-    .theme-toggle:hover { background:var(--text); border-color:var(--text); filter:invert(1); }
-
-    /* 汉堡菜单（移动端） */
-    .hamburger {
-      display:none; width:36px; height:36px; border-radius:50%;
-      border:1.5px solid var(--border); background:var(--surface);
-      align-items:center; justify-content:center; cursor:pointer;
-      font-size:1.1rem; transition:all var(--t); flex-shrink:0;
-    }
-    .hamburger:hover { background:var(--text); border-color:var(--text); filter:invert(1); }
-    .hamburger svg { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; }
-    .mobile-menu {
-      display:none; position:fixed; top:72px; left:0; right:0; z-index:290;
-      background:var(--surface); border-bottom:1px solid var(--border);
-      box-shadow:0 12px 40px rgba(0,0,0,0.1); padding:0.5rem 0;
-      transform:translateY(-8px); opacity:0;
-      transition:transform 0.25s ease, opacity 0.25s ease; pointer-events:none;
-    }
-    .mobile-menu.open { transform:translateY(0); opacity:1; pointer-events:all; }
-    .mobile-menu a {
-      display:block; padding:.85rem 8%; font-size:.95rem;
-      color:var(--text2); transition:all var(--t);
-    }
-    .mobile-menu a:hover { background:var(--bg); color:var(--text); }
-    .mobile-menu-overlay { display:none; position:fixed; inset:0; z-index:280; background:rgba(0,0,0,0.2); }
-    .mobile-menu-overlay.show { display:block; }
-
-    /* ===== PAGE HERO ===== */
-    .page-hero {
-      padding:120px 8% 70px; text-align:center;
-      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(79,110,247,.10) 0%, transparent 65%), var(--bg);
-    }
-    .page-hero .eyebrow { font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--text3); margin-bottom:.8rem; }
-    .page-hero h1 { font-size:clamp(2rem,5vw,3rem); font-weight:900; letter-spacing:-.03em; margin-bottom:.6rem; }
-    .page-hero-line { width:28px; height:3px; background:var(--text); border-radius:2px; margin:.8rem auto 1.2rem; }
-    .page-hero p { font-size:.93rem; color:var(--text2); max-width:480px; margin:0 auto; }
 
     /* ===== TAB NAV ===== */
     .tab-bar {
@@ -114,7 +40,7 @@
 
     /* ===== 作品卡片 ===== */
     /* 所有分类统一3列，保持卡片宽度一致 */
-    .wgrid, .wgrid-3 {
+    .wgrid {
       display:grid;
       grid-template-columns:repeat(4, 1fr);
       gap:1.2rem;
@@ -138,7 +64,6 @@
     .b-write { background:#f4e8ff; color:#8a35d6; }
     .b-music { background:#e0f2fe; color:#0284c7; }
     .b-film  { background:#f1f0ff; color:#6d28d9; }
-    .b-private { background:#fce7f3; color:#db2777; }
     .wcard-arrow { font-size:.75rem; color:var(--text3); transition:color var(--t), transform var(--t); display:inline-block; }
     .wcard:hover .wcard-arrow { color:var(--accent); transform:translateX(3px); }
 
@@ -179,30 +104,6 @@
       transition:all var(--t);
     }
     .gallery-close:hover { background:var(--text); color:#fff; border-color:var(--text); }
-
-    /* 私人相册密码锁 */
-    .gallery-lock {
-      padding:3rem 2rem; text-align:center;
-    }
-    .gallery-lock .lock-icon { font-size:3rem; margin-bottom:1rem; }
-    .gallery-lock h3 { font-size:1.1rem; font-weight:700; margin-bottom:.4rem; }
-    .gallery-lock p { font-size:.85rem; color:var(--text2); margin-bottom:1.5rem; }
-    .lock-input-row { display:flex; gap:.6rem; justify-content:center; max-width:280px; margin:0 auto; }
-    .lock-input {
-      flex:1; padding:.55rem .8rem; border-radius:10px;
-      border:1.5px solid var(--border); background:var(--bg);
-      font-size:.9rem; color:var(--text); outline:none;
-      transition:border-color var(--t);
-    }
-    .lock-input:focus { border-color:var(--accent); }
-    .lock-btn {
-      padding:.55rem 1.2rem; border-radius:10px;
-      background:var(--text); color:#fff; border:none;
-      font-size:.85rem; cursor:pointer; font-weight:600;
-      transition:opacity var(--t);
-    }
-    .lock-btn:hover { opacity:.85; }
-    .lock-error { font-size:.78rem; color:#e05252; margin-top:.6rem; min-height:1em; }
 
     /* 相册内容区 */
     .gallery-body {
@@ -247,41 +148,170 @@
     }
     .photo-placeholder .ph-icon { font-size:3rem; margin-bottom:.8rem; }
 
-    /* 全屏预览 */
+    /* 全屏预览 · 两栏布局 */
     .lightbox {
       position:fixed; inset:0; z-index:600;
-      background:rgba(0,0,0,0.92);
-      display:flex; align-items:center; justify-content:center;
+      background:rgba(10,10,12,0.96);
+      display:flex;
       opacity:0; pointer-events:none;
-      transition:opacity 0.25s ease;
+      transition:opacity 0.28s ease;
     }
     .lightbox.open { opacity:1; pointer-events:all; }
-    .lightbox img {
-      max-width:90vw; max-height:88vh;
-      border-radius:8px;
-      box-shadow:0 0 80px rgba(0,0,0,0.6);
-      object-fit:contain;
+    /* 左侧：图片区 */
+    .lightbox-main {
+      flex:1; display:flex; align-items:center; justify-content:center;
+      position:relative; min-width:0; padding:24px 16px 90px 16px;
     }
-    .lightbox-close {
-      position:absolute; top:20px; right:24px;
-      color:#fff; font-size:2rem; cursor:pointer; opacity:.7;
-      transition:opacity var(--t); background:none; border:none;
+    .lightbox-main img {
+      max-width:100%; max-height:calc(100vh - 140px);
+      border-radius:8px; object-fit:contain;
+      cursor:zoom-in;
     }
-    .lightbox-close:hover { opacity:1; }
-    .lightbox-prev, .lightbox-next {
-      position:absolute; top:50%; transform:translateY(-50%);
-      color:#fff; font-size:2rem; cursor:pointer;
-      background:rgba(255,255,255,.12); border:none;
-      width:48px; height:48px; border-radius:50%;
+    /* 右侧：信息面板 */
+    .lightbox-info {
+      width:340px; flex-shrink:0;
+      background:rgba(20,20,24,0.95);
+      border-left:1px solid rgba(255,255,255,0.08);
+      padding:24px 20px; overflow-y:auto;
+      font-size:.78rem; color:rgba(255,255,255,0.7);
+      display:flex; flex-direction:column; gap:16px;
+    }
+    .lightbox-info dl { margin:0; }
+    .lightbox-info dt {
+      font-size:.82rem; font-weight:600; letter-spacing:.02em;
+      color:rgba(255,255,255,0.9); margin-bottom:12px;
+    }
+    .lightbox-info dd {
+      margin:0 0 10px 0; color:rgba(255,255,255,0.85);
+      font-size:.78rem; line-height:1.5;
+    }
+    .lightbox-info .info-block {
+      padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .lightbox-info .info-block:last-child { border-bottom:none; }
+    /* key:value 行内布局 */
+    .lb-kv {
+      display:flex; align-items:baseline; padding:4px 0;
+    }
+    .lb-kv-key {
+      flex-shrink:0; width:56px;
+      font-size:.74rem; font-weight:400; color:rgba(255,255,255,0.55);
+    }
+    .lb-kv-val {
+      flex:1; min-width:0; text-align:right;
+      font-size:.76rem; font-weight:500; color:rgba(255,255,255,0.95);
+      word-break:break-all;
+    }
+    .lb-kv-sub { font-weight:400; color:rgba(255,255,255,0.35); font-size:.64rem; margin-left:2px; }
+    /* EXIF 标签样式 */
+    .lb-tag {
+      display:inline-block; padding:2px 8px; border-radius:4px;
+      background:rgba(255,255,255,0.08); margin-right:4px; margin-bottom:4px;
+      font-size:.7rem;
+    }
+    /* 2×2 参数卡片网格 - 紧凑无框 */
+    .lb-grid2 {
+      display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:10px;
+    }
+    .lb-card {
+      background:rgba(255,255,255,0.05); border-radius:8px;
+      padding:10px 12px; display:flex; align-items:center; gap:10px;
+    }
+    .lb-card-icon {
+      font-size:1.1rem; line-height:1; flex-shrink:0;
+    }
+    .lb-card-info { min-width:0; }
+    .lb-card-val {
+      font-size:.88rem; font-weight:600; color:rgba(255,255,255,0.95);
+      line-height:1.2; white-space:nowrap;
+    }
+    .lb-card-label {
+      font-size:.6rem; color:rgba(255,255,255,0.35);
+      letter-spacing:.02em; margin-top:1px;
+    }
+    /* 影调双栏环形图 */
+    .lb-dual {
+      display:flex; gap:12px; margin:8px 0;
+    }
+    .lb-dual-item {
+      flex:1; min-width:0; text-align:center;
+      background:rgba(255,255,255,0.03); border-radius:10px; padding:10px 6px;
+    }
+    .lb-dual-circle {
+      display:flex; justify-content:center; margin-bottom:4px;
+    }
+    .lb-dual-label {
+      font-size:.7rem; font-weight:500; color:rgba(255,255,255,0.85);
+    }
+    .lb-dual-sub {
+      font-size:.6rem; color:rgba(255,255,255,0.3); margin-top:2px;
+    }
+    /* 色调条 */
+    .lb-tone-bar {
+      display:flex; width:100%; height:20px; border-radius:4px; overflow:hidden; margin:4px 0 6px;
+    }
+    .lb-tone-bar span {
       display:flex; align-items:center; justify-content:center;
-      transition:background var(--t); opacity:.8;
+      font-size:.62rem; font-weight:600; color:rgba(255,255,255,0.85);
+      text-shadow:0 1px 2px rgba(0,0,0,0.6);
     }
-    .lightbox-prev { left:20px; }
-    .lightbox-next { right:20px; }
-    .lightbox-prev:hover, .lightbox-next:hover { background:rgba(255,255,255,.25); opacity:1; }
+    .lb-tone-legend {
+      display:flex; justify-content:space-between; font-size:.6rem; color:rgba(255,255,255,0.25); margin-bottom:8px;
+    }
+    /* 直方图 */
+    .lb-histogram {
+      display:flex; align-items:flex-end; gap:1px; height:48px;
+      margin-top:6px; margin-bottom:8px;
+    }
+    .lb-histogram .bar {
+      flex:1; min-width:1px; border-radius:1px 1px 0 0;
+    }
+    /* 关闭/导航按钮 */
+    .lightbox-close {
+      position:absolute; top:16px; right:16px; z-index:10;
+      color:rgba(255,255,255,0.6); font-size:1.3rem; cursor:pointer;
+      background:none; border:none; padding:8px; line-height:1;
+      transition:color var(--t);
+    }
+    .lightbox-close:hover { color:#fff; }
+    .lightbox-prev, .lightbox-next {
+      position:absolute; top:50%; transform:translateY(-50%); z-index:10;
+      color:rgba(255,255,255,0.5); font-size:1.8rem; cursor:pointer;
+      background:rgba(255,255,255,0.06); border:none;
+      width:44px; height:44px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transition:all var(--t);
+    }
+    .lightbox-prev { left:12px; }
+    .lightbox-next { right:12px; }
+    .lightbox-prev:hover, .lightbox-next:hover {
+      background:rgba(255,255,255,0.15); color:#fff;
+    }
     .lightbox-caption {
-      position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
-      color:rgba(255,255,255,.6); font-size:.8rem; white-space:nowrap;
+      position:absolute; bottom:16px; left:50%; transform:translateX(-50%);
+      color:rgba(255,255,255,0.4); font-size:.72rem; white-space:nowrap;
+      display:none; /* 用缩略图栏替代 */
+    }
+    /* 底部缩略图栏 */
+    .lightbox-thumbs {
+      position:absolute; bottom:0; left:0; right:340px; z-index:20;
+      display:flex; gap:8px; padding:12px 20px;
+      background:linear-gradient(0deg, rgba(10,10,12,0.95) 60%, rgba(10,10,12,0.4) 85%, transparent);
+      overflow-x:auto; justify-content:center;
+    }
+    .lightbox-thumbs img {
+      width:72px; height:54px; object-fit:cover; border-radius:5px;
+      cursor:pointer; opacity:.4; border:2px solid transparent;
+      transition:all var(--t); flex-shrink:0;
+    }
+    .lightbox-thumbs img:hover { opacity:.7; }
+    .lightbox-thumbs img.active { opacity:1; border-color:var(--accent); }
+    /* 移动端适配：面板放底部 */
+    @media(max-width:800px){
+      .lightbox { flex-direction:column; }
+      .lightbox-main { flex:1; padding:12px; }
+      .lightbox-main img { max-height:calc(60vh - 48px); }
+      .lightbox-info { width:100%; max-height:40vh; flex-shrink:1; }
     }
 
     /* ===== 响应式 media 补充 ===== */
@@ -372,81 +402,21 @@
     footer a { color:rgba(255,255,255,.5); transition:color var(--t); }
     footer a:hover { color:#fff; }
 
-    /* ===== 视频卡片（B站风格）===== */
-    .video-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:1rem; }
-    .video-card {
-      background:var(--surface); border:1px solid var(--border);
-      border-radius:12px; overflow:hidden; cursor:pointer;
-      transition:transform .2s, box-shadow .2s;
-    }
-    .video-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,.12); }
-    .video-thumb {
-      position:relative; width:100%; padding-top:56.25%; /* 16:9 */
-      background:#1a1a2e; overflow:hidden;
-    }
-    .video-play-icon {
-      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-      width:40px; height:40px; background:rgba(255,255,255,.9);
-      border-radius:50%; display:flex; align-items:center; justify-content:center;
-      font-size:.9rem; color:#1a1a2e; padding-left:3px;
-      transition:transform .2s, background .2s;
-    }
-    .video-card:hover .video-play-icon { transform:translate(-50%,-50%) scale(1.1); background:#fff; }
-    .video-bili-badge {
-      position:absolute; bottom:6px; right:6px;
-      background:rgba(0,0,0,.65); color:#fff;
-      font-size:.65rem; padding:2px 6px; border-radius:4px;
-      display:flex; align-items:center; gap:2px;
-    }
-    .video-info { padding:.7rem .85rem .85rem; }
-    .video-title { font-size:.82rem; font-weight:600; line-height:1.4; color:var(--text); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-    .video-meta { font-size:.72rem; color:var(--text3); margin-top:.3rem; }
-
-    /* ===== 视频播放器弹窗 ===== */
-    #videoPlayerOverlay {
-      position:fixed; inset:0; z-index:2000;
-      background:rgba(0,0,0,.8);
-      display:flex; align-items:center; justify-content:center; padding:1rem;
-      opacity:0; pointer-events:none; transition:opacity .25s;
-    }
-    #videoPlayerOverlay.open { opacity:1; pointer-events:all; }
-    .video-player-box {
-      background:var(--surface); border-radius:16px; overflow:hidden;
-      width:100%; max-width:860px;
-      box-shadow:0 20px 60px rgba(0,0,0,.4);
-    }
-    .video-player-header {
-      display:flex; align-items:center; justify-content:space-between;
-      padding:.75rem 1rem; border-bottom:1px solid var(--border);
-    }
-    .video-player-embed {
-      position:relative; width:100%; padding-top:56.25%; background:#000;
-    }
-    .video-player-embed iframe,
-    .video-player-embed video {
-      position:absolute; top:0; left:0; width:100%; height:100%;
-    }
-
     @media(max-width:1100px){
-      .wgrid, .wgrid-3 { grid-template-columns:repeat(3,1fr); }
+      .wgrid { grid-template-columns:repeat(3,1fr); }
     }
     @media(max-width:900px){
-      .wgrid, .wgrid-3 { grid-template-columns:repeat(2,1fr); }
+      .wgrid { grid-template-columns:repeat(2,1fr); }
     }
     @media(max-width:680px){
       .nav-links { display:none; }
       .hamburger { display:flex; }
       .mobile-menu { display:block; }
-      .wgrid, .wgrid-3 { grid-template-columns:1fr; }
+      .wgrid { grid-template-columns:1fr; }
       .photo-grid { grid-template-columns:repeat(2,1fr); }
-      .video-grid { grid-template-columns:repeat(2,1fr); }
     }
 
     /* ===== DARK MODE ===== */
-    body.dark {
-      --bg:#111113; --surface:#1c1c1f; --border:#2e2e34;
-    }
-    body.dark nav { background:rgba(17,17,19,.92); border-bottom-color:rgba(255,255,255,.06); }
     body.dark .tab-bar { background:rgba(17,17,19,.92); border-bottom-color:var(--border); }
     body.dark .tab-btn.active { background:#fff; color:#111; border-color:#fff; }
     body.dark .wcard { background:rgba(28,28,31,0.8); border-color:rgba(46,46,52,0.8); }
@@ -455,27 +425,15 @@
     body.dark .badge.b-write { background:rgba(138,53,214,.15); color:#c084fc; }
     body.dark .badge.b-music { background:rgba(2,132,199,.15); color:#38bdf8; }
     body.dark .badge.b-film  { background:rgba(109,40,217,.15); color:#a78bfa; }
-    body.dark .badge.b-private { background:rgba(219,39,119,.15); color:#f472b6; }
-    body.dark .nav-links a { color:var(--text2); }
-    body.dark .nav-links a:hover { color:var(--text); }
-    body.dark .nav-back { background:rgba(28,28,31,0.8); border-color:var(--border); color:var(--text2); }
-    body.dark .nav-back:hover { background:#fff; color:#111; border-color:#fff; }
-    body.dark footer { background:#0f0f11; }
     body.dark .gallery-box { background:var(--surface); }
     body.dark .lock-input { background:rgba(28,28,31,0.8); border-color:var(--border); color:var(--text); }
     body.dark .lock-btn { background:#fff; color:#111; }
-    body.dark .page-hero { background:
-      radial-gradient(ellipse 70% 60% at 50% 0%, rgba(79,110,247,.15) 0%, transparent 65%), var(--bg);
-    }
-    body.dark .hamburger { border-color:rgba(255,255,255,.2); background:rgba(255,255,255,.08); color:#fff; }
-    body.dark .hamburger:hover { background:rgba(255,255,255,.9); color:#111; }
-    body.dark .mobile-menu { background:var(--surface); border-color:var(--border); }
-    body.dark .mobile-menu a:hover { background:rgba(255,255,255,.06); }
     body.dark .film-item { background:rgba(28,28,31,.6); border-color:var(--border); }
     body.dark .film-item:hover { border-color:var(--accent); }
     body.dark .film-tag { background:rgba(28,28,31,.8); border-color:var(--border); }
     body.dark .film-spoiler { background:rgba(28,28,31,.5); }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/exif-js@2.3.0/exif.min.js"></script>
 </head>
 <body>
 
@@ -486,24 +444,22 @@
   </a>
   <div class="nav-links">
     <a href="index.html#about">关于</a>
-    <a href="index.html#works">作品</a>
-    <a href="index.html#journey">大事记</a>
+    <a href="index.html#works" style="color:var(--text);font-weight:600">作品</a>
     <a href="tools.html">工具库</a>
     <a href="knowledge.html">知识库</a>
     <a href="resume.html">简历</a>
   </div>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="切换明暗模式">🌙</button>
   <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="菜单">
     <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
   </button>
-  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="切换明暗模式">🌙</button>
 </nav>
 
 <!-- 移动端菜单遮罩 -->
 <div class="mobile-menu-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html#about">关于</a>
-  <a href="index.html#works">作品</a>
-  <a href="index.html#journey">大事记</a>
+  <a href="index.html#works" style="color:var(--text);font-weight:600">作品</a>
   <a href="tools.html">工具库</a>
   <a href="knowledge.html">知识库</a>
   <a href="resume.html">简历</a>
@@ -581,7 +537,7 @@
       <span class="cat-title">摄影与图像</span>
       <div class="cat-line"></div>
     </div>
-    <div class="wgrid-3">
+    <div class="wgrid">
       <!-- 风光摄影 -->
       <div class="wcard" onclick="openGallery('landscape')">
         <div class="wcard-thumb" style="background:linear-gradient(135deg,#d1fae5,#6ee7b7)">🏔️</div>
@@ -628,7 +584,7 @@
       <span class="cat-title">音乐</span>
       <div class="cat-line"></div>
     </div>
-    <div class="wgrid-3">
+    <div class="wgrid">
       <div class="wcard" style="cursor:default">
         <div class="wcard-thumb" style="background:linear-gradient(135deg,#dbeafe,#818cf8)">🎸</div>
         <div class="wcard-body">
@@ -650,14 +606,14 @@
       <span class="cat-title">影评</span>
       <div class="cat-line"></div>
     </div>
-    <div class="wgrid-3">
+    <div class="wgrid">
       <div class="wcard" onclick="openFilmReview('anime')">
         <div class="wcard-thumb" style="background:linear-gradient(135deg,#2d1b69,#7c3aed)">✨</div>
         <div class="wcard-body">
           <div class="wcard-title">动漫</div>
           <div class="wcard-desc">二次元的光影世界，那些跨越次元的感动与共鸣。</div>
           <div class="wcard-foot">
-            <span class="badge b-film">0 篇</span>
+            <span class="badge b-film" id="badge-anime">…</span>
             <span class="wcard-arrow">查看 →</span>
           </div>
         </div>
@@ -668,7 +624,7 @@
           <div class="wcard-title">影视</div>
           <div class="wcard-desc">剧集与纪录，那些需要时间慢慢品味的长篇叙事。</div>
           <div class="wcard-foot">
-            <span class="badge b-film">0 篇</span>
+            <span class="badge b-film" id="badge-tv">…</span>
             <span class="wcard-arrow">查看 →</span>
           </div>
         </div>
@@ -679,7 +635,7 @@
           <div class="wcard-title">电影</div>
           <div class="wcard-desc">那些让人沉默很久的故事，关于人性、命运与选择的深度思考。</div>
           <div class="wcard-foot">
-            <span class="badge b-film">8 篇</span>
+            <span class="badge b-film" id="badge-movie">…</span>
             <span class="wcard-arrow">查看 →</span>
           </div>
         </div>
@@ -711,16 +667,19 @@
 </div>
 
 <!-- ===== 全屏预览 ===== -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<div class="lightbox" id="lightbox">
   <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <button class="lightbox-prev" onclick="event.stopPropagation();lightboxNav(-1)">‹</button>
-  <img id="lightboxImg" src="" alt=""/>
-  <button class="lightbox-next" onclick="event.stopPropagation();lightboxNav(1)">›</button>
+  <div class="lightbox-main">
+    <button class="lightbox-prev" onclick="event.stopPropagation();lightboxNav(-1)">‹</button>
+    <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation();"/>
+    <button class="lightbox-next" onclick="event.stopPropagation();lightboxNav(1)">›</button>
+  </div>
+  <div class="lightbox-info" id="lightboxInfo">
+    <div style="color:rgba(255,255,255,0.3);text-align:center;padding-top:40px;">正在读取图片信息…</div>
+  </div>
+  <div class="lightbox-thumbs" id="lightboxThumbs"></div>
   <div class="lightbox-caption" id="lightboxCaption"></div>
 </div>
-
-<!-- ===== 视频播放器弹窗 ===== -->
-<div id="videoPlayerOverlay" onclick="if(event.target===this)closeVideoPlayer()"></div>
 
 <script>
   // ===== 主题 =====
@@ -731,7 +690,9 @@
     document.getElementById('themeBtn').textContent = dark ? '☀️' : '🌙';
     localStorage.setItem('theme', dark ? 'dark' : 'light');
   }
-  if (localStorage.getItem('theme') === 'dark') toggleTheme();
+  const savedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) toggleTheme();
 
   // 移动端菜单
   function toggleMobileMenu() {
@@ -789,33 +750,22 @@
   // ===== 相册数据配置 =====
   // 将来添加真实照片时，替换 src 为实际路径，如 "photos/street/001.jpg"
   // 每页显示12张，超出自动出现"加载更多"按钮
-  const PAGE_SIZE = 12;
-
-  // 生成16张占位图（实际使用时替换为真实路径）
-  function makePlaceholders(prefix, count, captions) {
-    return Array.from({length: count}, (_, i) => ({
-      src: `photos/${prefix}/${prefix}${i+1}.jpg`,
-      caption: captions ? captions[i] : `${prefix} ${i+1}`
-    }));
-  }
 
   const galleries = {
     landscape: {
       emoji: '🏔️', title: '风光摄影',
       desc: '山川湖海，日出日落，用镜头记录自然的壮美与宁静。',
-      private: false,
       photos: [
-        { src: 'photos/landscape/DSCF4078.JPG', caption: '风光 01' },
-        { src: 'photos/landscape/DSCF7145.JPG', caption: '风光 02' },
-        { src: 'photos/landscape/DSCF7189.JPG', caption: '风光 03' },
-        { src: 'photos/landscape/DSCF7196.JPG', caption: '风光 04' },
-        { src: 'photos/landscape/DSCF7271.JPG', caption: '风光 05' },
+        { src: 'photos/landscape/landscape_001.JPG', caption: '风光 01' },
+        { src: 'photos/landscape/landscape_002.JPG', caption: '风光 02' },
+        { src: 'photos/landscape/landscape_003.JPG', caption: '风光 03' },
+        { src: 'photos/landscape/landscape_004.JPG', caption: '风光 04' },
+        { src: 'photos/landscape/landscape_005.JPG', caption: '风光 05' },
       ]
     },
     portrait: {
       emoji: '🧍', title: '人像摄影',
       desc: '记录人与光影的邂逅，捕捉真实情绪流动的瞬间。',
-      private: false,
       photos: []
     }
   };
@@ -825,18 +775,11 @@
   // ===== 打开相册 =====
   function openGallery(key) {
     currentGallery = key;
-    photoPage[key] = 1;  // 重置分页
     const g = galleries[key];
     document.getElementById('galleryEmoji').textContent = g.emoji;
     document.getElementById('galleryTitleText').textContent = g.title;
 
-    if (g.private) {
-      renderLock(key);
-    } else if (g.type === 'video') {
-      renderVideos(key);
-    } else {
-      renderPhotos(key);
-    }
+    renderPhotos(key);
 
     document.getElementById('galleryOverlay').classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -851,38 +794,7 @@
     if (e.target === document.getElementById('galleryOverlay')) closeGallery();
   }
 
-  // ===== 渲染密码锁 =====
-  function renderLock(key) {
-    const g = galleries[key];
-    document.getElementById('galleryContent').innerHTML = `
-      <div class="gallery-lock">
-        <div class="lock-icon">🔐</div>
-        <h3>私人相册</h3>
-        <p>这里存放着珍贵的私人时光，请输入密码查看。</p>
-        <div class="lock-input-row">
-          <input class="lock-input" type="password" id="lockInput" placeholder="请输入密码" onkeydown="if(event.key==='Enter')checkPassword('${key}')"/>
-          <button class="lock-btn" onclick="checkPassword('${key}')">进入</button>
-        </div>
-        <div class="lock-error" id="lockError"></div>
-      </div>
-    `;
-    setTimeout(() => document.getElementById('lockInput')?.focus(), 100);
-  }
-
-  function checkPassword(key) {
-    const input = document.getElementById('lockInput').value;
-    const g = galleries[key];
-    if (input === g.password) {
-      renderPhotos(key);
-    } else {
-      document.getElementById('lockError').textContent = '密码错误，请重试';
-      document.getElementById('lockInput').value = '';
-      document.getElementById('lockInput').focus();
-    }
-  }
-
   // ===== 渲染照片网格（弹窗内滚动，一次显示全部）=====
-  let photoPage = {};  // 保留但不再用于分页
 
   function renderPhotos(key) {
     const g = galleries[key];
@@ -914,95 +826,43 @@
     document.getElementById('galleryContent').innerHTML = html;
   }
 
-  function loadMorePhotos(key) {
-    // 已不使用，保留兼容
-  }
-
-  // ===== 渲染视频网格（B站卡片风格）=====
-  function renderVideos(key) {
-    const g = galleries[key];
-    let html = `<div class="gallery-body">`;
-    if (g.desc) html += `<div class="gallery-desc">${g.desc}</div>`;
-
-    if (!g.videos || g.videos.length === 0) {
-      html += `
-        <div class="photo-placeholder">
-          <div class="ph-icon">${g.emoji}</div>
-          <div>视频整理中，敬请期待…</div>
-        </div>
-      `;
-    } else {
-      html += `<div class="video-grid">`;
-      g.videos.forEach((v, i) => {
-        const coverStyle = v.cover
-          ? `background-image:url('${v.cover}');background-size:cover;background-position:center`
-          : `background:linear-gradient(135deg,#1a1a2e,#16213e)`;
-        const isBili = !!v.bvid;
-        html += `
-          <div class="video-card" onclick="openVideoPlayer('${key}', ${i})">
-            <div class="video-thumb" style="${coverStyle}">
-              <div class="video-play-icon">▶</div>
-              ${isBili ? `<div class="video-bili-badge"><img src="https://www.bilibili.com/favicon.ico" alt="B站" style="width:14px;height:14px;vertical-align:middle;margin-right:3px;border-radius:2px">B站</div>` : '<div class="video-bili-badge">本地</div>'}
-            </div>
-            <div class="video-info">
-              <div class="video-title">${v.title}</div>
-              <div class="video-meta">${v.date || ''}</div>
-            </div>
-          </div>
-        `;
-      });
-      html += `</div>`;
-    }
-    html += `</div>`;
-    document.getElementById('galleryContent').innerHTML = html;
-  }
-
-  // ===== 视频播放器弹窗 =====
-  function openVideoPlayer(key, index) {
-    const v = galleries[key].videos[index];
-    let playerHTML = '';
-    if (v.bvid) {
-      playerHTML = `<iframe src="//player.bilibili.com/player.html?bvid=${v.bvid}&page=1&autoplay=1&danmaku=0"
-        scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"
-        style="width:100%;height:100%;position:absolute;top:0;left:0"></iframe>`;
-    } else if (v.src) {
-      playerHTML = `<video controls autoplay style="width:100%;height:100%;object-fit:contain;background:#000">
-        <source src="${v.src}">你的浏览器不支持视频播放。
-      </video>`;
-    }
-    document.getElementById('videoPlayerOverlay').innerHTML = `
-      <div class="video-player-box">
-        <div class="video-player-header">
-          <span style="font-weight:600;font-size:.95rem">${v.title}</span>
-          <button onclick="closeVideoPlayer()" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--text2);padding:.2rem .5rem">✕</button>
-        </div>
-        <div class="video-player-embed">${playerHTML}</div>
-      </div>
-    `;
-    document.getElementById('videoPlayerOverlay').classList.add('open');
-  }
-
-  function closeVideoPlayer() {
-    const overlay = document.getElementById('videoPlayerOverlay');
-    overlay.classList.remove('open');
-    overlay.innerHTML = ''; // 停止播放
-  }
-
-  // ===== 全屏预览 =====
+  // ===== 全屏预览（含 EXIF 信息面板）=====
   let lbKey = '', lbIndex = 0;
 
   function openLightbox(key, index) {
     lbKey = key;
     lbIndex = index;
-    showLightboxPhoto();
     document.getElementById('lightbox').classList.add('open');
+    showLightboxPhoto();
   }
 
   function showLightboxPhoto() {
     const photos = galleries[lbKey].photos;
     const p = photos[lbIndex];
-    document.getElementById('lightboxImg').src = p.src;
-    document.getElementById('lightboxCaption').textContent = `${p.caption || ''} (${lbIndex + 1} / ${photos.length})`;
+    const img = document.getElementById('lightboxImg');
+    img.src = p.src;
+    // 渲染缩略图栏
+    renderThumbs(photos);
+    // 重置信息面板
+    document.getElementById('lightboxInfo').innerHTML = '<div style="color:rgba(255,255,255,0.3);text-align:center;padding-top:40px;">正在读取图片信息…</div>';
+    // 读取 EXIF 并渲染
+    readPhotoInfo(p);
+  }
+
+  function renderThumbs(photos) {
+    let html = '';
+    photos.forEach((p, i) => {
+      html += `<img src="${p.src}" alt="" class="${i === lbIndex ? 'active' : ''}" onclick="event.stopPropagation();jumpToPhoto(${i})" loading="lazy"/>`;
+    });
+    document.getElementById('lightboxThumbs').innerHTML = html;
+    // 滚动到当前缩略图可见
+    const active = document.querySelector('#lightboxThumbs img.active');
+    if (active) active.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
+  }
+
+  function jumpToPhoto(index) {
+    lbIndex = index;
+    showLightboxPhoto();
   }
 
   function lightboxNav(dir) {
@@ -1013,6 +873,264 @@
 
   function closeLightbox() {
     document.getElementById('lightbox').classList.remove('open');
+  }
+
+  // ===== EXIF 读取与信息面板渲染 =====
+  function readPhotoInfo(p) {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = function() {
+      EXIF.getData(img, function() {
+        const exif = EXIF.getAllTags(this);
+        renderPhotoInfo(p, img, exif);
+      });
+    };
+    img.onerror = function() {
+      // 无法加载时显示基础信息
+      renderPhotoInfo(p, null, {});
+    };
+    img.src = p.src;
+  }
+
+  function renderPhotoInfo(p, img, exif) {
+    const hasExif = exif && exif.Make;
+    const info = [];
+
+    // ---- 基础信息 ----
+    const fname = p.src.split('/').pop();
+    const ext = fname.split('.').pop().toUpperCase();
+    const w = img ? img.naturalWidth : '—';
+    const h = img ? img.naturalHeight : '—';
+    const megapixels = img ? ((w * h) / 1000000).toFixed(1) : '—';
+    const ratio = w && h ? simplifyRatio(w, h) : '—';
+    const dt = hasExif ? (exif.DateTimeOriginal || exif.DateTime || '') : '';
+
+    info.push(`<div class="info-block">
+      <dt>基础信息</dt>
+      <div class="lb-kv"><span class="lb-kv-key">文件名</span><span class="lb-kv-val">${esc(fname)}</span></div>
+      <div class="lb-kv"><span class="lb-kv-key">格式</span><span class="lb-kv-val">${ext} · ${ratio}</span></div>
+      <div class="lb-kv"><span class="lb-kv-key">尺寸</span><span class="lb-kv-val">${w} × ${h} px</span></div>
+      <div class="lb-kv"><span class="lb-kv-key">像素</span><span class="lb-kv-val">${megapixels} MP</span></div>
+      <div class="lb-kv"><span class="lb-kv-key">大小</span><span class="lb-kv-val" id="lbFileSize">计算中…</span></div>
+      ${dt ? `<div class="lb-kv"><span class="lb-kv-key">时间</span><span class="lb-kv-val">${esc(dt)}</span></div>` : ''}
+    </div>`);
+
+    // ---- 拍摄参数（2×2网格卡片）----
+    info.push(`<div class="info-block" id="lbShootInfo">
+      <dt style="margin-bottom:8px;">拍摄参数</dt>
+    `);
+    if (hasExif) {
+      const f = exif.FNumber ? 'F/' + exif.FNumber : '—';
+      let ss = '—';
+      if (exif.ExposureTime) ss = exif.ExposureTime < 1 ? '1/' + Math.round(1/exif.ExposureTime) + 's' : exif.ExposureTime + 's';
+      const iso = exif.ISOSpeedRatings ? 'ISO ' + exif.ISOSpeedRatings : '—';
+      const fl = exif.FocalLength ? exif.FocalLength + 'mm' : '—';
+      info.push(`<div class="lb-grid2">
+        <div class="lb-card">
+          <div class="lb-card-icon" style="color:#fbbf24;">○</div>
+          <div class="lb-card-info"><div class="lb-card-val">${f}</div><div class="lb-card-label">光圈</div></div>
+        </div>
+        <div class="lb-card">
+          <div class="lb-card-icon" style="color:#60a5fa;">⏱</div>
+          <div class="lb-card-info"><div class="lb-card-val">${ss}</div><div class="lb-card-label">快门速度</div></div>
+        </div>
+        <div class="lb-card">
+          <div class="lb-card-icon" style="color:#f87171;">○</div>
+          <div class="lb-card-info"><div class="lb-card-val">${iso}</div><div class="lb-card-label">感光度</div></div>
+        </div>
+        <div class="lb-card">
+          <div class="lb-card-icon" style="color:#a78bfa;">◎</div>
+          <div class="lb-card-info"><div class="lb-card-val">${fl}</div><div class="lb-card-label">焦距</div></div>
+        </div>
+      </div>`);
+      if (exif.ExposureProgram !== undefined) {
+        const programs = {1:'手动曝光',2:'程序曝光',3:'光圈优先',4:'快门优先',5:'创意模式',6:'运动模式',7:'人像模式',8:'风景模式'};
+        info.push(`<div class="lb-kv"><span class="lb-kv-key">模式</span><span class="lb-kv-val">${programs[exif.ExposureProgram] || '自动'}</span></div>`);
+      }
+      if (exif.WhiteBalance !== undefined) {
+        info.push(`<div class="lb-kv"><span class="lb-kv-key">白平衡</span><span class="lb-kv-val">${exif.WhiteBalance === 1 ? '手动' : '自动'}</span></div>`);
+      }
+      if (exif.Flash !== undefined) {
+        info.push(`<div class="lb-kv"><span class="lb-kv-key">闪光灯</span><span class="lb-kv-val">${exif.Flash === 1 ? '未触发' : '已触发'}</span></div>`);
+      }
+    } else {
+      info.push(`<div style="color:rgba(255,255,255,0.3);padding:8px 0;">当前图片不含 EXIF 数据</div>`);
+    }
+    info.push(`</div>`);
+
+    // ---- 设备信息 ----
+    if (hasExif) {
+      info.push(`<div class="info-block">
+        <dt>设备信息</dt>
+        <div class="lb-kv"><span class="lb-kv-key">相机</span><span class="lb-kv-val">${esc(exif.Make || '—')} ${esc(exif.Model || '')}</span></div>
+        <div class="lb-kv"><span class="lb-kv-key">镜头</span><span class="lb-kv-val">${exif.LensModel ? esc(exif.LensModel) : '未知'}</span></div>
+        <div class="lb-kv"><span class="lb-kv-key">最大光圈</span><span class="lb-kv-val">${exif.MaxApertureValue ? 'F/' + (Math.pow(2, exif.MaxApertureValue / 2).toFixed(1)) : '未知'}</span></div>
+        ${exif.FocalLengthIn35mmFilm ? `<div class="lb-kv"><span class="lb-kv-key">等效</span><span class="lb-kv-val">${exif.FocalLengthIn35mmFilm}mm</span></div>` : ''}
+      </div>`);
+    }
+
+    // ---- 影调分析 ----
+    if (img) {
+      info.push(`<div class="info-block" id="lbTonal"><dl>
+        <dt>影调分析</dt>
+        <dd style="color:rgba(255,255,255,0.3);">分析中…</dd>
+      </dl></div>`);
+    }
+
+    document.getElementById('lightboxInfo').innerHTML = info.join('');
+
+    // 异步：计算文件大小
+    fetch(p.src, { method: 'HEAD' }).then(r => {
+      const len = r.headers.get('content-length');
+      if (len) document.getElementById('lbFileSize').textContent = formatSize(Number(len));
+    }).catch(() => {});
+
+    // 异步：计算影调
+    if (img) computeTonal(p.src, w, h);
+  }
+
+  // ===== 影调/直方图计算 =====
+  function computeTonal(src, w, h) {
+    const canvas = document.createElement('canvas');
+    const size = 160;
+    canvas.width = size; canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    const img2 = new Image();
+    img2.crossOrigin = 'anonymous';
+    img2.onload = function() {
+      ctx.drawImage(img2, 0, 0, size, size);
+      const data = ctx.getImageData(0, 0, size, size).data;
+      const rBins = new Array(256).fill(0);
+      const gBins = new Array(256).fill(0);
+      const bBins = new Array(256).fill(0);
+      const lumaBins = new Array(256).fill(0);
+      let totalBrightness = 0, pxCount = 0;
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i], g = data[i+1], bb = data[i+2];
+        const gray = Math.round(0.299*r + 0.587*g + 0.114*bb);
+        rBins[r]++; gBins[g]++; bBins[bb]++; lumaBins[gray]++;
+        totalBrightness += gray;
+        pxCount++;
+      }
+      const avgBright = totalBrightness / pxCount;
+      const maxBin = Math.max(...lumaBins);
+
+      // RGB 直方图（SVG 叠加三条折线）
+      let histHtml = '<svg viewBox="0 0 256 60" width="100%" style="display:block;margin:6px 0 10px;">';
+      const scaleH = (v) => 60 - Math.max(0, (v / maxBin) * 56);
+      ['r','g','b'].forEach((ch, ci) => {
+        const bins = ch === 'r' ? rBins : (ch === 'g' ? gBins : bBins);
+        const colors = ['#ef4444','#22c55e','#3b82f6'];
+        let d = '';
+        for (let i = 0; i < 256; i++) {
+          d += (i === 0 ? 'M' : 'L') + i + ' ' + scaleH(bins[i]) + ' ';
+        }
+        histHtml += `<path d="${d}" fill="none" stroke="${colors[ci]}" stroke-width="1.2" opacity="0.85" stroke-linejoin="round"/>`;
+      });
+      // 亮度叠加
+      let lumaD = '';
+      for (let i = 0; i < 256; i++) {
+        lumaD += (i === 0 ? 'M' : 'L') + i + ' ' + scaleH(lumaBins[i]) + ' ';
+      }
+      histHtml += `<path d="${lumaD}" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.8" opacity="0.6"/>`;
+      // 底部基线
+      histHtml += '<line x1="0" y1="60" x2="256" y2="60" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>';
+      histHtml += '</svg>';
+
+      // 阴影/中间调/高光占比
+      let shadows = 0, midtones = 0, highlights = 0;
+      for (let i = 0; i < 256; i++) {
+        if (i < 85) shadows += lumaBins[i];
+        else if (i < 170) midtones += lumaBins[i];
+        else highlights += lumaBins[i];
+      }
+      const total = shadows + midtones + highlights;
+      const sPct = Math.round(shadows / total * 100);
+      const mPct = Math.round(midtones / total * 100);
+      const hPct = Math.round(highlights / total * 100);
+
+      // 对比度估算
+      let contrast = '低';
+      const stdDev = Math.sqrt(lumaBins.reduce((s, v, i) => s + v * Math.pow(i - avgBright, 2), 0) / total);
+      if (stdDev > 70) contrast = '高';
+      else if (stdDev > 40) contrast = '中';
+
+      document.getElementById('lbTonal').innerHTML = `<div class="info-block">
+        <dt>影调分析</dt>
+        <div class="lb-dual">
+          <div class="lb-dual-item">
+            <div class="lb-dual-circle">
+              <svg viewBox="0 0 64 64" width="56" height="56">
+                <circle cx="32" cy="32" r="28" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="5"/>
+                <circle cx="32" cy="32" r="28" fill="none" stroke="#fbbf24" stroke-width="5"
+                  stroke-dasharray="${Math.round(avgBright/255*176)} 176" stroke-linecap="round"
+                  transform="rotate(-90 32 32)"/>
+                <text x="32" y="36" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">${Math.round(avgBright/2.55)}</text>
+                <text x="32" y="48" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8">亮度</text>
+              </svg>
+            </div>
+            <div class="lb-dual-label">曝光值</div>
+            <div class="lb-dual-sub">平均亮度 ${Math.round(avgBright)}/255</div>
+          </div>
+          <div class="lb-dual-item">
+            <div class="lb-dual-circle">
+              <svg viewBox="0 0 64 64" width="56" height="56">
+                <circle cx="32" cy="32" r="28" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="5"/>
+                <circle cx="32" cy="32" r="28" fill="none" stroke="#60a5fa" stroke-width="5"
+                  stroke-dasharray="${Math.round(Math.min(stdDev/128*176, 176))} 176" stroke-linecap="round"
+                  transform="rotate(-90 32 32)"/>
+                <text x="32" y="36" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">${Math.round(stdDev)}</text>
+                <text x="32" y="48" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="8">对比度</text>
+              </svg>
+            </div>
+            <div class="lb-dual-label">标准差 σ</div>
+            <div class="lb-dual-sub">${contrast}对比 · 范围0~128</div>
+          </div>
+        </div>
+        <div class="lb-tone-bar" style="margin-top:12px;">${buildToneBar(sPct, mPct, hPct)}</div>
+        <div style="font-size:.6rem;color:rgba(255,255,255,0.22);padding: 4px 0 0; line-height:1.5;">
+          ● 曝光值：平均像素亮度的百分比，越高画面越亮<br>
+          ● 标准差：像素亮度离散程度，越大对比越强烈
+        </div>
+        <dt style="margin-top:12px;">直方图</dt>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+          <span style="font-size:.58rem;color:#ef4444;">R</span>
+          <span style="font-size:.58rem;color:#22c55e;">G</span>
+          <span style="font-size:.58rem;color:#3b82f6;">B</span>
+          <span style="font-size:.58rem;color:rgba(255,255,255,0.4);">W</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:4px;">
+          ${histHtml}
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:.6rem;color:rgba(255,255,255,0.2);padding:0 2px;margin-top:2px;">
+          <span>阴影</span><span>中间调</span><span>高光</span>
+        </div>
+      </div>`;
+    };
+    img2.src = src;
+  }
+
+  // ===== 工具函数 =====
+  function formatSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / 1048576).toFixed(1) + ' MB';
+  }
+
+  function simplifyRatio(w, h) {
+    function gcd(a, b) { return b ? gcd(b, a % b) : a; }
+    const d = gcd(w, h);
+    return (w/d) + ':' + (h/d);
+  }
+
+  function esc(s) {
+    if (!s) return '—';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function buildToneBar(shadows, midtones, highlights) {
+    const s = Math.max(shadows, 2), m = Math.max(midtones, 2), h = Math.max(highlights, 2);
+    return `<span style="width:${shadows}%;background:linear-gradient(180deg,#444,#222)" title="阴影 ${shadows}%">${shadows > 12 ? shadows+'%' : ''}</span><span style="width:${midtones}%;background:linear-gradient(180deg,#888,#555)" title="中间调 ${midtones}%">${midtones > 12 ? midtones+'%' : ''}</span><span style="width:${highlights}%;background:linear-gradient(180deg,#ccc,#999)" title="高光 ${highlights}%">${highlights > 12 ? highlights+'%' : ''}</span>`;
   }
 
   /* ===== 影评：从 MD 文件动态加载 =====
@@ -1037,6 +1155,7 @@
 
   // ===== 解析 Frontmatter MD =====
   function parseMD(text) {
+    text = text.replace(/\r\n/g, '\n');
     const fmMatch = text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
     if (!fmMatch) return null;
     const fm = {};
@@ -1077,19 +1196,21 @@
   async function loadFilmCat(cat) {
     if (filmCache[cat]) return filmCache[cat];
     try {
-      const idxRes = await fetch(`reviews/${cat}/index.json`);
+      const idxRes = await fetch(`reviews/${cat}/index.json?_=${Date.now()}`);
       if (!idxRes.ok) { filmCache[cat] = []; return []; }
       const files = await idxRes.json();
-      const reviews = [];
-      for (const file of files) {
-        try {
-          const res = await fetch(`reviews/${cat}/${encodeURIComponent(file)}`);
-          if (!res.ok) continue;
-          const text = await res.text();
-          const data = parseMD(text);
-          if (data) reviews.push(data);
-        } catch(e) { /* 单文件失败跳过 */ }
-      }
+      // 并行 fetch 所有 MD 文件（比串行快 N 倍）
+      const results = await Promise.all(
+        files.map(async file => {
+          try {
+            const res = await fetch(`reviews/${cat}/${encodeURIComponent(file)}?_=${Date.now()}`);
+            if (!res.ok) return null;
+            const text = await res.text();
+            return parseMD(text);
+          } catch(e) { return null; }
+        })
+      );
+      const reviews = results.filter(Boolean);
       filmCache[cat] = reviews;
       return reviews;
     } catch(e) {
@@ -1107,11 +1228,17 @@
     filmCurrentView[cat] = 'list';
     document.getElementById('galleryEmoji').textContent = meta.emoji;
     document.getElementById('galleryTitleText').textContent = meta.title;
-    document.getElementById('galleryContent').innerHTML = `<div class="gallery-body"><div style="text-align:center;padding:3rem;color:var(--text3)">加载中…</div></div>`;
     document.getElementById('galleryOverlay').classList.add('open');
     document.body.style.overflow = 'hidden';
-    const reviews = await loadFilmCat(cat);
-    renderFilmList(cat, reviews);
+    // 如果已缓存则立即渲染，否则显示加载中
+    const cached = filmCache[cat];
+    if (cached) {
+      renderFilmList(cat, cached);
+    } else {
+      document.getElementById('galleryContent').innerHTML = `<div class="gallery-body"><div style="text-align:center;padding:3rem;color:var(--text3)">加载中…</div></div>`;
+      const reviews = await loadFilmCat(cat);
+      renderFilmList(cat, reviews);
+    }
   }
 
   function renderFilmList(cat, reviews, filterTag) {
@@ -1129,23 +1256,37 @@
     // 提取所有 tag 及出现次数
     const tagCount = {};
     reviews.forEach(r => (r.tags || []).forEach(t => { tagCount[t] = (tagCount[t] || 0) + 1; }));
-    // 按出现次数降序排列
-    const sortedTags = Object.entries(tagCount).sort((a, b) => b[1] - a[1]);
+
+    // 分离国家标签和其他标签
+    const countryTags = ['国产','国漫','日漫','美剧','韩剧','印剧','泰剧','日剧'];
+    const cTags = Object.entries(tagCount).filter(([t]) => countryTags.includes(t)).sort((a, b) => b[1] - a[1]);
+    const oTags = Object.entries(tagCount).filter(([t]) => !countryTags.includes(t) && tagCount[t] >= 2).sort((a, b) => b[1] - a[1]);
 
     // 过滤
     const activeTag = filterTag || filmActiveFilter[cat] || '';
     const filtered = activeTag ? reviews.filter(r => (r.tags || []).includes(activeTag)) : reviews;
 
-    // 过滤条 HTML
-    let filterHtml = `<div class="film-filter">`;
+    // 过滤条 HTML — 国家标签 + 全部 在第一行
+    let filterHtml = `<div class="film-filter" style="border-bottom:none;padding-bottom:.3rem">`;
     filterHtml += `<span class="film-filter-tag${!activeTag ? ' active' : ''}" onclick="filmFilterBy('${cat}','')">全部</span>`;
-    sortedTags.forEach(([tag, count]) => {
+    cTags.forEach(([tag, count]) => {
       filterHtml += `<span class="film-filter-tag${activeTag === tag ? ' active' : ''}" onclick="filmFilterBy('${cat}','${tag}')">${tag} <small>${count}</small></span>`;
     });
-    filterHtml += `<span class="film-filter-count">${filtered.length} / ${reviews.length}</span>`;
     filterHtml += `</div>`;
+    // 其他标签在第二行（只显示出现次数 >= 2 的）
+    let filterHtml2 = '';
+    if (oTags.length > 0) {
+      filterHtml2 += `<div class="film-filter">`;
+      oTags.forEach(([tag, count]) => {
+        filterHtml2 += `<span class="film-filter-tag${activeTag === tag ? ' active' : ''}" onclick="filmFilterBy('${cat}','${tag}')">${tag} <small>${count}</small></span>`;
+      });
+      filterHtml2 += `<span class="film-filter-count">${filtered.length} / ${reviews.length}</span>`;
+      filterHtml2 += `</div>`;
+    } else {
+      filterHtml2 += `<div class="film-filter"><span class="film-filter-count">${filtered.length} / ${reviews.length}</span></div>`;
+    }
 
-    let html = `<div class="gallery-body">${filterHtml}<div class="film-list">`;
+    let html = `<div class="gallery-body">${filterHtml}${filterHtml2}<div class="film-list">`;
     filtered.forEach((r, i) => {
       // 找到在原始 reviews 中的真实 index
       const realIndex = reviews.indexOf(r);
@@ -1215,20 +1356,26 @@
     return s;
   }
 
-  // ===== 更新影评卡片数量徽章 =====
+  // ===== 更新影评卡片数量徽章 + 预热缓存 =====
   async function updateFilmBadges() {
-    for (const cat of ['anime','tv','movie']) {
-      const reviews = await loadFilmCat(cat);
+    // 并行预加载三个分类，用户点击时直接命中缓存
+    const results = await Promise.all(
+      ['anime','tv','movie'].map(async cat => {
+        const reviews = await loadFilmCat(cat);
+        return { cat, reviews };
+      })
+    );
+    results.forEach(({ cat, reviews }) => {
       const badge = document.querySelector(`[onclick="openFilmReview('${cat}')"] .badge`);
       if (badge) badge.textContent = reviews.length + ' 篇';
-    }
+    });
   }
   // 页面加载后异步更新数量
   updateFilmBadges();
 
   // 键盘支持
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeLightbox(); closeGallery(); closeVideoPlayer(); }
+    if (e.key === 'Escape') { closeLightbox(); closeGallery(); }
     if (document.getElementById('lightbox').classList.contains('open')) {
       if (e.key === 'ArrowLeft') lightboxNav(-1);
       if (e.key === 'ArrowRight') lightboxNav(1);

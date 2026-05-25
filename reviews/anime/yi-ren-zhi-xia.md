@@ -5,8 +5,8 @@ year: 2016
 director: 王昕
 duration: 36集
 rating: 8.6
-tags: [动漫,剧集,玄幻,热血,搞笑]
-poster:
+tags: [国漫, 玄幻, 热血, 搞笑, 道家]
+poster: yi-ren-zhi-xia.webp
 ---
 
 > 不摇碧莲张楚岚，武当王也，诸葛青……这些名字本身就是国产动漫的名片

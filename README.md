@@ -42,13 +42,11 @@
 ├── knowledge.html          # 知识库
 ├── works.html              # 作品展示
 ├── tools.html              # 工具库
-├── danmaku.html            # 弹幕墙
 ├── style.css               # 全站样式
 ├── embedded_content.js     # 知识库文章内容（纯前端数据源）
 ├── image/                  # 图片资源（logo / favicon / 背景）
 ├── photos/                 # 摄影照片
 ├── docs/                   # 知识库 Markdown 源文件（9 分类）
-└── PROJECT_LOG.md          # 项目变更日志
 ```
 
 ## 设计灵感

@@ -5,8 +5,8 @@ year: 2020
 director: 朴性厚
 duration: 47集
 rating: 8.7
-tags: [动漫,剧集,战斗,奇幻,热血]
-poster:
+tags: [日漫, 战斗, 奇幻, 热血, 诅咒, 哲学]
+poster: zhou-shu-hui-zhan.webp
 ---
 
 > 最强咒术师五条悟的"因为很强所以没问题"，背后是整个咒术界的腐朽与残酷

@@ -1,11 +1,12 @@
 ---
+poster: re-xue-chang-an.webp
 title: 热血长安
 sub: Hot Blood
 year: 2017
 director: 王骏晔
 duration: 32集
 rating: 7.8
-tags: [剧集,古装,悬疑,探案]
+tags: [国产,古装,悬疑,探案]
 ---
 
 > 大唐版"名侦探柯南"，单元案件节奏明快，推理部分诚意十足

@@ -1,6 +1,8 @@
 # 开发工具和辅助文件
 .workbuddy/
+.claude/
 PROJECT_LOG.md
+preview.bat
 
 # 临时文件和构建产物
 node_modules/

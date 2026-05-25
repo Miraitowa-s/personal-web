@@ -3,10 +3,18 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="周云飞的个人主页——星空山野。摄影、吉他、DIY、编程，记录一个万物皆有趣的折腾党。"/>
+  <meta property="og:title" content="周云飞 · 星空山野"/>
+  <meta property="og:description" content="摄影、吉他、DIY、编程——记录一个万物皆有趣的折腾党。"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="image/pic.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
   <title>周云飞 · 星空山野</title>
   <link rel="icon" type="image/svg+xml" href="image/favicon.svg" media="(prefers-color-scheme: light)"/>
   <link rel="icon" type="image/svg+xml" href="image/favicon-dark.svg" media="(prefers-color-scheme: dark)"/>
-  <link rel="stylesheet" href="style.css?v=20250325"/>
+  <link rel="stylesheet" href="css/style.css?v=20250325"/>
+  <link rel="preload" as="image" href="image/pic.jpg"/>
 </head>
 <body>
 
@@ -17,11 +25,9 @@
   </a>
   <div class="nav-links">
     <a href="#about">关于</a>
-    <a href="#life-track">人生轨迹</a>
     <a href="#works">创作与收藏</a>
     <a href="knowledge.html">知识库</a>
-    <a href="#journey">大事记</a>
-    <a href="#">简历</a>
+    <a href="resume.html">简历</a>
   </div>
   <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="切换明暗模式">🌙</button>
   <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="菜单">
@@ -32,10 +38,8 @@
 <!-- 移动端菜单 -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#about" onclick="closeMobileMenu()">关于</a>
-  <a href="#life-track" onclick="closeMobileMenu()">人生轨迹</a>
   <a href="#works" onclick="closeMobileMenu()">创作与收藏</a>
   <a href="knowledge.html">知识库</a>
-  <a href="#journey" onclick="closeMobileMenu()">大事记</a>
   <a href="resume.html">简历</a>
 </div>
 <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
@@ -59,9 +63,6 @@
   </div>
 </section>
 
-<!-- 页面过渡遮罩 -->
-<div class="page-transition" id="pageTransition"></div>
-
 <!-- ========== ABOUT ========== -->
 <section id="about" class="reveal">
   <div class="container">
@@ -78,16 +79,17 @@
       </div>
       <div class="about-body">
         <p>我是周云飞。</p>
-        <p>一名 “装备齐全、技术随缘” 的业余爱好者</p>
-        <p>手里的相机，拍不出眼里的风景</p>
-        <p>平板里的绘画软件，画不出脑子里的画面</p>
-        <p>吉他缩在墙角，等着我哪天重拾三分钟热度</p>
-        <p>手工也试过，无奈被电路知识狠狠劝退</p>
-        <p>虽然技能点还没点满</p>
-        <p>但对创造的热情一直在线</p>
-        <p>主打一个：重在参与，乐在其中</p>
-        <p>🦭梦想：</p>
-        <p>把这些半吊子爱好，一个个慢慢练出点样子</p>
+        <p>一名 “万物皆有趣，一事未精通” 的业余爱好者</p>
+        <p>取景框装得下山河，快门一按全变了味</p>
+        <p>画板开了灰尘，灵感死在草稿层</p>
+        <p>吉他一摸就来劲，一放就是小半年</p>
+        <p>路亚入水三百次，却全程陪我喂龟</p>
+        <p>但每次重新拿起来</p>
+        <p>那股劲还是在的</p>
+        <p>我想这大概就是热爱的形状</p>
+        <p>不是一往无前，是屡败屡来</p>
+        <p>总有一天</p>
+        <p>把这些坑一个个填上</p>
         <p>带着相机和好心情，和喜欢的人一起环游世界</p>
       </div>
     </div>
@@ -113,14 +115,14 @@
         <div class="lc-dot"></div>
         <div class="lc-card">
           <div class="lc-media">
-            <img src="My Journey/18年6月/xian travel01.jpg" alt="西安旅行">
+            <img src="journey/18年6月/xian travel01.jpg" alt="西安旅行">
             <span class="lc-media-tag">📷 2张</span>
           </div>
           <div class="lc-body">
             <div class="lc-title">烟火长安</div>
             <div class="lc-desc">城墙之上，看朝暮流转；街巷深处，听千年低语。那年夏天，我把脚步借给了古都。</div>
           </div>
-          <input type="hidden" value="My Journey/18年6月/xian travel01.jpg|My Journey/18年6月/xian travel02.jpg">
+          <input type="hidden" value="journey/18年6月/xian travel01.jpg|journey/18年6月/xian travel02.jpg">
         </div>
       </div>
 
@@ -130,14 +132,14 @@
         <div class="lc-dot"></div>
         <div class="lc-card">
           <div class="lc-media">
-            <img src="My Journey/22年9月/79774230169a9e32ee0e325a56856fd6.jpg" alt="2022年9月">
+            <img src="journey/22年9月/79774230169a9e32ee0e325a56856fd6.jpg" alt="2022年9月">
             <span class="lc-media-tag">📷 1张</span>
           </div>
           <div class="lc-body">
             <div class="lc-title">一起同窗</div>
             <div class="lc-desc">敬这三年的埋头苦读，敬食堂里永远在排的长队。我们带着期待与忐忑，走进了崭新的世界。</div>
           </div>
-          <input type="hidden" value="My Journey/22年9月/79774230169a9e32ee0e325a56856fd6.jpg">
+          <input type="hidden" value="journey/22年9月/79774230169a9e32ee0e325a56856fd6.jpg">
         </div>
       </div>
 
@@ -147,14 +149,14 @@
         <div class="lc-dot"></div>
         <div class="lc-card">
           <div class="lc-media">
-            <img src="My Journey/23年6月/graduate01.jpg" alt="毕业季">
+            <img src="journey/23年6月/graduate01.jpg" alt="毕业季">
             <span class="lc-media-tag">📷 2张</span>
           </div>
           <div class="lc-body">
             <div class="lc-title">青春终章</div>
             <div class="lc-desc">穿上毕业服那一刻，四年的时光忽然有了重量。愿此去繁花相伴，前路星光相随。</div>
           </div>
-          <input type="hidden" value="My Journey/23年6月/graduate01.jpg|My Journey/23年6月/graduate02.jpg">
+          <input type="hidden" value="journey/23年6月/graduate01.jpg|journey/23年6月/graduate02.jpg">
         </div>
       </div>
 
@@ -164,14 +166,14 @@
         <div class="lc-dot"></div>
         <div class="lc-card">
           <div class="lc-media">
-            <img src="My Journey/23年9月/yang wedding.jpg" alt="婚礼">
+            <img src="journey/23年9月/100.jpg" alt="婚礼">
             <span class="lc-media-tag">📷 1张</span>
           </div>
           <div class="lc-body">
             <div class="lc-title">“春城”贺喜</div>
             <div class="lc-desc">昆明的阳光总是刚刚好，就像你们俩站在一起的样子。往后日子，愿你们像这座城一样，慢慢过，好好爱。</div>
           </div>
-          <input type="hidden" value="My Journey/23年9月/yang wedding.jpg">
+          <input type="hidden" value="journey/23年9月/yang wedding.jpg">
         </div>
       </div>
 
@@ -181,14 +183,14 @@
         <div class="lc-dot"></div>
         <div class="lc-card">
           <div class="lc-media">
-            <img src="My Journey/25年4月/微信图片_20260430101249_2832_35.jpg" alt="2025年4月">
+            <img src="journey/25年4月/微信图片_20260430101249_2832_35.jpg" alt="2025年4月">
             <span class="lc-media-tag">📷 3张</span>
           </div>
           <div class="lc-body">
             <div class="lc-title">不负相遇</div>
             <div class="lc-desc">四月的风吹过，带来了新的故事。贵阳街头的蘸水藏着生活里那些普通却珍贵的片刻。</div>
           </div>
-          <input type="hidden" value="My Journey/25年4月/微信图片_20260430101249_2832_35.jpg|My Journey/25年4月/微信图片_20260430101251_2833_35.jpg|My Journey/25年4月/微信图片_20260430101251_2834_35.jpg">
+          <input type="hidden" value="journey/25年4月/微信图片_20260430101249_2832_35.jpg|journey/25年4月/微信图片_20260430101251_2833_35.jpg|journey/25年4月/微信图片_20260430101251_2834_35.jpg">
         </div>
       </div>
 
@@ -198,7 +200,7 @@
         <div class="lc-dot"></div>
         <div class="lc-card">
           <div class="lc-media">
-            <video src="My Journey/26年4月/bingbing wedding.mp4" muted loop playsinline></video>
+            <video src="journey/26年4月/bingbing wedding.mp4" muted loop playsinline></video>
             <div class="lc-play">▶</div>
             <span class="lc-media-tag">🎬 视频</span>
           </div>
@@ -206,7 +208,7 @@
             <div class="lc-title">“柿”饼之禧</div>
             <div class="lc-desc">同样的誓言，不同的面孔，同样动人。愿你们此后每一天，都像今天这般明亮。</div>
           </div>
-          <input type="hidden" value="video:My Journey/26年4月/bingbing wedding.mp4">
+          <input type="hidden" value="video:journey/26年4月/bingbing wedding.mp4">
         </div>
       </div>
 
@@ -416,7 +418,9 @@
   }
 
   // 恢复主题偏好
-  if (localStorage.getItem('theme') === 'dark') {
+  const savedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
     toggleTheme();
   }
 

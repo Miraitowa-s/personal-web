@@ -1,11 +1,12 @@
 ---
+poster: xing-han-can-lan.webp
 title: 星汉灿烂
 sub: Love Like the Galaxy
 year: 2022
 director: 费振翔
 duration: 55集
 rating: 8.2
-tags: [剧集,古装,爱情,家族]
+tags: [国产,古装,爱情,家族]
 ---
 
 > 程少商在家族与朝堂之间挣扎求存，与凌不疑的羁绊从误解到相知，是一场漫长的双向救赎

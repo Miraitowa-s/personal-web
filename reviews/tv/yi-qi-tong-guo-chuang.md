@@ -1,11 +1,12 @@
 ---
+poster: yi-qi-tong-guo-chuang.webp
 title: 一起同过窗
 sub: Together Through the Window
 year: 2016
 director: 毕鑫业
 duration: 34集
 rating: 9.2
-tags: [剧集,校园,青春,喜剧]
+tags: [国产,校园,青春,喜剧]
 ---
 
 > 最真实的大学青春剧，没有狗血没有滤镜，只有一群普通人在最美好的年纪里笨拙地成长

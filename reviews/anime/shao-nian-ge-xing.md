@@ -5,8 +5,8 @@ year: 2018
 director: 陈升垚
 duration: 26集
 rating: 8.0
-tags: [动漫,剧集,武侠,热血]
-poster:
+tags: [国漫, 武侠, 热血, 江湖]
+poster: shao-nian-ge-xing.webp
 ---
 
 > 废柴皇子带着个不靠谱的和尚闯江湖，一路打怪升级的热血武侠梦

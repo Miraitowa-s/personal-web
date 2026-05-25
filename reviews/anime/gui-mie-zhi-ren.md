@@ -5,8 +5,8 @@ year: 2019
 director: 外崎春雄
 duration: 44集
 rating: 9.0
-tags: [动漫,剧集,战斗,奇幻,热血]
-poster:
+tags: [日漫, 战斗, 奇幻, 热血, 亲情, 神作画]
+poster: gui-mie-zhi-ren.webp
 ---
 
 > 飞碟社用燃烧的经费证明了：好的动画演出，可以让一个王道故事变成现象级

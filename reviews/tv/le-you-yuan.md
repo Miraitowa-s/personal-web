@@ -1,11 +1,12 @@
 ---
+poster: le-you-yuan.webp
 title: 乐游原
 sub: The Land of Miracles
 year: 2023
 director: 郑伟文
 duration: 40集
 rating: 7.0
-tags: [剧集,古装,爱情,权谋]
+tags: [国产,古装,爱情,权谋]
 ---
 
 > 乱世之中，两个立场对立的人相爱却无法相守，权谋与深情难以两全

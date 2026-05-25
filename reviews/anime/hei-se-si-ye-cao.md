@@ -5,8 +5,8 @@ year: 2017
 director: 田畑寿嗣
 duration: 170集
 rating: 7.4
-tags: [动漫,剧集,奇幻,热血,魔法]
-poster:
+tags: [日漫, 奇幻, 热血, 魔法, 王道, 长篇]
+poster: hei-se-si-ye-cao.webp
 ---
 
 > 没有魔力的少年偏要当魔法帝，最王道的设定配上最执拗的嘶吼

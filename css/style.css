@@ -215,7 +215,7 @@ nav.scrolled .theme-toggle {
   transition:opacity 0.8s ease;
 }
 .hero-bg.loaded {
-  background:url('image/pic.jpg') center/cover no-repeat;
+  background:url('../image/pic.jpg') center/cover no-repeat;
 }
 .hero-bg.fade-in {
   opacity:1;
@@ -537,7 +537,6 @@ section { padding:100px 8%; }
   font-weight:600;
 }
 
-.b-video  { background:#fff0f0; color:#e05252; }
 .b-web    { background:#e8fff2; color:#1a9e5a; }
 .b-write  { background:#f4e8ff; color:#8a35d6; }
 .b-photo  { background:#fff8e8; color:#c47d1a; }
@@ -705,7 +704,7 @@ section { padding:100px 8%; }
    FOOTER
    ============================================================ */
 footer {
-  background-image:url('image/pic.jpg');
+  background-image:url('../image/pic.jpg');
   background-position:center 30%;
   background-size:cover;
   background-repeat:no-repeat;
@@ -791,7 +790,7 @@ body.dark {
   --border:  #2e2e34;
   --text:    #f0f0f2;
   --text2:   #a0a0aa;
-  --text3:   #555560;
+  --text3:   #6b6b78;
   --page-bg: #0f0f11;
   background:var(--page-bg);
 }
@@ -1211,14 +1210,3 @@ body.dark .lc-media { background: #2a2a32; }
   opacity:1; transform:translateY(0);
 }
 
-/* 页面过渡效果 */
-.page-transition {
-  position:fixed; inset:0; z-index:1000;
-  background:var(--page-bg);
-  opacity:0; pointer-events:none;
-  transition:opacity 0.35s ease;
-}
-.page-transition.active {
-  opacity:1; pointer-events:all;
-}
-body.dark .page-transition { background:var(--page-bg); }

@@ -5,8 +5,8 @@ year: 2017
 director: 若林厚史
 duration: 12集
 rating: 8.3
-tags: [动漫,剧集,校园,恋爱,搞笑]
-poster:
+tags: [日漫, 校园, 恋爱, 搞笑, 单元剧, 甜宠]
+poster: tu-ran-xi-huan-ni.webp
 ---
 
 > 如果恋爱有教科书，那一定是这本——十几对情侣的恋爱众生相，每一段都甜到蛀牙

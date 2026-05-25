@@ -1,11 +1,12 @@
 ---
+poster: gu-si-xiang-qu.webp
 title: 古相思曲
 sub: The Journey of Chong Zi
 year: 2023
 director: 知竹
 duration: 14集
 rating: 8.8
-tags: [剧集,古装,爱情,奇幻]
+tags: [国产,古装,爱情,奇幻]
 ---
 
 > 逆流而上的爱情，她初见他时他已是暮年，他初见她时她尚是少女——时间错位的宿命感令人窒息

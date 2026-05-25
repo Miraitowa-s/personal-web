@@ -1,11 +1,12 @@
 ---
+poster: dian-ran-ni-wen-nuan-wo.webp
 title: 点燃我温暖你
 sub: Lighter & Princess
 year: 2022
 director: 刘俊杰
 duration: 40集
 rating: 7.5
-tags: [剧集,都市,爱情,青春]
+tags: [国产,都市,爱情,青春]
 ---
 
 > 天才少年的偏执与深情，与乖乖女的勇敢蜕变，交织成一段刻骨铭心的青春虐恋

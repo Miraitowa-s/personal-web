@@ -1,11 +1,12 @@
 ---
+poster: ye-tian-zi.webp
 title: 夜天子
 sub: Night Emperor
 year: 2018
 director: 陈皓威
 duration: 40集
 rating: 7.6
-tags: [剧集,古装,悬疑,冒险]
+tags: [国产,古装,悬疑,冒险]
 ---
 
 > 一个小人物阴差阳错卷入官场与江湖的漩涡，靠着歪打正着和几分运气，走出了一条歪路正途

@@ -1,11 +1,12 @@
 ---
+poster: da-song-shao-nian-zhi.webp
 title: 大宋少年志
 sub: Young Blood
 year: 2019
 director: 伊峥、王飞、彭学军、罗志刚、刘崇杰
 duration: 42集
 rating: 8.5
-tags: [剧集,古装,悬疑,热血]
+tags: [国产,古装,悬疑,热血]
 ---
 
 > 七个性格迥异的少年被卷入暗流涌动的朝堂博弈，在秘阁中成长为真正的搭档

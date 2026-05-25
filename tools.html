@@ -7,32 +7,16 @@
   <meta property="og:title" content="工具库 · 周云飞"/>
   <meta property="og:description" content="精选 7 大类实用工具导航，支持关键词快速搜索。"/>
   <meta property="og:type" content="website"/>
-  <meta property="og:image" content="https://yourdomain.com/image/pic.jpg"/>
+  <meta property="og:image" content="image/pic.jpg"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <title>工具库 · 周云飞</title>
   <link rel="icon" type="image/svg+xml" href="image/favicon.svg" media="(prefers-color-scheme: light)"/>
   <link rel="icon" type="image/svg+xml" href="image/favicon-dark.svg" media="(prefers-color-scheme: dark)"/>
+  <link rel="stylesheet" href="css/common.css"/>
   <style>
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    :root {
-      --bg:      #f5f5f3;
-      --surface: #ffffff;
-      --border:  #e6e6e2;
-      --text:    #18181b;
-      --text2:   #52525b;
-      --text3:   #a1a1aa;
-      --accent:  #4f6ef7;
-      --accent:  #4f6ef7;
-      --r:       12px;
-      --sh:      0 6px 28px rgba(0,0,0,0.09);
-      --sh-sm:   0 2px 10px rgba(0,0,0,0.06);
-      --t:       0.22s ease;
-    }
-    html { scroll-behavior:smooth; scroll-padding-top:80px; }
+    :root { --r: 12px; }
     body {
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-      color:var(--text); line-height:1.7; overflow-x:hidden;
       background:
         radial-gradient(ellipse 80% 60% at 50% 0%, rgba(79,110,247,.12) 0%, transparent 70%),
         radial-gradient(ellipse 60% 50% at 85% 85%, rgba(138,53,214,.08) 0%, transparent 60%),
@@ -40,62 +24,6 @@
         #f5f5f3;
       background-attachment:fixed;
     }
-    a { text-decoration:none; color:inherit; }
-
-    /* NAV */
-    nav {
-      position:fixed; top:0; left:0; right:0; z-index:300;
-      height:72px; display:flex; align-items:center; justify-content:space-between;
-      padding:0 8%;
-      background:rgba(245,245,243,.82); backdrop-filter:blur(20px);
-      -webkit-backdrop-filter:blur(20px);
-      border-bottom:1px solid rgba(0,0,0,.06);
-    }
-    .nav-logo {
-      display:flex; align-items:center; gap:.8rem;
-      text-decoration:none;
-      padding:8px 0;
-    }
-    .nav-logo img {
-      width:140px; height:auto;
-      flex-shrink:0; object-fit:contain;
-      display:block;
-    }
-    .nav-links { display:flex; gap:2rem; }
-    .nav-links a { font-size:0.95rem; color:var(--text2); transition:color var(--t); }
-    .nav-links a:hover { color:var(--text); }
-    .theme-toggle {
-      width:36px; height:36px; border-radius:50%;
-      border:1.5px solid var(--border); background:var(--surface);
-      display:flex; align-items:center; justify-content:center;
-      cursor:pointer; font-size:1rem; transition:all var(--t);
-    }
-    .theme-toggle:hover { background:var(--text); border-color:var(--text); filter:invert(1); }
-
-    /* 汉堡菜单（移动端） */
-    .hamburger {
-      display:none; width:36px; height:36px; border-radius:50%;
-      border:1.5px solid var(--border); background:var(--surface);
-      align-items:center; justify-content:center; cursor:pointer;
-      font-size:1.1rem; transition:all var(--t); flex-shrink:0;
-    }
-    .hamburger:hover { background:var(--text); border-color:var(--text); filter:invert(1); }
-    .hamburger svg { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; }
-    .mobile-menu {
-      display:none; position:fixed; top:72px; left:0; right:0; z-index:290;
-      background:var(--surface); border-bottom:1px solid var(--border);
-      box-shadow:0 12px 40px rgba(0,0,0,0.1); padding:0.5rem 0;
-      transform:translateY(-8px); opacity:0;
-      transition:transform 0.25s ease, opacity 0.25s ease; pointer-events:none;
-    }
-    .mobile-menu.open { transform:translateY(0); opacity:1; pointer-events:all; }
-    .mobile-menu a {
-      display:block; padding:.85rem 8%; font-size:.95rem;
-      color:var(--text2); transition:all var(--t);
-    }
-    .mobile-menu a:hover { background:var(--bg); color:var(--text); }
-    .mobile-menu-overlay { display:none; position:fixed; inset:0; z-index:280; background:rgba(0,0,0,0.2); }
-    .mobile-menu-overlay.show { display:block; }
 
     /* HERO */
     .hero {
@@ -294,18 +222,12 @@
 
     /* DARK */
     body.dark {
-      --bg:#111113; --surface:#1c1c1f; --border:#2e2e34;
-      --text:#f0f0f2; --text2:#b0b0bb; --text3:#666670;
-      --text:#f0f0f2; --text2:#b0b0bb; --text3:#666670;
       background:
         radial-gradient(ellipse 80% 60% at 50% 0%, rgba(79,110,247,.16) 0%, transparent 70%),
         radial-gradient(ellipse 60% 50% at 85% 85%, rgba(138,53,214,.12) 0%, transparent 60%),
         radial-gradient(ellipse 50% 40% at 5% 80%, rgba(26,158,90,.09) 0%, transparent 60%),
         #111113;
     }
-    body.dark nav { background:rgba(17,17,19,.9); }
-    body.dark .nav-links a { color:var(--text2); }
-    body.dark .nav-links a:hover { color:var(--text); }
     body.dark .search-input {
       background:rgba(28,28,31,0.8);
       border-color:var(--border);
@@ -321,15 +243,8 @@
       color:var(--bg);
       border-color:var(--text);
     }
-    body.dark .hamburger { border-color:rgba(255,255,255,.2); background:rgba(255,255,255,.08); color:#fff; }
-    body.dark .hamburger:hover { background:rgba(255,255,255,.9); color:#111; }
-    body.dark .mobile-menu { background:var(--surface); border-color:var(--border); }
-    body.dark .mobile-menu a:hover { background:rgba(255,255,255,.06); }
 
     @media(max-width:680px){
-      .nav-links { display:none; }
-      .hamburger { display:flex; }
-      .mobile-menu { display:block; }
     }
   </style>
 </head>
@@ -343,15 +258,14 @@
   <div class="nav-links">
     <a href="index.html#about">关于</a>
     <a href="index.html#works">作品</a>
-    <a href="index.html#journey">大事记</a>
     <a href="tools.html" style="color:var(--text);font-weight:600">工具库</a>
     <a href="knowledge.html">知识库</a>
     <a href="resume.html">简历</a>
   </div>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="切换明暗模式">🌙</button>
   <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="菜单">
     <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
   </button>
-  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="切换明暗模式">🌙</button>
 </nav>
 
 <!-- 移动端菜单遮罩 -->
@@ -359,7 +273,6 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html#about">关于</a>
   <a href="index.html#works">作品</a>
-  <a href="index.html#journey">大事记</a>
   <a href="tools.html" style="color:var(--text);font-weight:600">工具库</a>
   <a href="knowledge.html">知识库</a>
   <a href="resume.html">简历</a>
@@ -394,7 +307,7 @@
     <span class="icon">🤖</span>
     <span>AI 智能</span>
   </div>
-  <p class="cat-desc">AI 对话、大模型平台与 AI 工具，覆盖工作学习各场景。</p>
+  <p class="cat-desc">AI 对话、大模型平台、AI 编程与 AI 搜索，覆盖工作学习各场景。</p>
   <div class="tool-grid" data-category="ai">
     <a href="https://chat.openai.com" target="_blank" class="tcard" data-category="ai">
       <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🤖</div>
@@ -503,6 +416,78 @@
       </div>
       <div class="tcard-badge badge-ai">AI</div>
     </a>
+
+    <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" class="tcard" data-category="ai">
+      <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">💻</div>
+      <div class="tcard-info">
+        <div class="tcard-name">Claude Code</div>
+        <div class="tcard-desc">Anthropic 终端 AI 编程助手，理解整个代码库</div>
+      </div>
+      <div class="tcard-badge badge-ai">AI编程</div>
+    </a>
+
+    <a href="https://www.cursor.com" target="_blank" class="tcard" data-category="ai">
+      <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">✏️</div>
+      <div class="tcard-info">
+        <div class="tcard-name">Cursor</div>
+        <div class="tcard-desc">AI 原生代码编辑器，基于 VS Code 内核</div>
+      </div>
+      <div class="tcard-badge badge-ai">AI编程</div>
+    </a>
+
+    <a href="https://windsurf.com" target="_blank" class="tcard" data-category="ai">
+      <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🏄</div>
+      <div class="tcard-info">
+        <div class="tcard-name">Windsurf</div>
+        <div class="tcard-desc">Codeium 出品 AI 编辑器，轻量流畅，免费额度多</div>
+      </div>
+      <div class="tcard-badge badge-ai">AI编程</div>
+    </a>
+
+    <a href="https://github.com/features/copilot" target="_blank" class="tcard" data-category="ai">
+      <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🤝</div>
+      <div class="tcard-info">
+        <div class="tcard-name">GitHub Copilot</div>
+        <div class="tcard-desc">AI 代码补全，IDE 插件形态，用户基数最大</div>
+      </div>
+      <div class="tcard-badge badge-ai">AI编程</div>
+    </a>
+
+    <a href="https://v0.dev" target="_blank" class="tcard" data-category="ai">
+      <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🎨</div>
+      <div class="tcard-info">
+        <div class="tcard-name">v0</div>
+        <div class="tcard-desc">Vercel 出品 AI 生成前端 UI，一句话生成组件</div>
+      </div>
+      <div class="tcard-badge badge-ai">AI编程</div>
+    </a>
+
+    <a href="https://bolt.new" target="_blank" class="tcard" data-category="ai">
+      <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">⚡</div>
+      <div class="tcard-info">
+        <div class="tcard-name">bolt.new</div>
+        <div class="tcard-desc">浏览器内 AI 全栈开发，即时预览零配置</div>
+      </div>
+      <div class="tcard-badge badge-ai">AI编程</div>
+    </a>
+
+    <a href="https://replit.com" target="_blank" class="tcard" data-category="ai">
+      <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🔄</div>
+      <div class="tcard-info">
+        <div class="tcard-name">Replit</div>
+        <div class="tcard-desc">在线 AI IDE，一键部署，跨设备编码</div>
+      </div>
+      <div class="tcard-badge badge-ai">AI编程</div>
+    </a>
+
+    <a href="https://www.perplexity.ai" target="_blank" class="tcard" data-category="ai">
+      <div class="tcard-icon" style="background:rgba(79,110,247,.1);color:#4f6ef7">🔎</div>
+      <div class="tcard-info">
+        <div class="tcard-name">Perplexity</div>
+        <div class="tcard-desc">AI 搜索引擎，带来源引用，比传统搜索更高效</div>
+      </div>
+      <div class="tcard-badge badge-ai">AI搜索</div>
+    </a>
   </div>
 
   <!-- 2. 桌面工具 -->
@@ -510,7 +495,7 @@
     <span class="icon">⚙️</span>
     <span>桌面工具</span>
   </div>
-  <p class="cat-desc">Windows/Mac 本地效率软件：搜索、截图、系统增强、媒体播放、视频剪辑。</p>
+  <p class="cat-desc">Windows/Mac 本地效率软件：搜索、截图、系统增强、终端、媒体播放、视频剪辑。</p>
   <div class="tool-grid" data-category="desktop">
     <a href="https://www.voidtools.com/zh-cn" target="_blank" class="tcard" data-category="desktop">
       <div class="tcard-icon" style="background:rgba(59,130,246,.1);color:#3b82f6">🔍</div>
@@ -654,6 +639,51 @@
         <div class="tcard-desc">开源直播软件，录制推流</div>
       </div>
       <div class="tcard-badge badge-desktop">录屏</div>
+    </a>
+
+    <a href="https://raycast.com" target="_blank" class="tcard" data-category="desktop">
+      <div class="tcard-icon" style="background:rgba(59,130,246,.1);color:#3b82f6">🚀</div>
+      <div class="tcard-info">
+        <div class="tcard-name">Raycast</div>
+        <div class="tcard-desc">macOS 超级启动器，替代 Spotlight + Alfred</div>
+      </div>
+      <div class="tcard-badge badge-desktop">启动器</div>
+    </a>
+
+    <a href="https://u.tools" target="_blank" class="tcard" data-category="desktop">
+      <div class="tcard-icon" style="background:rgba(59,130,246,.1);color:#3b82f6">🔧</div>
+      <div class="tcard-info">
+        <div class="tcard-name">uTools</div>
+        <div class="tcard-desc">跨平台超级启动器，插件生态丰富</div>
+      </div>
+      <div class="tcard-badge badge-desktop">启动器</div>
+    </a>
+
+    <a href="https://github.com/kingToolbox/WindTerm" target="_blank" class="tcard" data-category="desktop">
+      <div class="tcard-icon" style="background:rgba(59,130,246,.1);color:#3b82f6">🌐</div>
+      <div class="tcard-info">
+        <div class="tcard-name">WindTerm</div>
+        <div class="tcard-desc">开源终端 SSH 客户端，性能极强</div>
+      </div>
+      <div class="tcard-badge badge-desktop">终端</div>
+    </a>
+
+    <a href="https://www.warp.dev" target="_blank" class="tcard" data-category="desktop">
+      <div class="tcard-icon" style="background:rgba(59,130,246,.1);color:#3b82f6">🌀</div>
+      <div class="tcard-info">
+        <div class="tcard-name">Warp</div>
+        <div class="tcard-desc">AI 驱动终端，现代 Rust 实现</div>
+      </div>
+      <div class="tcard-badge badge-desktop">终端</div>
+    </a>
+
+    <a href="https://1password.com" target="_blank" class="tcard" data-category="desktop">
+      <div class="tcard-icon" style="background:rgba(59,130,246,.1);color:#3b82f6">🔐</div>
+      <div class="tcard-info">
+        <div class="tcard-name">1Password</div>
+        <div class="tcard-desc">密码管理器，跨平台浏览器集成</div>
+      </div>
+      <div class="tcard-badge badge-desktop">安全</div>
     </a>
   </div>
 
@@ -833,6 +863,24 @@
       </div>
       <div class="tcard-badge badge-learn">Python教程</div>
     </a>
+
+    <a href="https://www.huke88.com" target="_blank" class="tcard" data-category="learning">
+      <div class="tcard-icon" style="background:rgba(139,92,246,.1);color:#8b5cf6">🎨</div>
+      <div class="tcard-info">
+        <div class="tcard-name">虎课网</div>
+        <div class="tcard-desc">设计/摄影/剪辑在线教程平台</div>
+      </div>
+      <div class="tcard-badge badge-learn">技能教程</div>
+    </a>
+
+    <a href="https://www.xuetangx.com" target="_blank" class="tcard" data-category="learning">
+      <div class="tcard-icon" style="background:rgba(139,92,246,.1);color:#8b5cf6">🏛️</div>
+      <div class="tcard-info">
+        <div class="tcard-name">学堂在线</div>
+        <div class="tcard-desc">清华大学发起的在线教育平台</div>
+      </div>
+      <div class="tcard-badge badge-learn">高校课程</div>
+    </a>
   </div>
 
   <!-- 5. 设计创意 -->
@@ -840,7 +888,7 @@
     <span class="icon">🎨</span>
     <span>设计创意</span>
   </div>
-  <p class="cat-desc">设计工具、素材资源、摄影后期，激发创意灵感。</p>
+  <p class="cat-desc">设计工具、素材资源、AI 绘画、摄影后期，激发创意灵感。</p>
   <div class="tool-grid" data-category="design">
     <a href="https://modao.cc/" target="_blank" class="tcard" data-category="design">
       <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">🏷️</div>
@@ -985,6 +1033,42 @@
       </div>
       <div class="tcard-badge badge-design">图片查看</div>
     </a>
+
+    <a href="https://www.midjourney.com" target="_blank" class="tcard" data-category="design">
+      <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">🖼️</div>
+      <div class="tcard-info">
+        <div class="tcard-name">Midjourney</div>
+        <div class="tcard-desc">AI 图像生成，艺术质感最佳</div>
+      </div>
+      <div class="tcard-badge badge-design">AI绘画</div>
+    </a>
+
+    <a href="https://lumalabs.ai" target="_blank" class="tcard" data-category="design">
+      <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">🧊</div>
+      <div class="tcard-info">
+        <div class="tcard-name">Luma AI</div>
+        <div class="tcard-desc">AI 3D 模型生成，NeRF/Splat</div>
+      </div>
+      <div class="tcard-badge badge-design">AI 3D</div>
+    </a>
+
+    <a href="https://www.framer.com" target="_blank" class="tcard" data-category="design">
+      <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">🏗️</div>
+      <div class="tcard-info">
+        <div class="tcard-name">Framer</div>
+        <div class="tcard-desc">无代码建站工具，设计师友好</div>
+      </div>
+      <div class="tcard-badge badge-design">建站</div>
+    </a>
+
+    <a href="https://penpot.app" target="_blank" class="tcard" data-category="design">
+      <div class="tcard-icon" style="background:rgba(217,119,6,.1);color:#d97706">🖊️</div>
+      <div class="tcard-info">
+        <div class="tcard-name">Penpot</div>
+        <div class="tcard-desc">开源 UI 设计工具，Figma 替代</div>
+      </div>
+      <div class="tcard-badge badge-design">设计工具</div>
+    </a>
   </div>
 
   <!-- 6. 音乐乐器 -->
@@ -992,7 +1076,7 @@
     <span class="icon">🎵</span>
     <span>音乐乐器</span>
   </div>
-  <p class="cat-desc">乐谱、音频制作、乐器学习，音乐创作全链路工具。</p>
+  <p class="cat-desc">乐谱、音频制作、乐器学习、AI 音乐，音乐创作全链路工具。</p>
   <div class="tool-grid" data-category="music">
     <a href="https://www.ultimate-guitar.com" target="_blank" class="tcard" data-category="music">
       <div class="tcard-icon" style="background:rgba(234,88,12,.1);color:#ea580c">🎸</div>
@@ -1100,6 +1184,15 @@
         <div class="tcard-desc">免费乐谱与音乐资源</div>
       </div>
       <div class="tcard-badge badge-music">乐谱</div>
+    </a>
+
+    <a href="https://suno.com" target="_blank" class="tcard" data-category="music">
+      <div class="tcard-icon" style="background:rgba(234,88,12,.1);color:#ea580c">🎶</div>
+      <div class="tcard-info">
+        <div class="tcard-name">Suno</div>
+        <div class="tcard-desc">AI 音乐创作，输入文字生成歌曲</div>
+      </div>
+      <div class="tcard-badge badge-music">AI音乐</div>
     </a>
   </div>
 

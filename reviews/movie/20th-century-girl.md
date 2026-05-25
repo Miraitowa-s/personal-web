@@ -5,7 +5,7 @@ year: 2022
 director: 方宥力
 duration: 119 分钟
 rating: 8.0
-tags: [电影,校园,爱情,剧情]
+tags: [韩剧, 校园, 爱情, 剧情, 遗憾]
 poster: 20th-century-girl.webp
 ---
 

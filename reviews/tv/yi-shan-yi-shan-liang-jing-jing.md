@@ -1,11 +1,12 @@
 ---
+poster: yi-shan-yi-shan-liang-jing-jing.webp
 title: 一闪一闪亮星星
 sub: Shining For One Thing
 year: 2022
 director: 陈小明
 duration: 24集
 rating: 8.0
-tags: [剧集,校园,爱情,穿越]
+tags: [国产,校园,爱情,穿越]
 ---
 
 > 重新回到高三，想要改变所有人的命运，却发现有些遗憾不是重来就能弥补的

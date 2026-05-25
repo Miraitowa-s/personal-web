@@ -5,8 +5,8 @@ year: 2014
 director: 伊藤健太郎
 duration: 22集
 rating: 9.1
-tags: [动漫,剧集,音乐,青春,爱情]
-poster:
+tags: [日漫, 音乐, 青春, 爱情, 治愈, 催泪]
+poster: si-yue-shi-ni-de-huang-yan.webp
 ---
 
 > 谎言编织的春天，在黑白琴键上奏出最绚烂的色彩，而那个让你重新听见旋律的人，却注定无法留在你的春天里

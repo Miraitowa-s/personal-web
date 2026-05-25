@@ -5,8 +5,8 @@ year: 2016
 director: 卢恒宇
 duration: 24集
 rating: 8.2
-tags: [动漫,剧集,热血,奇幻,战斗]
-poster:
+tags: [国漫, 热血, 奇幻, 战斗, 兄弟情]
+poster: zhen-hun-jie.webp
 ---
 
 > 守护灵与寄灵人的羁绊，兄弟情比什么守护灵都燃

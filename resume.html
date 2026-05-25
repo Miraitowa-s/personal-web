@@ -6,57 +6,26 @@
   <title>个人简历 · 周云飞</title>
   <link rel="icon" type="image/svg+xml" href="image/favicon.svg" media="(prefers-color-scheme: light)"/>
   <link rel="icon" type="image/svg+xml" href="image/favicon-dark.svg" media="(prefers-color-scheme: dark)"/>
+  <link rel="stylesheet" href="css/common.css"/>
   <style>
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    :root {
-      --bg:#f5f5f3; --surface:#fff; --border:#e6e6e2;
-      --text:#1a1a1a; --text2:#666; --text3:#aaa;
-      --accent:#4f6ef7; --r:14px;
-      --sh:0 6px 28px rgba(0,0,0,0.09);
-      --sh-sm:0 2px 12px rgba(0,0,0,0.07);
-      --t:0.22s ease;
-    }
-    html { scroll-behavior:smooth; }
-    body {
-      background:var(--bg); color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB",sans-serif;
-      line-height:1.7; overflow-x:hidden;
-    }
-    a { text-decoration:none; color:inherit; }
-
-    /* ===== NAV ===== */
+    /* resume 页面自定义 nav（blur 量不同） */
     nav {
-      position:fixed; top:0; left:0; right:0; z-index:300;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:0 5%; height:60px;
       background:rgba(245,245,243,.88);
-      border-bottom:1px solid var(--border);
       backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
     }
-    .nav-logo { display:flex; align-items:center; gap:.8rem; text-decoration:none; }
-    .nav-logo img { width:140px; height:auto; object-fit:contain; display:block; }
-    .nav-links { display:flex; gap:2rem; }
-    .nav-links a { font-size:0.95rem; color:var(--text2); transition:color var(--t); }
-    .nav-links a:hover { color:var(--text); }
-    .nav-links a.active { color:var(--text); font-weight:600; }
-    .theme-toggle {
-      background:none; border:1px solid var(--border); border-radius:8px;
-      padding:4px 10px; cursor:pointer; font-size:1rem; color:var(--text2);
-      transition:all var(--t); margin-left:1rem;
-    }
-    .theme-toggle:hover { background:var(--surface); }
+
+    /* resume 页面自定义移动端菜单（右侧弹出） */
     .hamburger {
       display:none; flex-direction:column; justify-content:center; gap:5px;
       background:none; border:none; cursor:pointer; padding:6px;
     }
     .hamburger svg { width:22px; height:22px; stroke:var(--text); stroke-width:2; fill:none; stroke-linecap:round; }
-
-    /* Mobile menu */
     .mobile-menu-overlay {
       display:none; position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:280;
     }
     .mobile-menu {
-      display:none; position:fixed; top:60px; right:0; z-index:290;
+      display:none; position:fixed; top:72px; right:0; z-index:290;
       background:var(--surface); border-left:1px solid var(--border); border-bottom:1px solid var(--border);
       width:200px; padding:1rem 0; border-radius:0 0 0 12px;
     }
@@ -69,7 +38,7 @@
 
     /* ===== PAGE HERO ===== */
     .page-hero {
-      padding: 110px 5% 50px;
+      padding: 120px 5% 50px;
       max-width:1100px; margin:0 auto;
     }
     .eyebrow {
@@ -180,17 +149,16 @@
     footer a:hover { color:var(--text); }
 
     /* ===== DARK MODE ===== */
-    body.dark {
-      --bg:#111113; --surface:#1c1c1f; --border:rgba(255,255,255,.09);
-      --text:#f0f0ef; --text2:#999; --text3:#555;
-    }
     body.dark nav { background:rgba(17,17,19,.92); }
     body.dark .mobile-menu { background:var(--surface); }
+    body.dark .rs { background:var(--surface); border-color:var(--border); }
+    body.dark .profile-card { background:var(--surface); border-color:var(--border); }
+    body.dark .chip { background:var(--surface); border-color:var(--border); color:var(--text2); }
+    body.dark .contact-link { background:var(--surface); border-color:var(--border); color:var(--text2); }
+    body.dark .skill-bar { background:var(--border); }
 
     /* ===== RESPONSIVE ===== */
     @media(max-width:700px) {
-      .nav-links { display:none; }
-      .hamburger { display:flex; }
       .resume-wrap { grid-template-columns:1fr; }
       .resume-sidebar { order:-1; }
     }
@@ -204,21 +172,21 @@
   </a>
   <div class="nav-links">
     <a href="index.html#about">关于</a>
-    <a href="works.html">作品</a>
+    <a href="index.html#works">作品</a>
     <a href="tools.html">工具库</a>
     <a href="knowledge.html">知识库</a>
     <a href="resume.html" class="active">简历</a>
   </div>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="切换明暗模式">🌙</button>
   <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="菜单">
     <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
   </button>
-  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="切换明暗模式">🌙</button>
 </nav>
 
 <div class="mobile-menu-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html#about" onclick="closeMobileMenu()">关于</a>
-  <a href="works.html" onclick="closeMobileMenu()">作品</a>
+  <a href="index.html#works" onclick="closeMobileMenu()">作品</a>
   <a href="tools.html" onclick="closeMobileMenu()">工具库</a>
   <a href="knowledge.html" onclick="closeMobileMenu()">知识库</a>
   <a href="resume.html" onclick="closeMobileMenu()">简历</a>
