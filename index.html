@@ -13,8 +13,8 @@
   <title>周云飞 · 星空山野</title>
   <link rel="icon" type="image/svg+xml" href="image/favicon.svg" media="(prefers-color-scheme: light)"/>
   <link rel="icon" type="image/svg+xml" href="image/favicon-dark.svg" media="(prefers-color-scheme: dark)"/>
-  <link rel="stylesheet" href="css/style.css?v=20250325"/>
-  <link rel="preload" as="image" href="image/pic.jpg"/>
+  <link rel="stylesheet" href="css/style.css?v=20261007"/>
+  <link rel="preload" as="image" href="image/hero-bg-1.jpg"/>
 </head>
 <body>
 
@@ -27,7 +27,6 @@
     <a href="#about">关于</a>
     <a href="#works">创作与收藏</a>
     <a href="knowledge.html">知识库</a>
-    <a href="resume.html">简历</a>
   </div>
   <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="切换明暗模式">🌙</button>
   <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="菜单">
@@ -40,7 +39,6 @@
   <a href="#about" onclick="closeMobileMenu()">关于</a>
   <a href="#works" onclick="closeMobileMenu()">创作与收藏</a>
   <a href="knowledge.html">知识库</a>
-  <a href="resume.html">简历</a>
 </div>
 <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
 
@@ -55,10 +53,11 @@
     <div class="hero-actions">
       <a class="btn-primary" href="#works">查看作品</a>
       <a class="btn-ghost" href="tools.html">进入工具库</a>
+      <a class="btn-accent" href="knowledge.html">知识库</a>
     </div>
   </div>
   <div class="hero-scroll">
-    <div class="scroll-line"></div>
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
     <span>向下滚动</span>
   </div>
 </section>
@@ -173,7 +172,7 @@
             <div class="lc-title">“春城”贺喜</div>
             <div class="lc-desc">昆明的阳光总是刚刚好，就像你们俩站在一起的样子。往后日子，愿你们像这座城一样，慢慢过，好好爱。</div>
           </div>
-          <input type="hidden" value="journey/23年9月/yang wedding.jpg">
+          <input type="hidden" value="journey/23年9月/100.jpg">
         </div>
       </div>
 
@@ -227,9 +226,9 @@
 
   <div class="works-body">
     <div class="works-divider">我的作品</div>
-    <div class="my-works-grid">
+    <div class="my-works-grid stagger">
       <a href="works.html#web" class="wcard">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#d1fae5,#6ee7b7)">🌐</div>
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#dbeafe,#60a5fa)">🌐</div>
         <div class="wcard-body">
           <div class="wcard-title">软件项目</div>
           <div class="wcard-desc">个人主页、小程序等软件项目实践，追寻简洁优雅的产品质感。</div>
@@ -241,7 +240,7 @@
       </a>
 
       <a href="works.html#photo" class="wcard">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#fef3c7,#fcd34d)">📷</div>
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#c7d2fe,#818cf8)">📷</div>
         <div class="wcard-body">
           <div class="wcard-title">摄影与图像</div>
           <div class="wcard-desc">用镜头记录日常，光影、构图、瞬间，凝固那些值得被记住的时刻。</div>
@@ -253,7 +252,7 @@
       </a>
 
       <a href="works.html#film" class="wcard">
-        <div class="wcard-thumb" style="background:linear-gradient(135deg,#ede9fe,#c4b5fd)">🎬</div>
+        <div class="wcard-thumb" style="background:linear-gradient(135deg,#e0e7ff,#6366f1)">🎬</div>
         <div class="wcard-body">
           <div class="wcard-title">影评</div>
           <div class="wcard-desc">关于电影、剧集与动漫的思考与记录，用文字留住观影后的感动。</div>
@@ -561,15 +560,23 @@
     });
   }
 
-  // ===== 滚动动画 reveal =====
+  // ===== 滚动动画 reveal + stagger =====
   (function() {
-    const reveals = document.querySelectorAll('.reveal');
+    const reveals = document.querySelectorAll('.reveal, .stagger');
     if (!reveals.length) return;
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          io.unobserve(entry.target);
+          const el = entry.target;
+          el.classList.add('visible');
+          // stagger 容器：子元素逐个延迟出现，动画完成后清除延迟避免影响 hover
+          if (el.classList.contains('stagger')) {
+            [...el.children].forEach((child, i) => {
+              child.style.transitionDelay = (i * 0.1) + 's';
+              setTimeout(() => { child.style.transitionDelay = '0s'; }, 500 + i * 100);
+            });
+          }
+          io.unobserve(el);
         }
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });

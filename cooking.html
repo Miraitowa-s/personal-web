@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="周云飞的美食笔记——记录做过的菜，从家常到硬菜，每一道都值得记住。"/>
+  <meta property="og:title" content="美食笔记 · 周云飞"/>
+  <meta property="og:description" content="记录做过的菜，从家常到硬菜，每一道都值得记住。"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="image/pic.jpg"/>
+  <title>美食笔记 · 周云飞</title>
+  <link rel="icon" type="image/svg+xml" href="image/favicon.svg" media="(prefers-color-scheme: light)"/>
+  <link rel="icon" type="image/svg+xml" href="image/favicon-dark.svg" media="(prefers-color-scheme: dark)"/>
+  <link rel="stylesheet" href="css/common.css"/>
+  <style>
+    /* ===== 本页专属变量 ===== */
+    :root {
+      --c-accent: #4f6ef7;
+      --c-accent-light: #eef1fe;
+      --c-surface: #fefaf6;
+    }
+    body.dark {
+      --c-accent: #8aa4ff;
+      --c-accent-light: rgba(79,110,247,.14);
+      --c-surface: #1e1b18;
+    }
+
+    /* ===== 页面主体 ===== */
+    .cook-main {
+      max-width:1100px; margin:0 auto; padding:60px 5% 80px;
+    }
+
+    /* ===== HERO ===== */
+    .cook-hero {
+      text-align:center; padding:40px 0 30px;
+    }
+    .cook-hero h1 {
+      font-size:clamp(2rem,4vw,2.8rem); font-weight:900;
+      letter-spacing:-.03em; margin-bottom:.6rem;
+    }
+    .cook-hero p {
+      font-size:.95rem; color:var(--text2); max-width:400px; margin:0 auto;
+    }
+    .cook-hero .hero-dot {
+      display:inline-block; width:8px; height:8px; border-radius:50%;
+      background:var(--c-accent); margin-bottom:.4rem;
+    }
+
+    /* ===== 标签过滤栏 ===== */
+    .filter-bar {
+      display:flex; flex-wrap:wrap; justify-content:center; gap:.45rem;
+      margin-bottom:2rem; padding-bottom:1.5rem;
+      border-bottom:1px solid var(--border);
+    }
+    .filter-btn {
+      padding:.3rem .95rem; border-radius:20px;
+      border:1.5px solid var(--border); font-size:.78rem; color:var(--text2);
+      background:transparent; cursor:pointer; transition:all var(--t);
+    }
+    .filter-btn:hover,.filter-btn.active {
+      background:var(--c-accent); color:#fff; border-color:var(--c-accent);
+    }
+
+    /* ===== 卡片网格 ===== */
+    .cook-grid {
+      display:grid; grid-template-columns:repeat(4, 1fr); gap:1.2rem;
+    }
+    .ccard {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--r); overflow:hidden; cursor:pointer;
+      transition:transform var(--t), box-shadow var(--t);
+    }
+    .ccard:hover {
+      transform:translateY(-4px); box-shadow:0 12px 36px rgba(0,0,0,.1);
+    }
+    .ccard-cover {
+      height:140px; display:flex; align-items:center; justify-content:center;
+      position:relative; overflow:hidden;
+    }
+    .ccard-cover img {
+      width:100%; height:100%; object-fit:cover;
+      transition:transform .4s ease;
+    }
+    .ccard:hover .ccard-cover img { transform:scale(1.06); }
+    .ccard-cover .dish-icon {
+      font-size:2.8rem; opacity:.75;
+    }
+    .ccard-tags {
+      position:absolute; top:8px; left:8px; display:flex; gap:4px; flex-wrap:wrap;
+    }
+    .ccard-tags span {
+      font-size:.65rem; padding:.15rem .5rem; border-radius:10px;
+      background:rgba(255,255,255,.75); color:var(--text);
+      backdrop-filter:blur(4px);
+    }
+    .ccard-body {
+      padding:.85rem 1rem;
+    }
+    .ccard-body h3 {
+      font-size:.92rem; font-weight:700; margin-bottom:.2rem;
+    }
+    .ccard-body .meta {
+      font-size:.72rem; color:var(--text3);
+      display:flex; gap:.8rem;
+    }
+
+    /* ===== 详情弹窗 ===== */
+    .modal-overlay {
+      position:fixed; inset:0; z-index:200;
+      background:rgba(0,0,0,.55); backdrop-filter:blur(4px);
+      display:flex; align-items:center; justify-content:center;
+      padding:30px;
+      animation:fadeIn .2s ease;
+    }
+    @keyframes fadeIn {
+      from{opacity:0} to{opacity:1}
+    }
+    .modal-panel {
+      background:var(--surface); border-radius:18px;
+      max-width:960px; width:100%; max-height:86vh; overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,.25);
+      position:relative; animation:slideUp .3s ease;
+      display:flex;
+    }
+    @keyframes slideUp {
+      from{transform:translateY(20px); opacity:0}
+      to{transform:translateY(0); opacity:1}
+    }
+    .modal-close {
+      position:absolute; top:10px; right:12px; z-index:10;
+      width:32px; height:32px; border-radius:50%;
+      border:none; background:rgba(255,255,255,.7); font-size:1.1rem;
+      cursor:pointer; display:flex; align-items:center; justify-content:center;
+      color:var(--text2); transition:all var(--t);
+      backdrop-filter:blur(4px);
+    }
+    .modal-close:hover { background:rgba(255,255,255,.9); color:var(--text); }
+
+    .modal-cover {
+      width:45%; flex-shrink:0; min-height:420px; position:relative;
+      display:flex; align-items:center; justify-content:center; overflow:hidden;
+    }
+    .modal-cover img {
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    }
+    .modal-cover .dish-icon { font-size:5rem; opacity:.6; }
+    /* ===== 右栏 ===== */
+    .modal-body {
+      flex:1; overflow-y:auto; max-height:86vh; min-width:0;
+      display:flex; flex-direction:column;
+    }
+    .modal-info {
+      padding:1.8rem 1.8rem 0;
+    }
+    .modal-info h2 {
+      font-size:1.55rem; font-weight:800; margin-bottom:.3rem;
+    }
+    .modal-info .modal-meta {
+      font-size:.78rem; color:var(--text3); margin-bottom:1rem;
+      display:flex; gap:1.2rem; flex-wrap:wrap;
+    }
+    .modal-info .modal-meta span {
+      display:inline-flex; align-items:center; gap:.25rem;
+    }
+    .modal-info .modal-quote {
+      padding:.8rem 1rem; border-left:3px solid var(--c-accent);
+      background:var(--c-accent-light); border-radius:0 8px 8px 0;
+      font-size:.88rem; color:var(--text2); margin-bottom:1.5rem;
+      line-height:1.7;
+    }
+
+    /* ===== 食材 & 步骤（marked 渲染） ===== */
+    .dish-content { padding:0 1.8rem 2rem; flex:1; }
+    .dish-content h2 {
+      font-size:1.05rem; font-weight:700; color:var(--c-accent);
+      margin:1.5rem 0 .7rem; padding-bottom:.4rem;
+      border-bottom:2px solid var(--c-accent-light);
+    }
+    .dish-content h3 {
+      font-size:.88rem; font-weight:700; margin:1rem 0 .3rem; color:var(--text);
+    }
+    .dish-content ul {
+      list-style:none; padding:0; margin:.4rem 0 1rem;
+    }
+    .dish-content ul li {
+      padding:.28rem 0; font-size:.88rem; color:var(--text2);
+      border-bottom:1px dashed var(--border);
+    }
+    .dish-content ul li::before {
+      content:'•'; color:var(--c-accent); font-weight:700;
+      display:inline-block; width:1.2rem;
+    }
+    .dish-content ol {
+      padding-left:1.4rem; margin:.4rem 0 1rem;
+      counter-reset:step;
+    }
+    .dish-content ol li {
+      counter-increment:step; list-style:none;
+      padding:.4rem 0 .4rem 1.8rem; font-size:.88rem; color:var(--text2);
+      position:relative; line-height:1.7;
+    }
+    .dish-content ol li::before {
+      content:counter(step);
+      position:absolute; left:0; top:.4rem;
+      width:22px; height:22px; border-radius:50%;
+      background:var(--c-accent); color:#fff;
+      font-size:.7rem; font-weight:700;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .dish-content ol li + li { border-top:1px dashed var(--border); }
+    .dish-content p {
+      font-size:.88rem; color:var(--text2); line-height:1.75; margin:.5rem 0;
+    }
+
+    /* ===== 暗色模式微调 ===== */
+    body.dark .ccard:hover { box-shadow:0 12px 36px rgba(0,0,0,.4); }
+    body.dark .modal-close { background:rgba(255,255,255,.12); color:#ddd; }
+    body.dark .modal-close:hover { background:rgba(255,255,255,.22); color:#fff; }
+    body.dark .ccard-tags span { background:rgba(0,0,0,.5); color:#ccc; }
+
+    /* ===== 响应式 ===== */
+    @media (max-width:768px) {
+      .cook-grid { grid-template-columns:repeat(2, 1fr); gap:.8rem; }
+      .cook-hero h1 { font-size:1.8rem; }
+      .ccard-cover { height:120px; }
+      .modal-panel { flex-direction:column; max-height:92vh; }
+      .modal-cover { width:100%; min-height:200px; }
+      .modal-body { max-height:none; }
+      .modal-info { padding:1.2rem 1.2rem 0; }
+      .dish-content { padding:0 1.2rem 1.5rem; }
+      .modal-overlay { padding:16px; }
+    }
+    @media (max-width:480px) {
+      .cook-grid { grid-template-columns:1fr; }
+      .filter-btn { font-size:.72rem; padding:.25rem .75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="image/logo.png" alt="Logo"/>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#about">关于</a>
+    <a href="index.html#works">创作与收藏</a>
+    <a href="works.html">作品</a>
+    <a href="knowledge.html">知识库</a>
+  </div>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="切换明暗模式">🌙</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="菜单">
+    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#about" onclick="closeMobileMenu()">关于</a>
+  <a href="index.html#works" onclick="closeMobileMenu()">创作与收藏</a>
+  <a href="works.html">作品</a>
+  <a href="knowledge.html">知识库</a>
+</div>
+<div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
+<!-- ===== HERO ===== -->
+<section class="cook-hero">
+  <div class="hero-dot"></div>
+  <h1>美食笔记</h1>
+  <p>从厨房小白到能炒糖色，每一道菜都是一个故事。</p>
+</section>
+
+<!-- ===== 过滤栏 ===== -->
+<div class="cook-main">
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" data-tag="全部">全部</button>
+  </div>
+  <div class="cook-grid" id="dishGrid"></div>
+</div>
+
+<!-- ===== 详情弹窗 ===== -->
+<div id="modalContainer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+// ===== 状态 =====
+let allDishes = [];
+let activeTag = '全部';
+
+// ===== 封面渐变色库 =====
+const GRADIENTS = [
+  'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+  'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
+  'linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)',
+  'linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)',
+  'linear-gradient(135deg, #fccb90 0%, #d57eeb 100%)',
+  'linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)',
+  'linear-gradient(135deg, #f9d423 0%, #ff4e50 100%)',
+  'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)',
+  'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+  'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+];
+
+// 菜名 → 图标映射
+const FOOD_ICONS = {
+  '番茄炒蛋': '🍳', '红烧排骨': '🍖', '提拉米苏': '🍰', '味噌汤': '🍜',
+};
+
+function getGradient(name) {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  return GRADIENTS[Math.abs(hash) % GRADIENTS.length];
+}
+
+// ===== 解析 MD frontmatter =====
+function parseMD(text) {
+  text = text.replace(/\r\n/g, '\n');
+  const fmMatch = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!fmMatch) return null;
+  const fm = {};
+  fmMatch[1].split('\n').forEach(line => {
+    const kv = line.match(/^(\w+):\s*(.+)$/);
+    if (!kv) return;
+    const key = kv[1], val = kv[2].trim();
+    if (key === 'tags') {
+      fm.tags = val.replace(/[\[\]']/g,'').split(',').map(t => t.trim()).filter(Boolean);
+    } else {
+      fm[key] = val;
+    }
+  });
+  fm.body = fmMatch[2];
+  return fm;
+}
+
+// ===== 加载所有菜品 =====
+async function loadDishes() {
+  try {
+    const idxResp = await fetch(`cooking/index.json?_=${Date.now()}`);
+    const files = await idxResp.json();
+    const dishes = [];
+    for (const file of files) {
+      const resp = await fetch(`cooking/${file}?_=${Date.now()}`);
+      const text = await resp.text();
+      const fm = parseMD(text);
+      if (!fm) continue;
+      fm.filename = file;
+      fm.body_html = marked.parse(fm.body);
+      dishes.push(fm);
+    }
+    allDishes = dishes;
+    buildTagBar();
+    render();
+  } catch(e) {
+    document.getElementById('dishGrid').innerHTML =
+      '<p style="text-align:center;color:var(--text3);padding:3rem;">加载中...</p>';
+    console.error(e);
+  }
+}
+
+// ===== 构建标签栏 =====
+function buildTagBar() {
+  const tagCount = {};
+  allDishes.forEach(d => {
+    (d.tags || []).forEach(t => { tagCount[t] = (tagCount[t]||0)+1; });
+  });
+  const sorted = Object.entries(tagCount).sort((a,b) => b[1]-a[1]);
+
+  const bar = document.getElementById('filterBar');
+  bar.innerHTML = '<button class="filter-btn active" data-tag="全部">全部</button>';
+  sorted.forEach(([tag, cnt]) => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.dataset.tag = tag;
+    btn.textContent = tag + ' ' + cnt;
+    btn.onclick = () => { activeTag = tag; render(); };
+    bar.appendChild(btn);
+  });
+
+  bar.querySelectorAll('.filter-btn').forEach(b => {
+    b.onclick = function() {
+      bar.querySelectorAll('.filter-btn').forEach(x => x.classList.remove('active'));
+      this.classList.add('active');
+      activeTag = this.dataset.tag;
+      render();
+    };
+  });
+}
+
+// ===== 渲染卡片 =====
+function render() {
+  const filtered = activeTag === '全部'
+    ? allDishes
+    : allDishes.filter(d => (d.tags||[]).includes(activeTag));
+
+  document.getElementById('dishGrid').innerHTML = filtered.map(d => {
+    const icon = FOOD_ICONS[d.title] || '🍽️';
+    const grad = getGradient(d.title);
+    const tags = (d.tags||[]).slice(0, 2).map(t => `<span>${t}</span>`).join('');
+    const coverHTML = d.cover
+      ? `<img src="${d.cover}" alt="${d.title}" loading="lazy"/>`
+      : `<span class="dish-icon">${icon}</span>`;
+    const bgStyle = d.cover ? '' : ` style="background:${grad}"`;
+    return `
+    <div class="ccard" onclick="openDish('${d.filename}')">
+      <div class="ccard-cover"${bgStyle}>
+        ${coverHTML}
+        <div class="ccard-tags">${tags}</div>
+      </div>
+      <div class="ccard-body">
+        <h3>${d.title}</h3>
+        <div class="meta">
+          <span>⏱ ${d.time||'?'}</span>
+          <span>${d.difficulty||'?'}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ===== 打开详情弹窗 =====
+function openDish(filename) {
+  const dish = allDishes.find(d => d.filename === filename);
+  if (!dish) return;
+
+  const icon = FOOD_ICONS[dish.title] || '🍽️';
+  const grad = getGradient(dish.title);
+  const tags = (dish.tags||[]).map(t => `<span>${t}</span>`).join('');
+  const coverHTML = dish.cover
+    ? `<img src="${dish.cover}" alt="${dish.title}"/>`
+    : `<span class="dish-icon">${icon}</span>`;
+  const bgStyle = dish.cover ? '' : ` style="background:${grad}"`;
+
+  // 从 body_html 中提取引用块
+  const bodyParts = parseBodySections(dish.body_html);
+  const quoteHTML = bodyParts.quote;
+  const sectionsHTML = bodyParts.sections;
+
+  document.getElementById('modalContainer').innerHTML = `
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal-panel" onclick="event.stopPropagation()">
+      <div class="modal-cover"${bgStyle}>
+        ${coverHTML}
+      </div>
+      <div class="modal-body">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <div class="modal-info">
+          <h2>${dish.title}</h2>
+          <div class="modal-meta">
+            <span>⏱ ${dish.time||'?'}</span>
+            <span>📊 ${dish.difficulty||'?'}</span>
+            <span>🏷 ${tags}</span>
+          </div>
+          ${quoteHTML}
+        </div>
+        <div class="dish-content">${sectionsHTML}</div>
+      </div>
+    </div>
+  </div>`;
+
+  document.body.style.overflow = 'hidden';
+
+  // ESC 关闭
+  document.addEventListener('keydown', escHandler);
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modalOverlay')) return;
+  document.getElementById('modalContainer').innerHTML = '';
+  document.body.style.overflow = '';
+  document.removeEventListener('keydown', escHandler);
+}
+
+function escHandler(e) {
+  if (e.key === 'Escape') closeModal();
+}
+
+// ===== 解析正文区块 =====
+function parseBodySections(html) {
+  let quoteHTML = '';
+  let sectionsHTML = html;
+
+  // 提取引用块
+  const qMatch = html.match(/<blockquote>\s*<p>([\s\S]*?)<\/p>\s*<\/blockquote>/);
+  if (qMatch) {
+    quoteHTML = `<div class="modal-quote">${qMatch[1]}</div>`;
+    sectionsHTML = html.replace(qMatch[0], '').trim();
+  }
+
+  // 只保留 ## 食材 和 ## 步骤 区块
+  const h2Parts = sectionsHTML.split('<h2');
+  const kept = ['<h2'];
+  for (let i = 1; i < h2Parts.length; i++) {
+    const part = h2Parts[i];
+    // 去掉开头的 id 属性如 id="食材"
+    const cleanPart = part.replace(/^[^>]*>/, '');
+    if (cleanPart.includes('食材') || cleanPart.includes('步骤')) {
+      kept.push('<h2' + part);
+    }
+  }
+  return { quote: quoteHTML, sections: kept.join('') };
+}
+
+// ===== 启动 =====
+loadDishes();
+</script>
+
+</body>
+</html>
