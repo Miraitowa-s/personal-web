@@ -1217,6 +1217,7 @@
 
   let filmCurrentView = {};
   let filmActiveFilter = {};  // { cat: 'tag名' } 或 {} 表示不过滤
+  let filmScrollPos = {};     // { cat: 进入详情前列表的滚动位置 }，返回列表时恢复
 
   // ===== 打开影评 =====
   async function openFilmReview(cat) {
@@ -1237,7 +1238,7 @@
     }
   }
 
-  function renderFilmList(cat, reviews, filterTag) {
+  function renderFilmList(cat, reviews, filterTag, restoreScroll) {
     filmCurrentView[cat] = 'list';
     if (!reviews || reviews.length === 0) {
       document.getElementById('galleryContent').innerHTML = `
@@ -1254,7 +1255,7 @@
     reviews.forEach(r => (r.tags || []).forEach(t => { tagCount[t] = (tagCount[t] || 0) + 1; }));
 
     // 分离国家标签和其他标签
-    const countryTags = ['国产','国漫','日漫','美剧','韩剧','印剧','泰剧','日剧'];
+    const countryTags = ['国产','国漫','日漫','美剧','韩剧','台剧','印剧','泰剧','日剧'];
     const cTags = Object.entries(tagCount).filter(([t]) => countryTags.includes(t)).sort((a, b) => b[1] - a[1]);
     const oTags = Object.entries(tagCount).filter(([t]) => !countryTags.includes(t) && tagCount[t] >= 2).sort((a, b) => b[1] - a[1]);
 
@@ -1305,6 +1306,12 @@
     });
     html += `</div></div>`;
     document.getElementById('galleryContent').innerHTML = html;
+    // 从详情返回时，恢复之前的列表滚动位置
+    if (restoreScroll && filmScrollPos[cat]) {
+      const body = document.querySelector('#galleryContent .gallery-body');
+      if (body) body.scrollTop = filmScrollPos[cat];
+      filmScrollPos[cat] = 0;
+    }
   }
 
   function filmFilterBy(cat, tag) {
@@ -1320,10 +1327,13 @@
     const reviews = filmCache[cat] || [];
     const r = reviews[index];
     if (!r) return;
+    // 记住当前列表滚动位置，供返回时恢复
+    const listBody = document.querySelector('#galleryContent .gallery-body');
+    filmScrollPos[cat] = listBody ? listBody.scrollTop : 0;
     filmCurrentView[cat] = 'detail';
     const stars = renderStars(r.rating);
     let html = `<div class="gallery-body"><div class="film-detail">
-      <button class="film-detail-back" onclick="renderFilmList('${cat}', filmCache['${cat}'])">← 返回${filmCats[cat].title}列表</button>
+      <button class="film-detail-back" onclick="renderFilmList('${cat}', filmCache['${cat}'], null, true)">← 返回${filmCats[cat].title}列表</button>
       <div class="film-detail-header">
         <div class="film-poster">${r.poster ? `<img src="reviews/${cat}/${r.poster}" alt="${r.title}"/>` : '🎬'}</div>
         <div class="film-info">
